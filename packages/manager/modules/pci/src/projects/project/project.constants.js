@@ -22,6 +22,11 @@ export const ACTIONS = [
   },
 ];
 
+export const LEGACY_PLANCODES = [
+  'project.legacy',
+  'project.2018',
+];
+
 export const LINKS = [
   {
     translation: 'pci_projects_project_documentation_create_user_access_to_horizon',
@@ -47,5 +52,6 @@ export const LINKS = [
 
 export default {
   ACTIONS,
+  LEGACY_PLANCODES,
   LINKS,
 };

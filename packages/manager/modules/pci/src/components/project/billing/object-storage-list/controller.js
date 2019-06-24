@@ -41,7 +41,7 @@ export default /* @ngInject */ function (
   self.getStorageBandwidthInfoTooltip = function getStorageBandwidthInfoTooltip(storage) {
     return $translate.instant('cpbc_object_storage_output_traffic_info_part1')
       .concat($translate.instant('cpbc_object_storage_output_traffic_info_part2', {
-        amount: storage.outgoingBandwidth.quantity.value,
+        amount: storage.outgoingBandwidth ? storage.outgoingBandwidth.quantity.value : 0,
       }));
   };
 }

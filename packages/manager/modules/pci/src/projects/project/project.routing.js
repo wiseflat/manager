@@ -1,5 +1,9 @@
+import includes from 'lodash/includes';
 import controller from './project.controller';
 import template from './project.html';
+
+
+import { LEGACY_PLANCODES } from './project.constants';
 
 export default /* @ngInject */ ($stateProvider) => {
   $stateProvider
@@ -45,6 +49,7 @@ export default /* @ngInject */ ($stateProvider) => {
           : null),
         sidebarVisible: /* @ngInject */ project => project.status !== 'creating',
         user: /* @ngInject */ SessionService => SessionService.getUser(),
+        isLegacyProject: /* @ngInject */ project => includes(LEGACY_PLANCODES, project.planCode),
       },
     });
 };

@@ -20,7 +20,7 @@ export default /* @ngInject */ function CloudProjectBillingConsumptionEstimateCt
   self.loading = false;
   self.data = {
     currencySymbol: null,
-    alert: null,
+    alert: this.alert,
     estimateTotals: null,
     currentTotals: null,
   };
@@ -148,7 +148,7 @@ export default /* @ngInject */ function CloudProjectBillingConsumptionEstimateCt
   }
 
   function init() {
-    initForecast().then(() => initCurrent()).then(() => initAlert()).catch((err) => {
+    initForecast().then(() => initCurrent()).catch((err) => {
       CucCloudMessage.error([$translate.instant('cpbe_estimate_price_error_message'), (err.data && err.data.message) || ''].join(' '));
     });
   }

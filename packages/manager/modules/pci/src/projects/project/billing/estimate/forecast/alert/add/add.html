@@ -1,0 +1,38 @@
+<form id="addAlertForm" name="addAlertForm" novalidate>
+    <oui-modal
+        data-heading="{{:: 'pci_projects_project_billing_forecast_forecast_alert_add' | translate }}"
+        data-primary-action="$ctrl.createAlert()"
+        data-primary-label="{{:: 'pci_projects_project_billing_forecast_forecast_alert_add_label' | translate }}"
+        data-secondary-action="$ctrl.goBack()"
+        data-secondary-label="{{:: 'pci_projects_project_billing_forecast_forecast_alert_add_cancel' | translate }}"
+        data-loading="$ctrl.loading"
+        data-on-dismiss="$ctrl.goBack()">
+        <oui-field
+            data-label="{{:: 'pci_projects_project_billing_forecast_forecast_alert_add_email' | translate }}"
+            data-size="xl">
+            <input
+                class="oui-input"
+                type="email"
+                id="email"
+                name="email"
+                data-ng-model="$ctrl.alert.email"
+                required>
+        </oui-field>
+        <oui-field
+            data-label="{{:: 'pci_projects_project_billing_forecast_forecast_alert_add_threshold' | translate }}"
+            data-size="xl">
+            <oui-numeric
+                data-min="0"
+                data-max="9999999"
+                data-model="$ctrl.alert.monthlyThreshold">
+            </oui-numeric>
+        </oui-field>
+    </oui-modal>
+</form>
+
+
+
+
+
+
+

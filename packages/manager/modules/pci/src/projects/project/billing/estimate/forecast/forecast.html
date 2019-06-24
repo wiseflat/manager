@@ -1,0 +1,58 @@
+<div class="row">
+    <section class="col-sm-7">
+        <h2 data-translate="pci_projects_project_billing_forecast_forecast"></h2>
+        <p data-translate="pci_projects_project_billing_forecast_forecast_total"
+            data-translate-values="{
+                month: $ctrl.constructor.getNextMonth(),
+                price: '<strong>' + $ctrl.getTotalForecast() + ' ' + $ctrl.user.currency.symbol + '</strong>'
+            }">
+        </p>
+        <p data-translate="pci_projects_project_billing_forecast_forecast_monthly"
+           data-translate-values="{
+                price: '<strong>' + ($ctrl.monthlyForecast.prices.withTax.text || $ctrl.Consumption.getEmptyPrice($ctrl.user.currency.symbol)) + '</strong>'
+            }">
+        </p>
+        <p data-translate="pci_projects_project_billing_forecast_forecast_hourly"
+           data-translate-values="{
+                month: $ctrl.constructor.getCurrentMonth(),
+                price: '<strong>' + ($ctrl.hourlyForecast.price.text || $ctrl.Consumption.getEmptyPrice($ctrl.user.currency.symbol)) + '</strong>'
+            }">
+        </p>
+    </section>
+    <section class="col-sm-5">
+        <oui-tile
+            data-heading="{{ ::'pci_projects_project_billing_forecast_forecast_alert' | translate }}"
+            data-description="{{ ::'pci_projects_project_billing_forecast_forecast_alert_description' | translate }}">
+            <div data-ng-if="!$ctrl.alert">
+                <a
+                    class="oui-button oui-button_primary oui-button_icon-left"
+                    data-ng-href="{{ $ctrl.createAlertLink }}"
+                    data-write-right-required>
+                    <span class="fa fa-bell" aria-hidden="true"></span>
+                    <span translate="pci_projects_project_billing_forecast_forecast_alert_create"></span>
+                </a>
+            </div>
+            <div data-ng-if="$ctrl.alert">
+                <cuc-consumption-chart data-model="$ctrl.getConsumptionChart()"></cuc-consumption-chart>
+                <div data-write-right-required>
+                    <oui-spinner size="s" data-ng-if="$ctrl.isAlertDeleting"></oui-spinner>
+                    <a
+                        class="oui-button oui-button_primary oui-button_icon-left"
+                        data-ng-href="{{ $ctrl.editAlertLink }}"
+                        data-ng-class="{
+                            diasbled: $ctrl.isAlertDeleting
+                        }">
+                        <span class="fa fa-bell" aria-hidden="true"></span>
+                        <span translate="pci_projects_project_billing_forecast_forecast_alert_edit"></span>
+                    </a>
+                    <button class="oui-button oui-button_secondary"
+                            type="button"
+                            data-ng-click="$ctrl.deleteAlert()"
+                            data-ng-disabled="$ctrl.isAlertDeleting">
+                        <span data-translate="pci_projects_project_billing_forecast_forecast_alert_delete"></span>
+                    </button>
+                </div>
+            </div>
+        </oui-tile>
+    </section>
+</div>

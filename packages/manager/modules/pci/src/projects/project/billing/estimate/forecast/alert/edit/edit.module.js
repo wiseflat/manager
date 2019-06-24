@@ -4,11 +4,10 @@ import 'ovh-api-services';
 import '@ovh-ux/ng-translate-async-loader';
 import 'angular-translate';
 
-import legacy from './legacy/estimate.module';
-import forecast from './forecast/forecast.module';
-import routing from './estimate.routing';
+import component from './edit.component';
+import routing from './edit.routing';
 
-const moduleName = 'ovhManagerPciProjectBillingEstimate';
+const moduleName = 'ovhManagerPciProjectBillingForecastAlertEdit';
 
 angular
   .module(moduleName, [
@@ -16,10 +15,9 @@ angular
     'pascalprecht.translate',
     'ovh-api-services',
     'ui.router',
-    forecast,
-    legacy,
   ])
   .config(routing)
+  .component('pciProjectBillingForecastAlertEdit', component)
   .run(/* @ngTranslationsInject:json ./translations */);
 
 export default moduleName;

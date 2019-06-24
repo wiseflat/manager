@@ -1,0 +1,11 @@
+{
+  "pci_projects_project_billing_forecast_forecast": "Estimation de ma prochaine facture",
+  "pci_projects_project_billing_forecast_forecast_total": "Si votre consommation reste la même, le 1er {{ month }} vous devriez payer: {{ price }}",
+  "pci_projects_project_billing_forecast_forecast_monthly": "Renouvellement de vos forfaits mensuels: {{ price }}",
+  "pci_projects_project_billing_forecast_forecast_hourly": "Consommation à la demande en {{ month }}: {{ price }}",
+  "pci_projects_project_billing_forecast_forecast_alert": "Alerte consommation à la demande",
+  "pci_projects_project_billing_forecast_forecast_alert_description": "Cette alerte est basée sur la projection en fin de mois",
+  "pci_projects_project_billing_forecast_forecast_alert_create": "Créer l'alerte",
+  "pci_projects_project_billing_forecast_forecast_alert_edit": "Modifier l'alerte",
+  "pci_projects_project_billing_forecast_forecast_alert_delete": "Supprimer l'alerte"
+}
