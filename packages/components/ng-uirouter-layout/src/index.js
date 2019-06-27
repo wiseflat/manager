@@ -5,6 +5,7 @@ import 'angular-ui-bootstrap';
 import forEach from 'lodash/forEach';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
+import initial from 'lodash/initial';
 import intersection from 'lodash/intersection';
 import isString from 'lodash/isString';
 import isObject from 'lodash/isObject';
@@ -69,10 +70,19 @@ angular
         }
 
         if (get(state, 'layout.name') === 'modal') {
+          let componentName = get(state, 'views.modal.component', state.component);
           const $state = transition.injector().get('$state');
           const $uibModal = transition.injector().get('$uibModal');
 
-          const componentName = get(state, state.views.modal ? 'views.modal.component' : 'component');
+          const componentProvider = get(state, 'views.modal.componentProvider', state.componentProvider);
+          if (componentProvider) {
+            const resolves = initial(componentProvider);
+            const componentGetter = last(componentProvider);
+            componentName = componentGetter(
+              ...map(resolves, resolve => transition.injector().get(resolve)),
+            );
+          }
+
           if (componentName && isString(componentName)) {
             const directives = $injector.get(`${componentName}DirectiveProvider`).$get();
             // look for those directives that are components
