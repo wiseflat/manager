@@ -1,0 +1,11 @@
+{
+  "pci_projects_project_vouchers_movements": "Crédits & Vouchers",
+  "pci_projects_project_vouchers_movements_date" :"Date",
+  "pci_projects_project_vouchers_movements_amount" :"Montant",
+  "pci_projects_project_vouchers_movements_expiration" :"Date d'expiation",
+  "pci_projects_project_vouchers_movements_operation" :"Opération",
+  "pci_projects_project_vouchers_movements_operation_credit" :"Crédit",
+  "pci_projects_project_vouchers_movements_operation_debit" :"Débit",
+  "pci_projects_project_vouchers_movements_order" :"Commande associée"
+
+}

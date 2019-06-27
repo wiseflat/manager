@@ -1,0 +1,36 @@
+<div ui-view>
+<oui-datagrid
+    data-rows="$ctrl.balances"
+    data-row-loader="$ctrl.getBalance($row)">
+    <extra-top class="d-flex mb-1">
+        <button class="oui-button oui-button_secondary"
+                data-ng-click="$ctrl.buyCredit()"
+                data-write-right-required>
+            <span data-translate="pci_projects_project_vouchers_buy"></span>
+        </button>
+        <button class="oui-button oui-button_secondary"
+                data-ng-click="$ctrl.addVoucher()"
+                data-write-right-required>
+            <span data-translate="pci_projects_project_vouchers_add"></span>
+        </button>
+    </extra-top>
+    <oui-column data-title=":: 'pci_projects_project_vouchers_balance_name' | translate" data-property="balanceName" data-sortable="asc"></oui-column>
+    <oui-column data-title=":: 'pci_projects_project_vouchers_balance_creation' | translate" data-property="creationDate">
+        <span data-ng-bind="$row.creationDate | date:'mediumDate'"></span>
+    </oui-column>
+    <oui-column data-title=":: 'pci_projects_project_vouchers_balance_last_update' | translate" data-property="lastUpdate">
+        <span data-ng-bind="$row.lastUpdate | date:'mediumDate'"></span>
+    </oui-column>
+    <oui-column data-title=":: 'pci_projects_project_vouchers_balance_amount' | translate" data-property="amount.text"></oui-column>
+    <oui-column data-title=":: 'pci_projects_project_vouchers_balance_expiration' | translate" data-property="closestExpiringDetails.expirationDate">
+        <span data-ng-bind="$row.closestExpiringDetails.expirationDate | date:'mediumDate'"></span>
+    </oui-column>
+    <oui-column data-title=":: 'pci_projects_project_vouchers_balance_expiration_amount' | translate" data-property="closestExpiringDetails.amount.text"></oui-column>
+    <oui-action-menu data-align="end" data-compact>
+        <oui-action-menu-item
+            data-on-click="$ctrl.goToBalanceDetails($row.balanceName)">
+            <span data-translate="pci_projects_project_vouchers_balance_details"></span>
+        </oui-action-menu-item>
+    </oui-action-menu>
+</oui-datagrid>
+</div>

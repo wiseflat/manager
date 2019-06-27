@@ -1,0 +1,24 @@
+<form novalidate
+      name="orderCreditForm"
+      data-ng-submit="$ctrl.isAmountValid() && $ctrl.order()">
+
+    <oui-modal data-title="{{:: 'pci_projects_project_vouchers_credit_add' | translate }}"
+               data-primary-label="{{:: 'pci_projects_project_vouchers_credit_add_label' | translate }}"
+               data-secondary-action="$ctrl.goBack()"
+               data-secondary-label="{{:: 'pci_projects_project_vouchers_credit_add_cancel' | translate }}"
+               data-on-dismiss="$ctrl.goBack()">
+
+        <label
+            for="creditAmount"
+            class="oui-label"
+            data-translate="pci_projects_project_vouchers_credit_add_amount"
+            data-translate-values="{ currency: $ctrl.user.currency.symbol }">
+        </label>
+        <oui-numeric
+            data-min="$ctrl.limits.MIN"
+            data-max="$ctrl.limits.MAX"
+            data-model="$ctrl.amount"
+            name="creditAmount">
+        </oui-numeric>
+    </oui-modal>
+</form>

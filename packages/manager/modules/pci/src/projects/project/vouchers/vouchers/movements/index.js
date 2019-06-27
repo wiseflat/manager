@@ -2,7 +2,7 @@ import angular from 'angular';
 import '@uirouter/angularjs';
 import 'oclazyload';
 
-const moduleName = 'ovhManagerPciVouchersCreditLazyLoading';
+const moduleName = 'ovhManagerPciVouchersMovementsLazyLoading';
 
 angular
   .module(moduleName, [
@@ -10,12 +10,12 @@ angular
     'oc.lazyLoad',
   ])
   .config(/* @ngInject */($stateProvider) => {
-    $stateProvider.state('pci.projects.project.vouchers.credit.**', {
-      url: '/credit',
+    $stateProvider.state('pci.projects.project.vouchers.movements.**', {
+      url: '/:balanceName',
       lazyLoad: ($transition$) => {
         const $ocLazyLoad = $transition$.injector().get('$ocLazyLoad');
 
-        return import('./credit.module')
+        return import('./movements.module')
           .then(mod => $ocLazyLoad.inject(mod.default || mod));
       },
     });

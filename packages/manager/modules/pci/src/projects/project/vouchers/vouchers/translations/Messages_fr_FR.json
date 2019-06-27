@@ -1,0 +1,13 @@
+{
+  "pci_projects_project_vouchers": "Crédits & Vouchers",
+  "pci_projects_project_vouchers_balance_name": "Nom",
+  "pci_projects_project_vouchers_balance_creation": "Date de création",
+  "pci_projects_project_vouchers_balance_last_update" : "Dernière mise à jour",
+  "pci_projects_project_vouchers_balance_expiration":"Date d'expiration",
+  "pci_projects_project_vouchers_balance_amount" : "Montant arrivant à expiration",
+  "pci_projects_project_vouchers_balance_expiration_amount": "Montant",
+  "pci_projects_project_vouchers_balance_details" : "Détails des mouvements",
+  "pci_projects_project_vouchers_add" : "Ajouter un voucher",
+  "pci_projects_project_vouchers_buy" : "Acheter du crédit"
+
+}

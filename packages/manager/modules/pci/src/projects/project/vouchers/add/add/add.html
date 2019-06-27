@@ -1,0 +1,20 @@
+<oui-modal
+    data-title="{{:: 'pci_projects_project_vouchers_add' | translate}}"
+    data-primary-label="{{ ::'pci_projects_project_vouchers_add_label' | translate }}"
+    data-primary-action="$ctrl.addVoucher()"
+    data-secondary-action="$ctrl.goBack()"
+    data-secondary-label="{{ ::'pci_projects_project_vouchers_add_cancel' | translate }}"
+    data-on-dismiss="$ctrl.goBack()"
+    data-loading="$ctrl.isAdding">
+
+    <form novalidate>
+        <oui-field data-label="{{ ::'pci_projects_project_vouchers_add_enter' | translate }}">
+            <input type="text"
+                class="oui-input"
+                id="voucherAddValue"
+                name="voucherAddValue"
+                data-ng-model="$ctrl.voucher"
+                required/>
+        </oui-field>
+    </form>
+</oui-modal>

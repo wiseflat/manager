@@ -1,10 +1,5 @@
-import { Environment } from '@ovh-ux/manager-config';
-
-import controller from './credit.controller';
-import template from './credit.html';
-
-import controllerAgora from './credit-agora.controller';
-import templateAgora from './credit-agora.html';
+import find from 'lodash/find';
+import get from 'lodash/get';
 
 export default /* @ngInject */ ($stateProvider) => {
   $stateProvider.state('pci.projects.project.vouchers.credit', {
@@ -12,13 +7,31 @@ export default /* @ngInject */ ($stateProvider) => {
     layout: 'modal',
     views: {
       modal: {
-        controller: Environment.getRegion() === 'US' ? controllerAgora : controller,
-        controllerAs: '$ctrl',
-        template: Environment.getRegion() === 'US' ? templateAgora : template,
+        componentProvider: /* @ngInject */ isLegacyProject => (isLegacyProject ? 'pciProjectVouchersAddCreditLegacy' : 'pciProjectVouchersAddCredit'),
       },
     },
     resolve: {
       breadcrumb: () => null,
+      unitaryPrice: /* @ngInject */
+      (
+        isLegacyProject,
+        OvhApiOrderCatalogFormatted,
+        user,
+      ) => (
+      // prevent fetching heavy catalog if not needed
+        isLegacyProject ? null : OvhApiOrderCatalogFormatted.v6().get({ catalogName: 'cloud', ovhSubsidiary: user.ovhSubsidiary }).$promise
+          .then(({ plans }) => {
+            const defaultCreditPrices = get(
+              find(plans, { planCode: 'credit', pricingType: 'purchase' }),
+              'details.pricings.default',
+            );
+            const creditPrice = get(
+              find(defaultCreditPrices, ({ capacities }) => capacities.includes('installation')),
+              'price',
+            );
+            return creditPrice;
+          })),
+      goBack: /* @ngInject */ goToVouchers => goToVouchers,
     },
   });
 };

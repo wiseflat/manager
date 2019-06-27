@@ -1,0 +1,6 @@
+{
+  "pci_projects_project_vouchers_credit_add": "Acheter du crédit cloud",
+  "pci_projects_project_vouchers_credit_add_amount": "Somme à créditer ( HT {{ currency }} ) :",
+  "pci_projects_project_vouchers_credit_add_label": "Générer un bon de commande",
+  "pci_projects_project_vouchers_credit_add_cancel": "Annuler"
+}

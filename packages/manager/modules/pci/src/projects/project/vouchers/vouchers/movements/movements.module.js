@@ -4,22 +4,20 @@ import '@ovh-ux/ng-translate-async-loader';
 import 'angular-translate';
 import 'ovh-api-services';
 
-import legacy from './legacy/add.module';
-import add from './add/add.module';
-import routing from './add.routing';
+import component from './movements.component';
+import routing from './movements.routing';
 
-const moduleName = 'ovhManagerPciProjectVouchersAdd';
+const moduleName = 'ovhManagerPciProjectBillingVouchersMovements';
 
 angular
   .module(moduleName, [
-    add,
     'ngTranslateAsyncLoader',
     'pascalprecht.translate',
     'ovh-api-services',
     'ui.router',
-    legacy,
   ])
   .config(routing)
+  .component('pciProjectBillingVouchersMovements', component)
   .run(/* @ngTranslationsInject:json ./translations */);
 
 export default moduleName;
