@@ -43,7 +43,11 @@ angular
     wucGuides,
     wucIncrementNumber,
     wucJavaEnum,
+<<<<<<< HEAD
     wucOrderCart,
+=======
+    wucOrder,
+>>>>>>> feat(wuc): feat wuc order component
     wucOvhFileReader,
     wucProgressBarElementCounter,
     wucServiceStatusAction,

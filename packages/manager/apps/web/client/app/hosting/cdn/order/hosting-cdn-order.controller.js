@@ -16,6 +16,19 @@ export default class {
       this.currentIndex = 1;
       this.isEditable = false;
     }
+
+    this.options : [{
+      id: 'test',
+      data: ['a', 'b', 'c', 'd'],
+    }];
+  }
+
+  onFinish() {
+    console.log("Finish");
+  }
+
+  onSubmit() {
+    console.log("Submit step");
   }
 
   resetCart() {

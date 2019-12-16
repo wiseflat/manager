@@ -1,0 +1,48 @@
+<wuc-order>
+  <wuc-order-customization
+    title="Personnalisation"
+    customizable="[
+      {
+        title: "Server version"
+        data: $ctrl.serverVersions
+      },
+      {
+        title: "Mémoire"
+        data: $ctrl.memoiesy
+      },
+      {
+        title: "Datacentre"
+        data: $ctrl.datacenters
+      },
+    }"></wuc-order-customization>
+
+    <wuc-order-payment ng-if="$ctrl.needsPayment">
+
+    <wuc-order-activation ng-if="!$ctrl.needsPayment">
+</wuc-order>
+
+<wuc-order-payment ng-if="$ctrl.needsPayment">
+
+<wuc-order-activation ng-if="!$ctrl.needsPayment>
+
+if (!filter(children, child => child.canFinishStepper)) throw error
+code underneath ----
+
+
+<stepper>
+  <div></div>
+  <div ng-if="$ctrl.bindings.needsPayment">
+    <step>Duration
+    <step>Payment
+
+
+    <button>cancel
+    <button>Pay
+  </div>
+
+  <step ng-if="$ctrl.bindings.needsPayment">
+
+    <button>cancel
+    <button>Activate
+  </step>
+</stepper>

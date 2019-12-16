@@ -10,7 +10,49 @@
 <div data-ng-if="!$ctrl.loading">
     <p data-translate="hosting_cdn_order_description"></p>
 
-    <oui-stepper
+    <wuc-order
+        data-on-finish="$ctrl.onFinish()">
+        <wuc-order-customization
+            data-on-update="$ctrl.isModelValid($ctrl.model)">
+            <oui-field
+                data-label="{{:: 'private_database_order_clouddb_server_version' | translate }}"
+                data-size="l">
+                <oui-select
+                    data-name="engine"
+                    data-match="label"
+                    data-model="$ctrl.model.engine"
+                    data-items="$ctrl.engineList"
+                    data-placeholder="{{:: 'private_database_order_clouddb_server_version_placeholder' | translate }}">
+                </oui-select>
+            </oui-field>
+
+            <oui-field
+                data-label="{{:: 'private_database_order_clouddb_ram_option' | translate }}"
+                data-size="l">
+                <oui-select
+                    data-name="ram"
+                    data-match="label"
+                    data-model="$ctrl.model.ramSize"
+                    data-items="$ctrl.ramSizeList"
+                    data-placeholder="{{:: 'private_database_order_clouddb_ram_option_placeholder' | translate }}">
+                </oui-select>
+            </oui-field>
+
+            <oui-field
+                data-label="{{:: 'private_database_order_clouddb_datacenter' | translate }}"
+                data-size="l">
+                <oui-select
+                    data-name="datacenter"
+                    data-match="label"
+                    data-model="$ctrl.model.datacenter"
+                    data-items="$ctrl.datacenterList"
+                    data-placeholder="{{:: 'private_database_order_clouddb_datacenter_placeholder' | translate }}">
+                </oui-select>
+            </oui-field>
+        </wuc-order-customization>
+        <wuc-order-payment></wuc-order-payment>
+    </wuc-order>
+    <!-- <oui-stepper
         data-current-index="$ctrl.currentIndex"
         data-on-finish="$ctrl.checkout()">
         <oui-step-form
@@ -18,7 +60,6 @@
             data-editable="$ctrl.isEditable && !$ctrl.checkoutLoading"
             data-on-focus="$ctrl.resetCart()">
 
-            <!-- Durations -->
             <oui-field>
                 <oui-radio
                     name="interval"
@@ -53,14 +94,12 @@
             data-on-cancel="$ctrl.goBack()"
             data-prevent-next>
 
-            <!-- Payment Means -->
             <ovh-payment-method-choice
                 data-ng-if="::!$ctrl.isOptionFree"
                 data-model="$ctrl.autoPayWithPreferredPaymentMethod"
                 data-error-callback="$ctrl.goBackWithError()">
             </ovh-payment-method-choice>
 
-            <!-- Contracts -->
             <ovh-manager-order-contracts
                 name="agreeContracts"
                 data-ng-if="$ctrl.cart"
@@ -68,5 +107,5 @@
                 data-model="$ctrl.agreeContracts">
             </ovh-manager-order-contracts>
         </oui-step-form>
-    </oui-stepper>
+    </oui-stepper> -->
 </div>
