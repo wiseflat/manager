@@ -17,18 +17,10 @@ export default class {
       this.isEditable = false;
     }
 
-    this.options : [{
+    this.options = [{
       id: 'test',
       data: ['a', 'b', 'c', 'd'],
     }];
-  }
-
-  onFinish() {
-    console.log("Finish");
-  }
-
-  onSubmit() {
-    console.log("Submit step");
   }
 
   resetCart() {

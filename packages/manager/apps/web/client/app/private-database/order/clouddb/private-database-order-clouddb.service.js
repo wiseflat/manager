@@ -2,8 +2,8 @@ import flatten from 'lodash/flatten';
 import get from 'lodash/get';
 
 import {
-  DATACENTER_CONFIGURATION_KEY,
-  ENGINE_CONFIGURATION_KEY,
+  DATACENTER_CONFIGURATION_LABEL,
+  ENGINE_CONFIGURATION_LABEL,
   PLAN_CODE_TEMPLATE,
   PRODUCT_NAME,
 } from './private-database-order-clouddb.constants';
@@ -25,7 +25,7 @@ export default class PrivateDatabaseOrderCloudDb {
     const ramRegExp = new RegExp(ramSize);
     return this.OrderService
       .getProductOffers(cartId, PRODUCT_NAME)
-      .then(offers => offers
+      .then((offers) => offers
         .find(({ planCode }) => ramRegExp.test(planCode))
         .prices
         .map(({ duration, interval, pricingMode }) => ({
@@ -64,8 +64,8 @@ export default class PrivateDatabaseOrderCloudDb {
   }
 
   addConfiguration(cartId, itemId, datacenter, version) {
-    const datacenterLabel = DATACENTER_CONFIGURATION_KEY;
-    const versionLabel = ENGINE_CONFIGURATION_KEY;
+    const datacenterLabel = DATACENTER_CONFIGURATION_LABEL;
+    const versionLabel = ENGINE_CONFIGURATION_LABEL;
     return this.OrderService
       .addConfigurationItem(cartId, itemId, datacenterLabel, datacenter)
       .then(() => this.OrderService
@@ -98,12 +98,12 @@ export default class PrivateDatabaseOrderCloudDb {
 
   static getOrderableDatacenters(plans) {
     return PrivateDatabaseOrderCloudDb
-      .filterOrderableItems(plans, DATACENTER_CONFIGURATION_KEY);
+      .filterOrderableItems(plans, DATACENTER_CONFIGURATION_LABEL);
   }
 
   static getOrderableEngines(plans) {
     return PrivateDatabaseOrderCloudDb
-      .filterOrderableItems(plans, ENGINE_CONFIGURATION_KEY);
+      .filterOrderableItems(plans, ENGINE_CONFIGURATION_LABEL);
   }
 
   static getOrderableRamSizes(schema) {

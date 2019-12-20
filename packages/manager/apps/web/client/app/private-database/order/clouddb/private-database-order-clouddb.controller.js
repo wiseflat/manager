@@ -3,8 +3,15 @@ import orderBy from 'lodash/orderBy';
 import sortBy from 'lodash/sortBy';
 
 import {
+  DATACENTER_CONFIGURATION_LABEL,
+  ENGINE_CONFIGURATION_LABEL,
+  PLAN_CODE_TEMPLATE,
   PRODUCT_NAME,
 } from './private-database-order-clouddb.constants';
+
+import {
+  ORDER_TYPE,
+} from '../../../../../../../modules/web-universe-components/src/order/order.constants';
 
 export default class PrivateDatabaseOrderCloudDbCtrl {
   /* @ngInject */
@@ -16,13 +23,10 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
 
   $onInit() {
     this.currentIndex = 0;
-    this.defaultModelType = PRODUCT_NAME;
-    this.model = { };
-  }
-
-  selectTypeOption() {
-    this.model.type = this.defaultModelType;
-    this.currentIndex += 1;
+    this.model = {
+      productName: PRODUCT_NAME,
+      orderType: ORDER_TYPE.RENEW,
+    };
   }
 
   initializeCustomizationOptions() {
@@ -65,10 +69,21 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
       }));
   }
 
+  onConfigurationFinish() {
+    const planCode = PLAN_CODE_TEMPLATE
+      .replace(/{{RAM}}/, this.model.ramSize.value);
+
+    return planCode;
+  }
+
   canGoToDurationStep() {
     if (this.model.engine && this.model.ramSize && this.model.datacenter) {
       this.currentIndex += 1;
     }
+  }
+
+  getOrderState(state) {
+    this.orderState = state;
   }
 
   getDurationsAndPricings() {
@@ -104,6 +119,19 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
     if (this.model.duration) {
       this.currentIndex += 1;
     }
+  }
+
+  getConfiguration() {
+    return [
+      {
+        label: DATACENTER_CONFIGURATION_LABEL,
+        value: this.model.datacenter.value,
+      },
+      {
+        label: ENGINE_CONFIGURATION_LABEL,
+        value: this.model.engine.value,
+      },
+    ];
   }
 
   prepareCheckout() {

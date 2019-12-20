@@ -3,8 +3,20 @@ import template from './order.html';
 
 export default {
   bindings: {
-    onFinish: '@',
+    cartId: '<',
+    catalog: '<',
+    productName: '<',
+    type: '<',
+    user: '<',
+
+    getCurrentState: '&',
+
+    onConfigurationFinish: '&', // {'' planCode }
+    onError: '&',
+    onFinish: '&',
+    onGetConfiguration: '&',
   },
+  controller,
   name: 'wucOrder',
   template,
   transclude: true,

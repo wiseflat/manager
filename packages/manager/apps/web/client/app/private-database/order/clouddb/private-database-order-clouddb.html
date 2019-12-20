@@ -6,7 +6,62 @@
 <div class="container-fluid my-4 mx-5">
     <div data-ovh-alert="cloudDB_order_alert"></div>
 
-    <oui-stepper
+    <wuc-order
+        data-cart-id="$ctrl.cartId"
+        data-catalog="$ctrl.catalog"
+        data-product-name="$ctrl.model.productName"
+        data-type="$ctrl.model.orderType"
+        data-user="$ctrl.user"
+        data-on-get-configuration="$ctrl.getConfiguration()"
+        data-get-current-state="$ctrl.getOrderState(state)"
+        data-on-finish="$ctrl.onFinish()"
+        data-on-configuration-finish="$ctrl.onConfigurationFinish()">
+
+        <oui-step-form
+            data-header="{{:: 'private_database_order_clouddb_customization' | translate }}"
+            data-on-focus="$ctrl.initializeCustomizationOptions()"
+            data-editable="!$ctrl.orderState.isLoading"
+            data-disabled="$ctrl.hasValidatedCheckout">
+            <oui-field
+                data-label="{{:: 'private_database_order_clouddb_server_version' | translate }}"
+                data-size="l">
+                <oui-select
+                    data-name="engine"
+                    data-match="label"
+                    data-model="$ctrl.model.engine"
+                    data-items="$ctrl.engineList"
+                    data-placeholder="{{:: 'private_database_order_clouddb_server_version_placeholder' | translate }}">
+                </oui-select>
+            </oui-field>
+
+            <oui-field
+                data-label="{{:: 'private_database_order_clouddb_ram_option' | translate }}"
+                data-size="l">
+                <oui-select
+                    data-name="ram"
+                    data-match="label"
+                    data-model="$ctrl.model.ramSize"
+                    data-items="$ctrl.ramSizeList"
+                    data-placeholder="{{:: 'private_database_order_clouddb_ram_option_placeholder' | translate }}">
+                </oui-select>
+            </oui-field>
+
+            <oui-field
+                data-label="{{:: 'private_database_order_clouddb_datacenter' | translate }}"
+                data-size="l">
+                <oui-select
+                    data-name="datacenter"
+                    data-match="label"
+                    data-model="$ctrl.model.datacenter"
+                    data-items="$ctrl.datacenterList"
+                    data-placeholder="{{:: 'private_database_order_clouddb_datacenter_placeholder' | translate }}">
+                </oui-select>
+            </oui-field>
+        </oui-step-form>
+        <wuc-order-payment></wuc-order-payment>
+    </wuc-order>
+
+    <!-- <oui-stepper
         data-current-index="$ctrl.currentIndex"
         data-on-finish="$ctrl.validateCheckout()">
         <oui-step-form
@@ -131,5 +186,5 @@
                 data-model="$ctrl.agreeContracts">
             </ovh-manager-order-contracts>
         </oui-step-form>
-    </oui-stepper>
+    </oui-stepper> -->
 </div>

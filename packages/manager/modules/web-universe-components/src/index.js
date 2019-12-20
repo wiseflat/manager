@@ -15,6 +15,7 @@ import wucFileEditor from './fileEditor';
 import wucGuides from './guides';
 import wucIncrementNumber from './incrementNumber';
 import wucJavaEnum from './java-enum';
+import wucOrder from './order';
 import wucOrderCart from './order-cart';
 import wucOvhFileReader from './ovhFileReader';
 import wucProgressBarElementCounter from './progressBarElementCounter';
@@ -43,11 +44,8 @@ angular
     wucGuides,
     wucIncrementNumber,
     wucJavaEnum,
-<<<<<<< HEAD
-    wucOrderCart,
-=======
     wucOrder,
->>>>>>> feat(wuc): feat wuc order component
+    wucOrderCart,
     wucOvhFileReader,
     wucProgressBarElementCounter,
     wucServiceStatusAction,
