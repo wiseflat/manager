@@ -107,6 +107,7 @@
     "punycode": "^1.4.1",
     "raven-js": "^3.27.1",
     "request": "^2.51.0",
+    "stencil-components": "^0.0.1",
     "urijs": "^1.19.1",
     "validator": "^11.1.0"
   },

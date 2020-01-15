@@ -9,13 +9,19 @@ import {
   PRODUCT_NAME,
 } from './private-database-order-clouddb.constants';
 
-import {
-  ORDER_TYPE,
-} from '../../../../../../../modules/web-universe-components/src/order/order.constants';
+import { ORDER_TYPE } from '../../../../../../../modules/web-universe-components/src/order/order.constants';
 
 export default class PrivateDatabaseOrderCloudDbCtrl {
   /* @ngInject */
-  constructor($filter, $translate, PrivateDatabaseOrderCloudDb) {
+  constructor(
+    $scope,
+    $element,
+    $filter,
+    $translate,
+    PrivateDatabaseOrderCloudDb,
+  ) {
+    this.$scope = $scope;
+    this.$element = $element;
     this.$filter = $filter;
     this.$translate = $translate;
     this.PrivateDatabaseOrderCloudDb = PrivateDatabaseOrderCloudDb;
@@ -27,6 +33,11 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
       productName: PRODUCT_NAME,
       orderType: ORDER_TYPE.RENEW,
     };
+
+    this.stencilType = 'Type: button';
+
+    const stencilComp = document.querySelector('#stencilButtonClicker');
+    stencilComp.callback = this.getFunctionLogger();
   }
 
   initializeCustomizationOptions() {
@@ -35,19 +46,21 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
     this.model.datacenter = undefined;
 
     this.engineList = orderBy(
-      this.engines
-        .map((engine) => {
-          const [engineLabel, engineVersion] = engine.split('_');
+      this.engines.map((engine) => {
+        const [engineLabel, engineVersion] = engine.split('_');
 
-          return {
-            engineLabel,
-            engineVersion: parseFloat(engineVersion),
-            label: this.$translate.instant(`private_database_order_clouddb_server_version_${engineLabel}`, {
+        return {
+          engineLabel,
+          engineVersion: parseFloat(engineVersion),
+          label: this.$translate.instant(
+            `private_database_order_clouddb_server_version_${engineLabel}`,
+            {
               version: engineVersion,
-            }),
-            value: engine,
-          };
-        }),
+            },
+          ),
+          value: engine,
+        };
+      }),
       ['engineLabel', 'engineVersion'],
       ['asc', 'desc'],
     );
@@ -62,16 +75,19 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
       'value',
     );
 
-    this.datacenterList = this.datacenters
-      .map((datacenter) => ({
-        label: this.$translate.instant(`private_database_order_clouddb_datacenter_${datacenter}`),
-        value: datacenter,
-      }));
+    this.datacenterList = this.datacenters.map((datacenter) => ({
+      label: this.$translate.instant(
+        `private_database_order_clouddb_datacenter_${datacenter}`,
+      ),
+      value: datacenter,
+    }));
   }
 
   onConfigurationFinish() {
-    const planCode = PLAN_CODE_TEMPLATE
-      .replace(/{{RAM}}/, this.model.ramSize.value);
+    const planCode = PLAN_CODE_TEMPLATE.replace(
+      /{{RAM}}/,
+      this.model.ramSize.value,
+    );
 
     return planCode;
   }
@@ -90,17 +106,18 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
     this.model.duration = undefined;
     this.loadingDurations = true;
     const ramSizeRegExp = new RegExp(this.model.ramSize.value);
-    return this.PrivateDatabaseOrderCloudDb
-      .getDurationsFromRamOption(this.cartId, this.model.ramSize.value)
+    return this.PrivateDatabaseOrderCloudDb.getDurationsFromRamOption(
+      this.cartId,
+      this.model.ramSize.value,
+    )
       .then((durations) => {
-        const catalogPrices = this.catalog.plans
-          .find(({ planCode }) => ramSizeRegExp.test(planCode))
-          .pricings;
+        const catalogPrices = this.catalog.plans.find(({ planCode }) => ramSizeRegExp.test(planCode)).pricings;
 
         this.durations = durations
           .map((duration) => {
-            const pricing = catalogPrices
-              .find(({ interval }) => interval === duration.interval);
+            const pricing = catalogPrices.find(
+              ({ interval }) => interval === duration.interval,
+            );
 
             return {
               ...duration,
@@ -144,15 +161,19 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
       pricingMode: this.model.duration.pricingMode,
     };
 
-    return this.PrivateDatabaseOrderCloudDb
-      .prepareCheckout(this.cartId, checkoutData)
+    return this.PrivateDatabaseOrderCloudDb.prepareCheckout(
+      this.cartId,
+      checkoutData,
+    )
       .then(({ contracts, prices }) => {
         this.contracts = contracts;
         this.prices = prices;
       })
       .catch((error) => {
         this.displayErrorMessage(
-          `${this.$translate.instant('private_database_order_clouddb_payment_get_checkout_error')} ${get(error, 'data.message', error.message)}`,
+          `${this.$translate.instant(
+            'private_database_order_clouddb_payment_get_checkout_error',
+          )} ${get(error, 'data.message', error.message)}`,
         );
       })
       .finally(() => {
@@ -171,21 +192,29 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
         if (!this.autoPayWithPreferredPaymentMethod) {
           this.openBill(url);
           this.displaySuccessMessage(
-            `${this.$translate.instant('private_database_order_clouddb_bill_success', { billUrl: url })}`,
+            `${this.$translate.instant(
+              'private_database_order_clouddb_bill_success',
+              { billUrl: url },
+            )}`,
           );
         } else {
           this.displaySuccessMessage(
-            `${this.$translate.instant('private_database_order_clouddb_payment_checkout_success', {
-              accountId: this.defaultPaymentMean.label,
-              price: prices.withTax.text,
-              billUrl: url,
-            })}`,
+            `${this.$translate.instant(
+              'private_database_order_clouddb_payment_checkout_success',
+              {
+                accountId: this.defaultPaymentMean.label,
+                price: prices.withTax.text,
+                billUrl: url,
+              },
+            )}`,
           );
         }
       })
       .catch(() => {
         this.displayErrorMessage(
-          `${this.$translate.instant('private_database_order_clouddb_payment_checkout_error')}`,
+          `${this.$translate.instant(
+            'private_database_order_clouddb_payment_checkout_error',
+          )}`,
         );
       })
       .finally(() => {
@@ -194,6 +223,27 @@ export default class PrivateDatabaseOrderCloudDbCtrl {
   }
 
   displayErrorGetPaymentMethod() {
-    this.displayErrorMessage(this.$translate.instant('private_database_order_clouddb_payment_get_payment_method_error'));
+    this.displayErrorMessage(
+      this.$translate.instant(
+        'private_database_order_clouddb_payment_get_payment_method_error',
+      ),
+    );
+  }
+
+  getFunctionLogger() {
+    const { model } = this;
+    return function () {
+      console.log(model);
+    };
+
+    // console.log("Est-ce que tu m'entends bien ?");
+  }
+
+  $postLink() {
+    this.$element.on('clickEvent', (event) => {
+      this.eventValue = event.detail.value;
+
+      this.$scope.$digest();
+    });
   }
 }

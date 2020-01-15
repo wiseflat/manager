@@ -69,6 +69,9 @@ export = opts => {
         './node_modules',
         path.resolve('./node_modules'),
       ],
+      extensions: [
+        '.tsx', '.js',
+      ],
     },
 
     resolveLoader: {
@@ -226,6 +229,12 @@ export = opts => {
             },
           ],
         },
+
+        // Load typescript files for Stencil
+        {
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader'
+        }
       ], // \rules
     }, // \module
 

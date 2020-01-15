@@ -35,7 +35,7 @@ export = (env) => {
       host: env.host || process.env.npm_package_config_host || 'localhost',
       https: env.https || yn(process.env.npm_package_config_https) || false,
       overlay: true,
-      port: env.port || Number.parseInt(process.env.npm_package_config_port, 10) || 9000,
+      port: env.port || Number.parseInt(process.env.npm_package_config_port, 10) || 9090,
       proxy,
     },
   };

@@ -1956,6 +1956,13 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.15.0.tgz#96915baa05e6a6a1d137badf4984d3fc05820bb6"
   integrity sha512-lu8BpxjAtRCAo5ifytTpCPCj99LF7o/2Myn+NXyNCBqvPYn7Pjd76AMmUB5l7XF1U6t0hcWrlEM5ESufW7wAeA==
 
+"@stencil/core@^1.8.3":
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-1.8.3.tgz#c8ed5801212d709bf8427b94a59aab3ee032bda0"
+  integrity sha512-9+ugs+3OLokZPKKrm2QtmGD8t44U1w5SRCteL9HLU2bQNm8iN1SHRu9FBIAdvj1nIovwmsGZpb0+DyPVLfSv1g==
+  dependencies:
+    typescript "3.7.2"
+
 "@types/angular@^1.6.25":
   version "1.6.56"
   resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.6.56.tgz#20124077bd44061e018c7283c0bb83f4b00322dd"
@@ -15541,6 +15548,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
+  integrity sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
 
 typescript@^3.7.3:
   version "3.7.3"

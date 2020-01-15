@@ -44,7 +44,7 @@ import 'ckeditor';
 import 'ovh-api-services';
 import 'script-loader!clipboard/dist/clipboard.min.js';
 import 'script-loader!bootstrap-tour/build/js/bootstrap-tour-standalone.min.js';
-
+import 'stencil-components';
 // Ckeditor 4.x
 import 'ng-ckeditor';
 
