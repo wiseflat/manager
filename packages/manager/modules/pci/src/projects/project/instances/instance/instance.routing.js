@@ -18,14 +18,19 @@ export default /* @ngInject */ ($stateProvider) => {
         PciProjectsProjectInstanceService,
         projectId,
         instanceId,
-      ) => PciProjectsProjectInstanceService.get(projectId, instanceId),
+      ) => PciProjectsProjectInstanceService.getGrapgQlIntance(projectId, instanceId),
+      // instance: /* @ngInject */ (
+      //   PciProjectsProjectInstanceService,
+      //   projectId,
+      //   instanceId,
+      // ) => PciProjectsProjectInstanceService.get(projectId, instanceId),
 
-      instancePrice: /* @ngInject */ (
-        PciProjectsProjectInstanceService,
-        projectId,
-        instance,
-      ) =>
-        PciProjectsProjectInstanceService.getInstancePrice(projectId, instance),
+      // instancePrice: /* @ngInject */ (
+      //   PciProjectsProjectInstanceService,
+      //   projectId,
+      //   instance,
+      // ) =>
+      //   PciProjectsProjectInstanceService.getInstancePrice(projectId, instance),
 
       reverseDnsLink: /* @ngInject */ (coreConfig) =>
         DEDICATED_IPS_URL[coreConfig.getRegion()],

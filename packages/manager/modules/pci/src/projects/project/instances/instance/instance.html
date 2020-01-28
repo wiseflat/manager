@@ -1,3 +1,4 @@
+{{ $ctrl.loadingPrivateNetworks }}
 <oui-page-header data-heading="{{ $ctrl.instance.name }}">
     <oui-header-tabs>
         <oui-header-tabs-item
@@ -204,13 +205,14 @@
                     data-term="{{:: 'pci_projects_project_instances_instance_price_label' | translate }}"
                 >
                     <oui-tile-description>
+                        <oui-spinner data-size="s" data-ng-if="$ctrl.loadingPrice"></oui-spinner>
                         <span
-                            data-ng-if="$ctrl.instance.isMonthlyBillingActivated()"
+                            data-ng-if="!$ctrl.loadingPrice && $ctrl.instance.isMonthlyBillingActivated()"
                             data-translate="pci_projects_project_instances_instance_price_month_value"
                             data-translate-values="{ price : $ctrl.instancePrice.price.text }"
                         ></span>
                         <span
-                            data-ng-if="!$ctrl.instance.isMonthlyBillingActivated()"
+                            data-ng-if="!$ctrl.loadingPrice && !$ctrl.instance.isMonthlyBillingActivated()"
                             data-translate="pci_projects_project_instances_instance_price_hourly_value"
                             data-translate-values="{ price : $ctrl.instancePrice.price.text }"
                         ></span>
@@ -331,11 +333,12 @@
                             data-translate="pci_projects_project_instances_instance_reverse_ip_label"
                         ></dt>
                         <dd class="oui-tile__description">
+                            <oui-spinner data-size="s" data-ng-if="$ctrl.loadingReverseIp"></oui-spinner>
                             <oui-clipboard
-                                data-ng-if="$ctrl.instance.ipReverse"
-                                data-model="$ctrl.instance.ipReverse.reverse"
+                                data-ng-if="!$ctrl.loadingReverseIp && $ctrl.ipReverse"
+                                data-model="$ctrl.ipReverse.reverse"
                             ></oui-clipboard>
-                            <span data-ng-if="!$ctrl.instance.ipReverse"
+                            <span data-ng-if="!$ctrl.loadingReverseIp && !$ctrl.ipReverse"
                                 >-</span
                             >
                         </dd>
@@ -403,11 +406,12 @@
                             data-translate="pci_projects_project_instances_instance_reverse_ip_label"
                         ></dt>
                         <dd class="oui-tile__description">
+                            <oui-spinner data-size="s" data-ng-if="$ctrl.loadingReverseIp"></oui-spinner>
                             <oui-clipboard
-                                data-ng-if="$ctrl.instance.ipReverse"
-                                data-model="$ctrl.instance.ipReverse.reverse"
+                                data-ng-if="!$ctrl.loadingReverseIp && $ctrl.ipReverse"
+                                data-model="$ctrl.ipReverse.reverse"
                             ></oui-clipboard>
-                            <span data-ng-if="!$ctrl.instance.ipReverse"
+                            <span data-ng-if="!$ctrl.loadingReverseIp && !$ctrl.ipReverse"
                                 >-</span
                             >
                         </dd>
@@ -445,13 +449,18 @@
                     data-term="{{:: 'pci_projects_project_instances_instance_private_networks_label' | translate }}"
                 >
                     <oui-tile-description
-                        data-ng-if="$ctrl.instance.privateNetworks.length === 0"
+                        data-ng-if="$ctrl.loadingPrivateNetworks"
+                    >
+                        <oui-spinner data-size="s"></oui-spinner>
+                    </oui-tile-description>
+                    <oui-tile-description
+                        data-ng-if="!$ctrl.loadingPrivateNetworks && $ctrl.privateNetworks.length === 0"
                     >
                         <span>-</span>
                     </oui-tile-description>
                     <oui-tile-description
-                        data-ng-if="$ctrl.instance.privateNetworks.length > 0"
-                        data-ng-repeat="network in $ctrl.instance.privateNetworks track by network.id"
+                        data-ng-if="!$ctrl.loadingPrivateNetworks && $ctrl.privateNetworks.length > 0"
+                        data-ng-repeat="network in $ctrl.privateNetworks track by network.id"
                     >
                         <span data-ng-bind="network.name"></span>
                     </oui-tile-description>
@@ -482,8 +491,10 @@
                     data-term="{{:: 'pci_projects_project_instances_instance_ssh_key_label' | translate }}"
                 >
                     <oui-tile-description>
+                        <oui-spinner data-size="s" data-ng-if="$ctrl.loadingSshKey"></oui-spinner>
                         <span
-                            data-ng-bind="$ctrl.instance.sshKey.name || '-'"
+                            data-ng-if="!$ctrl.loadingSshKey"
+                            data-ng-bind="$ctrl.sshKey.name || '-'"
                         ></span>
                     </oui-tile-description>
                 </oui-tile-definition>

@@ -1,4 +1,12 @@
 import angular from 'angular';
+import AngularApollo from 'angular1-apollo';
+import { ApolloClient } from 'apollo-client';
+import { ApolloLink } from 'apollo-link';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { createHttpLink } from "apollo-link-http";
+import { onError } from "apollo-link-error";
+import { BatchHttpLink } from "apollo-link-batch-http";
+import { toIdValue } from 'apollo-utilities';
 
 import '@ovh-ux/manager-core';
 import '@ovh-ux/ng-ovh-api-wrappers'; // should be a peer dependency of ovh-api-services
@@ -37,6 +45,7 @@ const moduleName = 'ovhManagerPciProject';
 
 angular
   .module(moduleName, [
+    AngularApollo,
     analyticsDataPlatform,
     baremetal,
     billing,
@@ -66,6 +75,51 @@ angular
     serving,
   ])
   .config(routing)
+  .config(apolloProvider => {
+    const uri = "http://localhost:8080/graphql";
+    const httpLink = createHttpLink({
+      uri,
+      credentials: 'include',
+      headers: {
+        'Cache-Control': `max-age=30`
+      },
+      useGETForQueries: true,
+    });
+    const batchHttpLink = new BatchHttpLink({
+      uri,
+      credentials: 'include',
+      headers: { batch: "true " },
+      useGETForQueries: true,
+    });
+    const errorLink = onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors)
+        graphQLErrors.map(({ message, locations, path }) =>
+          console.log(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+          ),
+        );
+
+      if (networkError) console.log(`[Network error]: ${networkError}`);
+    });
+    const cache = new InMemoryCache({
+      cacheRedirects: {
+        Query: {
+          instance: (_, args, { getCacheKey }) => {
+            return getCacheKey({ __typename: 'Instance', id: args.instanceId })
+          },
+        },
+      },
+    });
+    const client = new ApolloClient({
+      link: ApolloLink.from([
+        errorLink,
+        httpLink,
+        batchHttpLink,
+      ]),
+      cache,
+    });
+    apolloProvider.defaultClient(client);
+  })
   .run(/* @ngTranslationsInject:json ./translations */);
 
 export default moduleName;

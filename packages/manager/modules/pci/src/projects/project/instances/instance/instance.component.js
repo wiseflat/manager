@@ -9,7 +9,7 @@ export default {
     projectId: '<',
     instanceId: '<',
     instance: '<',
-    instancePrice: '<',
+    // instancePrice: '<',
 
     instanceLink: '<',
     consoleLink: '<',

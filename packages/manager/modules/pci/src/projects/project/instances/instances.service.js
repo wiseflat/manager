@@ -18,6 +18,13 @@ import {
   BANDWIDTH_OUT_INVOICE,
 } from './instances.constants';
 
+import {
+  QUERY_INSTANCES,
+  QUERY_INSTANCE,
+  QUERY_INSTANCE_SSH_KEY,
+  QUERY_PRIVATE_NETWORKS,
+} from './instances.query';
+
 export default class PciProjectInstanceService {
   /* @ngInject */
   constructor(
@@ -34,6 +41,7 @@ export default class PciProjectInstanceService {
     OvhApiIp,
     OvhApiOrderCatalogPublic,
     PciProjectRegions,
+    apollo,
   ) {
     this.$q = $q;
     this.CucPriceHelper = CucPriceHelper;
@@ -48,6 +56,7 @@ export default class PciProjectInstanceService {
     this.OvhApiIp = OvhApiIp;
     this.OvhApiOrderCatalogPublic = OvhApiOrderCatalogPublic;
     this.PciProjectRegions = PciProjectRegions;
+    this.apollo = apollo;
   }
 
   getAll(projectId) {
@@ -567,5 +576,67 @@ export default class PciProjectInstanceService {
           {},
         );
       });
+  }
+
+  getGrapgQlIntances(projectId) {
+    return this.apollo
+      .query({
+        query: QUERY_INSTANCES,
+        variables: {
+          projectId,
+        },
+      })
+      .then((res) => {
+        return {
+          instances: map(res.data.instances, (instance) => new Instance(instance)),
+          vRack: res.data.vRack,
+        }
+      });
+  }
+
+  getGrapgQlIntance(projectId, instanceId) {
+    return this.apollo
+      .query({
+        query: QUERY_INSTANCE,
+        variables: {
+          projectId,
+          instanceId,
+        },
+      })
+      .then((res) => {
+        const instance = res.data.instance;
+        return new Instance({
+          ...instance,
+          flavor: {
+            ...instance.flavor,
+            capabilities: this.constructor.transformCapabilities(
+              get(instance.flavor, 'capabilities', []),
+            ),
+          },
+        });
+      });
+  }
+
+  getGrapgQlInstanceSshKey(projectId, instanceId) {
+    return this.apollo
+      .query({
+        query: QUERY_INSTANCE_SSH_KEY,
+        variables: {
+          projectId,
+          instanceId,
+        },
+      })
+      .then((res) => res.data.instance.sshKey);
+  }
+
+  getGrapgQlPrivateNetworks(projectId) {
+    return this.apollo
+      .query({
+        query: QUERY_PRIVATE_NETWORKS,
+        variables: {
+          projectId,
+        },
+      })
+      .then((res) => res.data.privateNetworks);
   }
 }

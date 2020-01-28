@@ -26,6 +26,8 @@ export default class CloudProjectComputeInfrastructureListCtrl {
     this.hasVrack = !isEmpty(this.vrack);
     this.loadMessages();
     this.checkHelpDisplay();
+    // pre load private networks
+    this.PciProjectsProjectInstanceService.getGrapgQlPrivateNetworks(this.projectId);
   }
 
   loadMessages() {

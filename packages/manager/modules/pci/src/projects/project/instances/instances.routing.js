@@ -23,37 +23,19 @@ export default /* @ngInject */ ($stateProvider) => {
       breadcrumb: /* @ngInject */ ($translate) =>
         $translate.instant('pci_projects_project_instances_title'),
       help: /* @ngInject */ ($transition$) => $transition$.params().help,
-      instances: /* @ngInject */ (
-        $q,
+      pageData: /* @ngInject */ (
         PciProjectsProjectInstanceService,
         projectId,
-      ) =>
-        PciProjectsProjectInstanceService.getAll(projectId)
-          .then((instances) =>
-            $q.all(
-              map(instances, (instance) =>
-                PciProjectsProjectInstanceService.getInstanceFlavor(
-                  projectId,
-                  instance,
-                ).then(
-                  (flavor) =>
-                    new Instance({
-                      ...instance,
-                      flavor,
-                    }),
-                ),
-              ),
-            ),
-          )
-          .then((instances) =>
-            filter(
-              instances,
-              (instance) =>
-                !find(TYPES_TO_EXCLUDE, (pattern) =>
-                  pattern.test(get(instance, 'flavor.type')),
-                ),
-            ),
-          ),
+      ) => PciProjectsProjectInstanceService.getGrapgQlIntances(projectId),
+      instances: /* @ngInject */ (
+        pageData,
+      ) => pageData.instances,
+      vrack: /* @ngInject */ (
+        pageData,
+      ) => pageData.vRack,
+      // ) => PciProjectsProjectInstanceService.getAll(projectId),
+      // vrack: /* @ngInject */ (PciProjectsProjectInstanceService, projectId) =>
+      //   PciProjectsProjectInstanceService.getVrack(projectId),
       addInstance: /* @ngInject */ ($state, projectId) => () =>
         $state.go('pci.projects.project.instances.add', {
           projectId,
@@ -129,8 +111,6 @@ export default /* @ngInject */ ($stateProvider) => {
           projectId,
           selectedInstance: instance,
         }),
-      vrack: /* @ngInject */ (PciPrivateNetworks, projectId) =>
-        PciPrivateNetworks.getVrack(projectId),
       goToInstances: /* @ngInject */ (CucCloudMessage, $state, projectId) => (
         message = false,
         type = 'success',
