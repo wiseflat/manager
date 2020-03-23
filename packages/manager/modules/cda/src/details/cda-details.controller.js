@@ -1,14 +1,15 @@
 import get from 'lodash/get';
 
-angular
-  .module('managerApp')
-  .controller('CdaDetailsCtrl', function CdaDetailsCtrl(
+import { GUIDE_URLS } from '../cda.constants';
+
+export default class CdaDetailsCtrl {
+  /* @ngInject */
+  constructor(
     $stateParams,
     $translate,
     $q,
     CdaService,
     CucCloudMessage,
-    URLS,
     OvhApiMe,
   ) {
     const self = this;
@@ -34,8 +35,8 @@ angular
     };
 
     self.loadMessage = function loadMessage() {
-      CucCloudMessage.unSubscribe('paas.cda');
-      self.messageHandler = CucCloudMessage.subscribe('paas.cda', {
+      CucCloudMessage.unSubscribe('cda');
+      self.messageHandler = CucCloudMessage.subscribe('cda', {
         onMessage: () => self.refreshMessage(),
       });
     };
@@ -68,4 +69,5 @@ angular
     }
 
     init();
-  });
+  }
+}

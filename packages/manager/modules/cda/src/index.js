@@ -2,7 +2,6 @@ import angular from 'angular';
 import '@uirouter/angularjs';
 import 'angular-translate';
 import 'ovh-api-services';
-import 'ovh-ui-angular';
 import 'angular-ui-bootstrap';
 import '@ovh-ux/ng-ovh-sidebar-menu';
 
@@ -10,6 +9,8 @@ import ovhManagerCore from '@ovh-ux/manager-core';
 import ngAtInternet from '@ovh-ux/ng-at-internet';
 import ngOvhCloudUniverseComponents from '@ovh-ux/ng-ovh-cloud-universe-components';
 import ngOvhDocUrl from '@ovh-ux/ng-ovh-doc-url';
+
+import { Environment } from '@ovh-ux/manager-config';
 
 import cdaDetails from './details';
 import cdaDetailsHome from './details/home';
@@ -19,8 +20,8 @@ import cdaUser from './user';
 import routing from './routing';
 import service from './cda.service';
 
-import 'ovh-ui-kit-bs/dist/ovh-ui-kit-bs.css';
-import 'ovh-ui-kit/dist/oui.css';
+import '@ovh-ux/ui-kit/dist/css/oui.css';
+import 'ovh-ui-kit-bs/dist/css/oui-bs3.css';
 import './cda.less';
 
 const moduleName = 'ovhManagerCda';
@@ -45,12 +46,8 @@ angular
   ])
   .config(routing)
   .config(
-    /* @ngInject */ (
-      $qProvider,
-      ovhDocUrlProvider,
-      TranslateServiceProvider,
-    ) => {
-      ovhDocUrlProvider.setUserLocale(TranslateServiceProvider.getUserLocale());
+    /* @ngInject */ ($qProvider, ovhDocUrlProvider) => {
+      ovhDocUrlProvider.setUserLocale(Environment.getUserLocale());
       $qProvider.errorOnUnhandledRejections(false);
     },
   )
