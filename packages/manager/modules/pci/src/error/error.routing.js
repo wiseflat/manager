@@ -20,6 +20,7 @@ export default /* @ngInject */ ($stateProvider) => {
           .to()
           .name.replace(/\./g, '::')}`;
         const error = $transition$.params();
+        console.log('error', error);
 
         atInternet.trackEvent({
           page,
@@ -33,8 +34,10 @@ export default /* @ngInject */ ($stateProvider) => {
       submitAction: /* @ngInject */ ($window) => () =>
         $window.location.reload(),
 
-      message: /* @ngInject */ ($transition$) =>
-        $transition$.params().message || null,
+      message: /* @ngInject */ ($transition$) => {
+        console.log('error', $transition$.params());
+        return $transition$.params().message || null;
+      },
 
       image: /* @ngInject */ ($transition$) =>
         $transition$.params().image || null,
