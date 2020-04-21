@@ -151,6 +151,7 @@ export const EMAIL_CONFIG = {
       stateParams: ['productId'],
       icon: 'ovh-font ovh-font-mail',
       app: [WEB],
+      regions: ['EU'],
     },
     {
       path: '/email/mxplan',
@@ -160,6 +161,7 @@ export const EMAIL_CONFIG = {
       loadOnState: 'app.email.mxplan',
       icon: 'ovh-font ovh-font-mail',
       app: [WEB],
+      regions: ['EU', 'CA'],
     },
     {
       path: '/email/domain/delegatedAccount',
@@ -169,11 +171,12 @@ export const EMAIL_CONFIG = {
       loadOnState: 'app.email.delegate',
       icon: 'ovh-font ovh-font-mail',
       app: [WEB],
+      regions: ['EU'],
     },
   ],
   icon: 'ovh-font ovh-font-mail',
   app: [WEB],
-  regions: ['EU'],
+  regions: ['EU', 'CA'],
 };
 
 export const MICROSOFT_CONFIG = {

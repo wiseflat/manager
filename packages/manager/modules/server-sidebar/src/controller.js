@@ -55,6 +55,10 @@ export default class OvhManagerServerSidebarController {
         .refresh()
         .then(() => this.OvhApiUniverses.Aapi().query().$promise)
         .then((universes) => {
+          universes.push({
+            universe: 'web',
+            url: 'https://ca.ovh.com/manager/web',
+          });
           this.SIDEBAR_CONFIG = SIDEBAR_CONFIG;
           this.SIDEBAR_ORDER_CONFIG = SIDEBAR_ORDER_CONFIG;
 
