@@ -1,6 +1,6 @@
 {
 
-  "pci_project_instances_available_only": "Masquer les options non disponibles",
+  "pci_project_instances_available_only": "Montrer les localisations indisponibles",
   "pci_project_instances_os_linux": "Distributions Unix",
   "pci_project_instances_os_windows": "Distributions Windows",
   "pci_project_instances_apps": "Distributions + Apps",

@@ -5,9 +5,12 @@ import '@ovh-ux/ng-ovh-cloud-universe-components';
 import 'angular-translate';
 import 'ovh-api-services';
 
+import './add.less';
+
 import flavorBilling from '../../../../components/project/flavor-billing';
 import flavorsList from '../../../../components/project/flavors-list';
 import imagesList from '../../../../components/project/images-list';
+import nestedSelectPicker from '../../../../components/project/nested-select-picker';
 import regionsList from './regions-list';
 import sshKeys from '../../../../components/project/instance/ssh-keys';
 
@@ -26,6 +29,7 @@ angular
     flavorBilling,
     flavorsList,
     imagesList,
+    nestedSelectPicker,
     regionsList,
     sshKeys,
   ])

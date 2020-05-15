@@ -35,6 +35,7 @@ module.exports = (env = {}) => {
     {
       template: './src/index.html',
       basePath: './src',
+      lessPath: ['./node_modules'],
       root: path.resolve(__dirname, './src'),
       assets: {
         files: [

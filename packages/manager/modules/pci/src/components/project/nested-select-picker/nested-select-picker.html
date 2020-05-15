@@ -1,0 +1,96 @@
+<oui-select-picker
+    data-model="$ctrl.model"
+    data-values="[$ctrl.value]"
+    data-variant="light"
+    data-on-change="$ctrl.onValueChange(modelValue, true)"
+    data-required
+>
+    <oui-select-picker-section
+        data-ng-class="{ 'oui-select-picker__section_disabled': $ctrl.disabled }"
+    >
+        <div class="text-center">
+            <p
+                data-ng-if="!$ctrl.isIconImgPath"
+                data-ng-class=":: $ctrl.icon"
+                aria-hidden="true"
+            ></p>
+            <p data-ng-if="$ctrl.isIconImgPath">
+                <img
+                    alt=""
+                    ng-attr-alt="{{:: $ctrl.value }}"
+                    ng-src="{{:: $ctrl.icon }}"
+                />
+            </p>
+            <p
+                class="text-label"
+                data-ng-bind=":: $ctrl.label || $ctrl.value"
+                data-ng-class="{ 'text-label_selected': $ctrl.model === $ctrl.value }"
+            ></p>
+        </div>
+    </oui-select-picker-section>
+    <oui-select-picker-footer>
+        <div
+            data-ng-class="{ 'oui-select-picker__footer_disabled': $ctrl.disabled }"
+        >
+            <div
+                class="oui-radio-toggle-group nested-selector d-flex"
+                data-ng-if="$ctrl.nestedValues.length < $ctrl.minDropdownLength"
+            >
+                <div
+                    class="oui-radio-toggle py-4"
+                    data-ng-repeat="value in $ctrl.nestedValues track by $index"
+                >
+                    <input
+                        class="oui-radio-toggle__input"
+                        type="radio"
+                        name="{{$ctrl.value}}"
+                        id="{{value.name}}"
+                        data-ng-value="value"
+                        data-ng-model="$ctrl.nestedModel"
+                        data-ng-change="$ctrl.onNestedValueChange(true)"
+                    />
+                    <label
+                        class="oui-radio-toggle__label-container"
+                        for="{{value.name}}"
+                    >
+                        <span
+                            class="oui-icon oui-icon-warning_extra-thin warning-icon"
+                            data-ng-if="($ctrl.nestedModel === value) && $ctrl.displayWarning"
+                        ></span>
+                        <span
+                            class="oui-radio-toggle__label"
+                            data-ng-class="{ 'oui-radio-toggle__label_selected': $ctrl.nestedModel === value }"
+                            data-ng-bind="value.name"
+                        ></span>
+                    </label>
+                </div>
+            </div>
+            <div
+                class="p-3"
+                data-ng-if="$ctrl.nestedValues.length >= $ctrl.minDropdownLength"
+            >
+                <span
+                    class="oui-icon oui-icon-warning_extra-thin warning-icon"
+                    data-ng-if="$ctrl.nestedValues.includes($ctrl.nestedModel) && $ctrl.displayWarning"
+                ></span>
+                <label class="oui-select mt-3">
+                    <select
+                        class="oui-select__input"
+                        data-ng-model="$ctrl.nestedModel"
+                        data-ng-change="$ctrl.onNestedValueChange(true)"
+                    >
+                        <option
+                            data-ng-repeat="value in $ctrl.nestedValues track by $index"
+                            data-ng-value="value"
+                            data-ng-bind="value.name"
+                        ></option>
+                    </select>
+                    <span
+                        class="oui-icon oui-icon-chevron-down"
+                        aria-hidden="true"
+                    ></span>
+                </label>
+            </div>
+        </div>
+    </oui-select-picker-footer>
+</oui-select-picker>

@@ -1,5 +1,6 @@
 import filter from 'lodash/filter';
 import find from 'lodash/find';
+import forEach from 'lodash/forEach';
 import first from 'lodash/first';
 import keys from 'lodash/keys';
 import partition from 'lodash/partition';
@@ -12,11 +13,13 @@ export default class ImagesListController {
   /* @ngInject */
   constructor(
     // $translate,
+    $q,
     OvhApiCloudProjectImage,
     OvhApiCloudProjectSnapshot,
     PciProjectImages,
   ) {
     // this.$translate = $translate;
+    this.$q = $q;
     this.OvhApiCloudProjectImage = OvhApiCloudProjectImage;
     this.OvhApiCloudProjectSnapshot = OvhApiCloudProjectSnapshot;
     this.PciProjectImages = PciProjectImages;
@@ -28,12 +31,14 @@ export default class ImagesListController {
     this.distribution = null;
     this.image = null;
 
-    this.showOnlyAvailable = false;
+    this.showNonAvailable = false;
 
     this.isLoading = true;
 
-    return Promise.all([this.getImages(), this.getSnapshots()])
+    return this.$q
+      .all([this.getImages(), this.getSnapshots()])
       .then(() => this.findDefaultImage())
+      .then(() => this.getDataToShow(this.showNonAvailable))
       .finally(() => {
         this.isLoading = false;
       });
@@ -65,6 +70,24 @@ export default class ImagesListController {
     this.apps = appImages;
 
     this.selectedTab = first(keys(this.os));
+    this.getFilteredImages();
+  }
+
+  getFilteredImages() {
+    const os = {};
+    forEach(this.os, (distributions, imageType) => {
+      os[imageType] = {};
+      forEach(distributions, (images, distribution) => {
+        os[imageType][distribution] = filter(images, (image) =>
+          this.isCompatible(image),
+        );
+      });
+    });
+    this.filteredOs = os;
+  }
+
+  getDataToShow(showNonAvailable) {
+    this.osToShow = showNonAvailable ? this.os : this.filteredOs;
   }
 
   getSnapshots() {
@@ -125,12 +148,7 @@ export default class ImagesListController {
     }
   }
 
-  changeDistribution(distribution, images) {
-    if (images.length === 1) {
-      [this.image] = images;
-    } else {
-      this.image = null;
-    }
+  changeDistribution() {
     this.selectedImage = this.image;
     if (this.onChange) {
       this.onChange({ image: this.selectedImage });
@@ -142,8 +160,12 @@ export default class ImagesListController {
   }
 
   onImageChange(image) {
-    if (image.isApp() || image.isBackup()) {
-      this.distribution = null;
+    this.isImageCompatible = false;
+    if (image) {
+      if (image.isApp() || image.isBackup()) {
+        this.distribution = null;
+      }
+      this.isImageCompatible = this.isCompatible(image);
     }
     this.selectedImage = image;
     if (this.onChange) {

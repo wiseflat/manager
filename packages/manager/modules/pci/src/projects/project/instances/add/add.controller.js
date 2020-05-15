@@ -1,5 +1,6 @@
 import find from 'lodash/find';
 import filter from 'lodash/filter';
+import forEach from 'lodash/forEach';
 import get from 'lodash/get';
 import includes from 'lodash/includes';
 import isEmpty from 'lodash/isEmpty';
@@ -43,7 +44,7 @@ export default class PciInstancesAddController {
     this.defaultInstanceName = '';
 
     this.showUserData = false;
-    this.showOnlyAvailableRegions = false;
+    this.showNonAvailableRegions = false;
 
     this.quota = null;
     this.flavor = null;
@@ -53,6 +54,7 @@ export default class PciInstancesAddController {
     this.model = {
       flavorGroup: null,
       image: null,
+      isImageCompatible: false,
       number: 1,
       location: null,
       datacenter: null,
@@ -84,6 +86,19 @@ export default class PciInstancesAddController {
       'pci_projects_project_instances_add_success_multiple_message';
   }
 
+  getFilteredRegions() {
+    const regions = {};
+    forEach(this.regions, (locationsMap, continent) => {
+      regions[continent] = {};
+      forEach(locationsMap, (datacenters, location) => {
+        regions[continent][location] = filter(datacenters, (datacenter) =>
+          this.isRegionAvailable(datacenter),
+        );
+      });
+    });
+    this.filteredRegions = regions;
+  }
+
   loadMessages() {
     this.messageHandler = this.CucCloudMessage.subscribe(
       'pci.projects.project.instances.add',
@@ -101,10 +116,18 @@ export default class PciInstancesAddController {
 
   onFlavorChange() {
     this.displaySelectedFlavor = true;
+    this.getFilteredRegions();
   }
 
   onRegionFocus() {
     this.displaySelectedRegion = false;
+    this.getRegionsToShow(this.showNonAvailableRegions);
+  }
+
+  getRegionsToShow(showNonAvailableRegions) {
+    this.regionsToShow = showNonAvailableRegions
+      ? this.regions
+      : this.filteredRegions;
   }
 
   onRegionChange() {
@@ -171,6 +194,7 @@ export default class PciInstancesAddController {
   showImageNavigation() {
     return (
       this.model.image &&
+      this.model.isImageCompatible &&
       (this.model.image.type !== 'linux' || this.model.sshKey)
     );
   }

@@ -1,0 +1,78 @@
+pci-nested-select-picker {
+  @import 'ovh-ui-kit/packages/oui-color/_variables.less';
+
+  .oui-select-picker {
+    .oui-select-picker__label {
+      display: none;
+    }
+
+    .oui-select-picker__section {
+      border-top: none;
+    }
+
+    .text-label {
+      font-weight: normal;
+
+      &_selected {
+        font-weight: bold;
+      }
+    }
+
+    .oui-select-picker__footer {
+      background: none !important;
+      border-top: 1px solid @oui-color-secondary;
+      padding: 0 !important;
+    }
+
+    .oui-select-picker__section,
+    .oui-select-picker__footer {
+      &_disabled {
+        opacity: 0.5;
+      }
+    }
+
+    .nested-selector {
+      .oui-radio-toggle__label-container {
+        position: relative;
+      }
+
+      .oui-radio-toggle__label {
+        padding: 0.625rem 0.25rem;
+        border: none;
+        box-shadow: none !important;
+        background-color: transparent;
+        font-weight: normal;
+        color: inherit;
+        white-space: normal;
+
+        &_selected {
+          font-weight: bold;
+        }
+      }
+
+      .oui-radio-toggle:not(:first-child) {
+        border-left: 1px solid @oui-color-secondary;
+      }
+
+      .oui-radio-toggle__input:hover ~ .oui-radio-toggle__label-container .oui-radio-toggle__label {
+        background-color: transparent;
+      }
+
+      .oui-radio-toggle__input:checked ~ .oui-radio-toggle__label-container .oui-radio-toggle__label {
+        background-color: transparent;
+        color: inherit;
+      }
+
+      .oui-radio-toggle__input:disabled ~ .oui-radio-toggle__label-container .oui-radio-toggle__label {
+        background-color: transparent;
+      }
+    }
+
+    .warning-icon {
+      color: @oui-color-error-medium;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
