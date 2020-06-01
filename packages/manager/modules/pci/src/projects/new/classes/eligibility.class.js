@@ -21,8 +21,10 @@ export default class PciEligibility {
   }
 
   isAskIncreaseProjectsQuotaRequired() {
-    return this.actionsRequired.includes(
-      ELIGIBILITY_ACTION_ENUM.ASK_INCREASE_PROJECTS_QUOTA,
+    return (
+      this.actionsRequired.includes(
+        ELIGIBILITY_ACTION_ENUM.ASK_INCREASE_PROJECTS_QUOTA,
+      ) || true
     );
   }
 
