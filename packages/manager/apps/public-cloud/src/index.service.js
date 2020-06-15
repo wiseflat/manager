@@ -1,6 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
 import map from 'lodash/map';
-import sortBy from 'lodash/sortBy';
 
 import { DEFAULT_PROJECT_KEY } from './index.constants';
 
@@ -13,15 +12,7 @@ export default class PublicCloud {
     this.ovhUserPref = ovhUserPref;
   }
 
-  getProjects(filters = []) {
-    // Don't have Iceberg in US -> Fallback by ovh-api-services
-    if (this.coreConfig.isRegion('US')) {
-      this.OvhApiCloudProject.v6().resetAllCache();
-      return this.OvhApiCloudProject.v6()
-        .queryDetails()
-        .then((projects) => sortBy(projects, 'description'));
-    }
-
+  getProjects(filters = [], sort = 'description', sortOrder = 'asc') {
     // Use Iceberg
     return filters
       .reduce(
@@ -31,7 +22,7 @@ export default class PublicCloud {
           .query()
           .expand('CachedObjectList-Cursor'),
       )
-      .sort('description') // Doesn't work as long as cache is not enabled
+      .sort(sort || 'description', sortOrder) // Doesn't work as long as cache is not enabled
       .execute(null, true)
       .$promise.then(({ data }) => data);
   }

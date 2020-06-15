@@ -3,6 +3,7 @@ import map from 'lodash/map';
 import Project from './Project.class';
 import Offer from '../components/project/offer/offer.class';
 
+import { PCI_REDIRECT_URLS } from '../constants';
 import { GUIDES_URL } from '../components/project/guides-header/guides-header.constants';
 
 export default /* @ngInject */ ($stateProvider) => {
@@ -30,12 +31,20 @@ export default /* @ngInject */ ($stateProvider) => {
           .catch(() => $q.when({ active: false })),
       defaultProject: /* @ngInject */ (PciProjectsService) =>
         PciProjectsService.getDefaultProject(),
-      getProject: /* @ngInject */ (OvhApiCloudProject) => (project) =>
-        OvhApiCloudProject.v6()
-          .get({ serviceName: project.serviceName })
-          .$promise.then((projectDetails) => new Project(projectDetails)),
+      getProjectInfo: /* @ngInject */ (OvhApiCloudProjectServiceInfos) => (
+        project,
+      ) =>
+        OvhApiCloudProjectServiceInfos.v6()
+          .get({ serviceName: project.project_id })
+          .$promise.then(
+            (serviceInfo) =>
+              new Project({
+                ...project,
+                serviceInfo,
+              }),
+          ),
       goToProject: /* @ngInject */ ($state) => (project) =>
-        $state.go('pci.projects.project', { projectId: project.serviceName }),
+        $state.go('pci.projects.project', { projectId: project.project_id }),
       goToProjects: /* @ngInject */ ($state, CucCloudMessage) => (
         message = false,
         type = 'success',
@@ -53,12 +62,12 @@ export default /* @ngInject */ ($stateProvider) => {
         return promise;
       },
       guideUrl: () => GUIDES_URL,
-      projects: /* @ngInject */ (OvhApiCloudProject) =>
-        OvhApiCloudProject.v6()
-          .query()
-          .$promise.then((projects) =>
-            map(projects, (serviceName) => new Project({ serviceName })),
-          ),
+      projects: /* @ngInject */ (publicCloud) =>
+        publicCloud
+          .getProjects([], 'status', 'desc')
+          .then((projects) => map(projects, (project) => new Project(project))),
+      billingUrl: /* @ngInject */ (coreConfig) =>
+        PCI_REDIRECT_URLS[coreConfig.getRegion()].billing,
       terminateProject: /* @ngInject */ (OvhApiCloudProject) => (project) =>
         OvhApiCloudProject.v6().delete({ serviceName: project.serviceName })
           .$promise,

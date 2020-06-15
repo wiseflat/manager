@@ -1,0 +1,43 @@
+<div class="oui-modal oui-modal_shadow">
+    <div class="oui-modal__header">
+        <button
+            class="oui-icon oui-modal__close-button oui-icon-close"
+            type="button"
+            data-ng-click="$ctrl.goBack()"
+        ></button>
+    </div>
+    <div class="oui-modal__body">
+        <span
+            class="oui-icon oui-icon-warning-circle"
+            aria-hidden="true"
+        ></span>
+        <div class="oui-modal__body-text">
+            <h2 class="oui-modal__title" data-ng-bind="::$ctrl.title"></h2>
+            <p data-ng-bind="::$ctrl.description"></p>
+        </div>
+    </div>
+    <div class="oui-modal__footer">
+        <oui-button
+            data-ng-if="$ctrl.projectData.hasPendingDebt && !$ctrl.projectData.isSuspended"
+            data-variant="secondary"
+            data-on-click="$ctrl.goToProject({ project_id: $ctrl.projectId })"
+        >
+            <span data-translate="pci_projects_project_view"></span>
+        </oui-button>
+        <oui-button
+            class="ml-3"
+            data-ng-if="$ctrl.projectData.hasPendingDebt"
+            data-variant="primary"
+            data-on-click="$ctrl.goToBilling()"
+        >
+            <span data-translate="pci_projects_project_pay_bill"></span>
+        </oui-button>
+        <oui-button
+            data-ng-if="!$ctrl.projectData.hasPendingDebt && $ctrl.projectData.isSuspended"
+            data-variant="primary"
+            data-on-click="$ctrl.goBack()"
+        >
+            <span data-translate="pci_projects_project_inactive_close"></span>
+        </oui-button>
+    </div>
+</div>

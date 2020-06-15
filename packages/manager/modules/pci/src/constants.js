@@ -124,10 +124,19 @@ export const CLOUD_PROJECT_OVERVIEW_THRESHOLD = {
 };
 
 export const CLOUD_PROJECT_STATE = {
+  creating: 'creating',
   deleting: 'deleting',
   deleted: 'deleted',
   ok: 'ok',
   suspended: 'suspended',
+};
+
+export const CLOUD_PROJECT_BILLING_STATE = {
+  EXPIRED: 'expired',
+  IN_CREATION: 'inCreation',
+  OK: 'ok',
+  PENDING_DEBT: 'pendingDebt',
+  UNPAID: 'unPaid',
 };
 
 export const CLOUD_PCA_FILE_STATE = {
@@ -642,6 +651,7 @@ export default {
   CLOUD_MONITORING,
   CLOUD_PROJECT_OVERVIEW_THRESHOLD,
   CLOUD_PROJECT_STATE,
+  CLOUD_PROJECT_BILLING_STATE,
   CLOUD_PCA_FILE_STATE,
   PCI_REDIRECT_URLS,
   PCI_URLS,
