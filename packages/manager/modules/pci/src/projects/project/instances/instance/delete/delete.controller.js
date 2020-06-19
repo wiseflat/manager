@@ -14,9 +14,9 @@ export default class PciInstanceDeleteController {
 
   deleteInstance() {
     this.isLoading = true;
-    return this.PciProjectsProjectInstanceService.delete(
+    return this.PciProjectsProjectInstanceService.deleteGrapgQlInstance(
       this.projectId,
-      this.instance,
+      this.instance.id,
     )
       .then(() =>
         this.goBack(

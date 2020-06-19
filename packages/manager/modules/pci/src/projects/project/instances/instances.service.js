@@ -25,6 +25,8 @@ import {
   QUERY_PRIVATE_NETWORKS,
 } from './instances.query';
 
+import { DELETE_INSTANCE } from './instances.mutation';
+
 export default class PciProjectInstanceService {
   /* @ngInject */
   constructor(
@@ -588,9 +590,12 @@ export default class PciProjectInstanceService {
       })
       .then((res) => {
         return {
-          instances: map(res.data.instances, (instance) => new Instance(instance)),
+          instances: map(
+            res.data.instances,
+            (instance) => new Instance(instance),
+          ),
           vRack: res.data.vRack,
-        }
+        };
       });
   }
 
@@ -604,7 +609,7 @@ export default class PciProjectInstanceService {
         },
       })
       .then((res) => {
-        const instance = res.data.instance;
+        const { instance } = res.data;
         return new Instance({
           ...instance,
           flavor: {
@@ -638,5 +643,15 @@ export default class PciProjectInstanceService {
         },
       })
       .then((res) => res.data.privateNetworks);
+  }
+
+  deleteGrapgQlInstance(projectId, instanceId) {
+    return this.apollo.mutate({
+      mutation: DELETE_INSTANCE,
+      variables: {
+        projectId,
+        instanceId,
+      },
+    });
   }
 }
