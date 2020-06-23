@@ -25,7 +25,11 @@ import {
   QUERY_PRIVATE_NETWORKS,
 } from './instances.query';
 
-import { DELETE_INSTANCE } from './instances.mutation';
+import {
+  CREATE_INSTANCE,
+  DELETE_INSTANCE,
+  UPDATE_INSTANCE,
+} from './instances.mutation';
 
 export default class PciProjectInstanceService {
   /* @ngInject */
@@ -645,12 +649,56 @@ export default class PciProjectInstanceService {
       .then((res) => res.data.privateNetworks);
   }
 
+  createGrapgQlInstance(
+    projectId,
+    {
+      autobackup,
+      flavorId,
+      imageId,
+      monthlyBilling,
+      name,
+      networks,
+      region,
+      sshKeyId,
+      userData,
+    },
+  ) {
+    return this.apollo.mutate({
+      mutation: CREATE_INSTANCE,
+      variables: {
+        projectId,
+        instanceData: {
+          autobackup,
+          flavorId,
+          imageId,
+          monthlyBilling,
+          name,
+          networks,
+          region,
+          sshKeyId,
+          userData,
+        },
+      },
+    });
+  }
+
   deleteGrapgQlInstance(projectId, instanceId) {
     return this.apollo.mutate({
       mutation: DELETE_INSTANCE,
       variables: {
         projectId,
         instanceId,
+      },
+    });
+  }
+
+  updateGrapgQlInstance(projectId, { id: instanceId, name: instanceName }) {
+    return this.apollo.mutate({
+      mutation: UPDATE_INSTANCE,
+      variables: {
+        projectId,
+        instanceId,
+        instanceName,
       },
     });
   }
