@@ -23,9 +23,12 @@ import {
   QUERY_INSTANCE,
   QUERY_INSTANCE_SSH_KEY,
   QUERY_PRIVATE_NETWORKS,
-} from './instances.query';
-
-import { DELETE_INSTANCE } from './instances.mutation';
+  QUERY_PUBLIC_NETWORKS,
+  QUERY_REGIONS,
+  MUTATION_CREATE_INSTANCE,
+  MUTATION_DELETE_INSTANCE,
+  MUTATION_UPDATE_INSTANCE,
+} from './instances.graphql';
 
 export default class PciProjectInstanceService {
   /* @ngInject */
@@ -580,13 +583,14 @@ export default class PciProjectInstanceService {
       });
   }
 
-  getGrapgQlIntances(projectId) {
+  getGrapgQlIntances(projectId, fetchPolicy = 'cache-first') {
     return this.apollo
       .query({
         query: QUERY_INSTANCES,
         variables: {
           projectId,
         },
+        fetchPolicy,
       })
       .then((res) => {
         return {
@@ -599,7 +603,7 @@ export default class PciProjectInstanceService {
       });
   }
 
-  getGrapgQlIntance(projectId, instanceId) {
+  getGrapgQlIntance(projectId, instanceId, fetchPolicy = 'cache-first') {
     return this.apollo
       .query({
         query: QUERY_INSTANCE,
@@ -607,6 +611,7 @@ export default class PciProjectInstanceService {
           projectId,
           instanceId,
         },
+        fetchPolicy,
       })
       .then((res) => {
         const { instance } = res.data;
@@ -645,13 +650,127 @@ export default class PciProjectInstanceService {
       .then((res) => res.data.privateNetworks);
   }
 
+  getGrapgQlPublicNetworks(projectId) {
+    return this.apollo
+      .query({
+        query: QUERY_PUBLIC_NETWORKS,
+        variables: {
+          projectId,
+        },
+      })
+      .then((res) => res.data.publicNetworks);
+  }
+
+  createGrapgQlInstance(
+    projectId,
+    {
+      autobackup,
+      flavorId,
+      imageId,
+      monthlyBilling,
+      name,
+      networks,
+      region,
+      sshKeyId,
+      userData,
+    },
+  ) {
+    return this.apollo.mutate({
+      mutation: MUTATION_CREATE_INSTANCE,
+      variables: {
+        projectId,
+        instanceData: {
+          autobackup,
+          flavorId,
+          imageId,
+          monthlyBilling,
+          name,
+          networks,
+          region,
+          sshKeyId,
+          userData,
+        },
+      },
+      update: (proxy, { data: { createInstance } }) => {
+        // update cache with newly created instance
+        // Read the data from cache
+        const data = proxy.readQuery({
+          query: QUERY_INSTANCES,
+          variables: {
+            projectId,
+          },
+        });
+
+        // Add newly created intance into instance list cache.
+        const newInstance = new Instance({
+          ...createInstance,
+          flavor: {
+            ...createInstance.flavor,
+            capabilities: this.constructor.transformCapabilities(
+              get(createInstance.flavor, 'capabilities', []),
+            ),
+          },
+        });
+        data.instances.push(newInstance);
+
+        // Write our data back to the cache.
+        proxy.writeQuery({
+          query: QUERY_INSTANCES,
+          variables: {
+            projectId,
+          },
+          data,
+        });
+      },
+    });
+  }
+
   deleteGrapgQlInstance(projectId, instanceId) {
     return this.apollo.mutate({
-      mutation: DELETE_INSTANCE,
+      mutation: MUTATION_DELETE_INSTANCE,
       variables: {
         projectId,
         instanceId,
       },
     });
+  }
+
+  updateGrapgQlInstance(projectId, { id: instanceId, name: instanceName }) {
+    return this.apollo.mutate({
+      mutation: MUTATION_UPDATE_INSTANCE,
+      variables: {
+        projectId,
+        instanceId,
+        instanceName,
+      },
+    });
+  }
+
+  getGrapgQlAvailableRegions(projectId) {
+    return this.apollo
+      .query({
+        query: QUERY_REGIONS,
+        variables: {
+          projectId,
+        },
+      })
+      .then((res) => {
+        const regions = res.data.regions;
+        return this.PciProjectRegions.groupByContinentAndDatacenterLocation(
+          map(
+            regions,
+            (region) =>
+              new Datacenter({
+                ...region,
+                ...this.CucRegionService.getRegion(region.name),
+                available: has(region, 'status'),
+              }),
+          ),
+        );
+      });
+  }
+
+  refetchGraphqlInstances(projectId) {
+    return this.getGrapgQlIntances(projectId, 'network-only');
   }
 }

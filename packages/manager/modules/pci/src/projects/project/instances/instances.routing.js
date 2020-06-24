@@ -135,13 +135,6 @@ export default /* @ngInject */ ($stateProvider) => {
 
         return promise;
       },
-      refreshInstances: /* @ngInject */ (
-        $state,
-        OvhApiCloudProjectInstance,
-      ) => () => {
-        OvhApiCloudProjectInstance.v6().resetAllCache();
-        $state.reload();
-      },
     },
   });
 };

@@ -90,4 +90,11 @@ export default class CloudProjectComputeInfrastructureListCtrl {
         });
     }
   }
+
+  refreshInstances() {
+    this.PciProjectsProjectInstanceService.refetchGraphqlInstances(this.projectId)
+      .then((res) => {
+        this.instances = res.instances;
+      });
+  }
 }
