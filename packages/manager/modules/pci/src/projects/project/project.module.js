@@ -6,7 +6,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { BatchHttpLink } from "apollo-link-batch-http";
-import { toIdValue } from 'apollo-utilities';
 
 import '@ovh-ux/manager-core';
 import '@ovh-ux/ng-ovh-api-wrappers'; // should be a peer dependency of ovh-api-services
@@ -76,19 +75,18 @@ angular
   ])
   .config(routing)
   .config(apolloProvider => {
-    const uri = "http://localhost:8080/graphql";
+    console.log(process);
+    const uri = '/engine/2api/graphql';
+    // const uri = 'https://www.ovh.com/engine/2api/graphql';
+    // const uri = "http://localhost:8080/graphql";
     const httpLink = createHttpLink({
       uri,
       credentials: 'include',
-      headers: {
-        'Cache-Control': `max-age=30`
-      },
-      useGETForQueries: true,
     });
     const batchHttpLink = new BatchHttpLink({
       uri,
       credentials: 'include',
-      headers: { batch: "true " },
+      // headers: { batch: "true " },
       useGETForQueries: true,
     });
     const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -114,7 +112,7 @@ angular
       link: ApolloLink.from([
         errorLink,
         httpLink,
-        batchHttpLink,
+        // batchHttpLink,
       ]),
       cache,
     });

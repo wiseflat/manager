@@ -84,6 +84,7 @@ angular.module('Module.license').controller('LicenseCtrl', [
         },
       })
         .then((licenses) => {
+          console.log(licenses);
           if (isArray(get(licenses, 'availableTypes'))) {
             licenses.availableTypes.push('ALL_TYPE');
           }
