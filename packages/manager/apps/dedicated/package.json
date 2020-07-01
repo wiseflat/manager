@@ -19,6 +19,7 @@
     "start:watch": "lerna exec --stream --parallel --scope='@ovh-ux/manager-dedicated' --include-dependencies -- npm run dev:watch --if-present"
   },
   "dependencies": {
+    "@ovh-ux/manager-account-migration": "^0.0.1",
     "@ovh-ux/manager-account-sidebar": "^1.0.0",
     "@ovh-ux/manager-banner": "^1.1.3",
     "@ovh-ux/manager-beta-preference": "^1.0.0",
@@ -31,7 +32,6 @@
     "@ovh-ux/manager-exchange": "^1.0.0",
     "@ovh-ux/manager-filters": "^0.1.0",
     "@ovh-ux/manager-iplb": "^0.4.0",
-    "@ovh-ux/manager-migration": "^0.0.1",
     "@ovh-ux/manager-models": "^1.0.0",
     "@ovh-ux/manager-nasha": "^1.0.0",
     "@ovh-ux/manager-navbar": "^3.0.0",
