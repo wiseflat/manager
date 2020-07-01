@@ -1,12 +1,12 @@
 {
-  "name": "@ovh-ux/manager-migration",
+  "name": "@ovh-ux/manager-account-migration",
   "version": "0.0.1",
   "private": true,
   "description": "OVHcloud Migration product",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ovh/manager.git",
-    "directory": "packages/manager/modules/migration"
+    "directory": "packages/manager/modules/account-migration"
   },
   "license": "BSD-3-Clause",
   "author": "OVH SAS",

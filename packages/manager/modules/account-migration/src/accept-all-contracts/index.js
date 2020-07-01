@@ -2,11 +2,11 @@ import angular from 'angular';
 
 import acceptComponent from './accept.component';
 
-const moduleName = 'migrationAcceptAllContracts';
+const moduleName = 'accountMigrationAcceptAllContracts';
 
 angular
   .module(moduleName, [])
-  .component('migrationAcceptAllContracts', acceptComponent)
+  .component('accountMigrationAcceptAllContracts', acceptComponent)
   .run(/* @ngTranslationsInject:json ./translations */);
 
 export default moduleName;

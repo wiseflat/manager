@@ -42,7 +42,7 @@ import ovhManagerVps from '@ovh-ux/manager-vps';
 import ovhManagerVrack from '@ovh-ux/manager-vrack';
 import ovhManagerIplb from '@ovh-ux/manager-iplb';
 import { detach as detachPreloader } from '@ovh-ux/manager-preloader';
-import ngOvhMigrationComponents from '@ovh-ux/manager-migration';
+import ngOvhAccountMigrationComponents from '@ovh-ux/manager-account-migration';
 import account from './account';
 import config from './config/config';
 import contactsService from './account/contacts/service/contacts-service.module';
@@ -108,7 +108,7 @@ angular
       ngOvhUserPref,
       ngOvhUtils,
       ngOvhWebUniverseComponents,
-      ngOvhMigrationComponents,
+      ngOvhAccountMigrationComponents,
       'ngRoute',
       'ngSanitize',
       ngTranslateAsyncLoader,
