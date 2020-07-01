@@ -31,6 +31,7 @@
     "@ovh-ux/manager-exchange": "^1.0.0",
     "@ovh-ux/manager-filters": "^0.1.0",
     "@ovh-ux/manager-iplb": "^0.4.0",
+    "@ovh-ux/manager-migration": "^0.0.1",
     "@ovh-ux/manager-models": "^1.0.0",
     "@ovh-ux/manager-nasha": "^1.0.0",
     "@ovh-ux/manager-navbar": "^3.0.0",
