@@ -6,7 +6,7 @@ angular
   .controller('UserAccount.controllers.agreements.details', [
     '$stateParams',
     '$q',
-    'UserAccount.services.agreements',
+    'UserAccountServicesAgreements',
     'Alerter',
     '$translate',
     'User',

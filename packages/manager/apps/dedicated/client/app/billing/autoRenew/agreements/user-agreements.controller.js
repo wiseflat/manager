@@ -3,13 +3,15 @@ import get from 'lodash/get';
 angular.module('UserAccount').controller('UserAccount.controllers.agreements', [
   '$scope',
   '$translate',
-  'UserAccount.services.agreements',
   'Alerter',
+  'gotoAcceptAllAgreements',
+  'UserAccountServicesAgreements',
   function UserAccountAgreementsController(
     $scope,
     $translate,
-    Service,
     Alerter,
+    gotoAcceptAllAgreements,
+    Service,
   ) {
     function init() {
       $scope.loading = true;
@@ -26,6 +28,8 @@ angular.module('UserAccount').controller('UserAccount.controllers.agreements', [
     $scope.toActivate = [];
 
     $scope.agreed = {};
+
+    $scope.gotoAcceptAllAgreements = gotoAcceptAllAgreements;
 
     $scope.loadAgreementsList = function loadAgreementsList(count, offset) {
       init();
