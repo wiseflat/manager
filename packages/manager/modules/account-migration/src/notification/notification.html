@@ -10,42 +10,46 @@
     <span
         data-translate="ovh_manager_account_migration_pending_contracts2"
     ></span>
-    <a
-        data-translate="ovh_manager_account_migration_faq_text"
-        data-ng-href="{{ $ctrl.FAQ_LINK }}"
-    ></a>
+    <span
+        data-faq-link="$ctrl.FAQ_LINK"
+        data-link-text="'ovh_manager_account_migration_faq_text' | translate"
+        account-migration-faq-link=""
+    ></span>
 </oui-message>
 
 <oui-message data-type="success">
     <span
         data-translate="ovh_manager_account_migration_pending_contracts_success"
     ></span>
-    <a
-        data-translate="ovh_manager_account_migration_faq_text"
-        data-ng-href="{{ $ctrl.FAQ_LINK }}"
-    ></a>
+    <span
+        data-faq-link="$ctrl.FAQ_LINK"
+        data-link-text="'ovh_manager_account_migration_faq_text' | translate"
+        account-migration-faq-link=""
+    ></span>
 </oui-message>
 
 <oui-message data-type="warning">
     <span data-translate="ovh_manager_account_migration_pending_debts1"></span>
-    <a
-        data-translate="ovh_manager_account_migration_faq_text"
-        data-ng-href="{{ $ctrl.FAQ_LINK }}"
-    ></a>
+    <span
+        data-faq-link="$ctrl.FAQ_LINK"
+        data-link-text="'ovh_manager_account_migration_faq_text' | translate"
+        account-migration-faq-link=""
+    ></span>
     <span data-translate="ovh_manager_account_migration_pending_debts2"></span>
     <a
         data-translate="ovh_manager_account_migration_billing_link_text"
-        data-ng-href="{{ $ctrl.BILLING_URL }}"
+        data-ng-href="{{:: $ctrl.RedirectionService.getURL('debtPay') }}"
     ></a>
     <span data-translate="ovh_manager_account_migration_pending_debts3"></span>
 </oui-message>
 
 <oui-message data-type="warning">
     <span data-translate="ovh_manager_account_migration_pending_order1"></span>
-    <a
-        data-translate="ovh_manager_account_migration_faq_text"
-        data-ng-href="{{ $ctrl.FAQ_LINK }}"
-    ></a>
+    <span
+        data-faq-link="$ctrl.FAQ_LINK"
+        data-link-text="'ovh_manager_account_migration_faq_text' | translate"
+        account-migration-faq-link=""
+    ></span>
     <span data-translate="ovh_manager_account_migration_pending_order2"></span>
     <a
         data-translate="ovh_manager_account_migration_orders_link_text"
@@ -57,10 +61,11 @@
     <span
         data-translate="ovh_manager_account_migration_pending_contact1"
     ></span>
-    <a
-        data-translate="ovh_manager_account_migration_faq_text"
-        data-ng-href="{{ $ctrl.FAQ_LINK }}"
-    ></a>
+    <span
+        data-faq-link="$ctrl.FAQ_LINK"
+        data-link-text="'ovh_manager_account_migration_faq_text' | translate"
+        account-migration-faq-link=""
+    ></span>
     <span
         data-translate="ovh_manager_account_migration_pending_contact2"
     ></span>
@@ -74,16 +79,17 @@
     <span
         data-translate="ovh_manager_account_migration_pending_debts_and_order1"
     ></span>
-    <a
-        data-translate="ovh_manager_account_migration_faq_text"
-        data-ng-href="{{ $ctrl.FAQ_LINK }}"
-    ></a>
+    <span
+        data-faq-link="$ctrl.FAQ_LINK"
+        data-link-text="'ovh_manager_account_migration_faq_text' | translate"
+        account-migration-faq-link=""
+    ></span>
     <span
         data-translate="ovh_manager_account_migration_pending_debts_and_order2"
     ></span>
     <a
         data-translate="ovh_manager_account_migration_billing_link_text"
-        data-ng-href="{{ $ctrl.BILLING_URL }}"
+        data-ng-href="{{:: $ctrl.RedirectionService.getURL('debtPay') }}"
     ></a>
     <span data-translate="ovh_manager_account_migration_and"></span>
     <a
@@ -99,16 +105,17 @@
     <span
         data-translate="ovh_manager_account_migration_pending_debts_and_contact1"
     ></span>
-    <a
-        data-translate="ovh_manager_account_migration_faq_text"
-        data-ng-href="{{ $ctrl.FAQ_LINK }}"
-    ></a>
+    <span
+        data-faq-link="$ctrl.FAQ_LINK"
+        data-link-text="'ovh_manager_account_migration_faq_text' | translate"
+        account-migration-faq-link=""
+    ></span>
     <span
         data-translate="ovh_manager_account_migration_pending_debts_and_contact2"
     ></span>
     <a
         data-translate="ovh_manager_account_migration_billing_link_text"
-        data-ng-href="{{ $ctrl.BILLING_URL }}"
+        data-ng-href="{{:: $ctrl.RedirectionService.getURL('debtPay') }}"
     ></a>
     <span data-translate="ovh_manager_account_migration_and"></span>
     <a
@@ -126,7 +133,7 @@
     ></span>
     <a
         data-translate="ovh_manager_account_migration_billing_link_text"
-        data-ng-href="{{ $ctrl.BILLING_URL }}"
+        data-ng-href="{{:: $ctrl.RedirectionService.getURL('debtPay') }}"
     ></a>
     <span data-translate="ovh_manager_account_migration_and"></span>
     <a
@@ -142,16 +149,17 @@
     <span
         data-translate="ovh_manager_account_migration_pending_debts_order_and_contact1"
     ></span>
-    <a
-        data-translate="ovh_manager_account_migration_faq_text"
-        data-ng-href="{{ $ctrl.FAQ_LINK }}"
-    ></a>
+    <span
+        data-faq-link="$ctrl.FAQ_LINK"
+        data-link-text="'ovh_manager_account_migration_faq_text' | translate"
+        account-migration-faq-link=""
+    ></span>
     <span
         data-translate="ovh_manager_account_migration_pending_debts_order_and_contact1"
     ></span>
     <a
         data-translate="ovh_manager_account_migration_billing_link_text"
-        data-ng-href="{{ $ctrl.BILLING_URL }}"
+        data-ng-href="{{:: $ctrl.RedirectionService.getURL('debtPay') }}"
     ></a
     >,
     <a
@@ -167,3 +175,5 @@
         data-translate="ovh_manager_account_migration_pending_debts_order_and_contact1"
     ></span>
 </oui-message>
+
+<!-- data-label="{{ :: 'refunds_table_head_account' | translate }}" -->
