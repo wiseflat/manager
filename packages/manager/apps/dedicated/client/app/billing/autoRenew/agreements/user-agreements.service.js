@@ -1,7 +1,7 @@
 import find from 'lodash/find';
 import set from 'lodash/set';
 
-angular.module('UserAccount').service('UserAccount.services.agreements', [
+angular.module('UserAccount').service('UserAccountServicesAgreements', [
   '$http',
   '$q',
   '$translate',

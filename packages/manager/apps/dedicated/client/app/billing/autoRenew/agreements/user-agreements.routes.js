@@ -11,6 +11,12 @@ export default /* @ngInject */ (
       template,
       controller: 'UserAccount.controllers.agreements',
       translations: { value: ['.'], format: 'json' },
+      resolve: {
+        gotoAcceptAllAgreements: /* @ngInject */ ($state) => (agreements) =>
+          $state.go('app.account.billing.autorenew.agreements.accept-all', {
+            agreements,
+          }),
+      },
     });
 
     // ensure compatibility with links sended by emails
