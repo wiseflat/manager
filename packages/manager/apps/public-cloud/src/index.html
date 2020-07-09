@@ -44,5 +44,18 @@
 
             <public-cloud-dark-mode></public-cloud-dark-mode>
         </div>
+        <iframe
+            id="iframe"
+            sandbox="allow-scripts allow-same-origin"
+            width="0"
+            height="0"
+        >
+        </iframe>
+        <button
+            style="position:absolute; left: 325px; top: 50px; z-index:1000"
+            onclick="document.getElementById('iframe').contentWindow.postMessage('Hello from parent')"
+        >
+            Send Message
+        </button>
     </body>
 </html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Public Cloud - OVHcloud</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <script src="https://analytics.ovh.com/ovh/ovh_manager.js"></script>
+        <script>
+            window.addEventListener(
+                'message',
+                function(message) {
+                    console.log('Message from parent ::', message.data);
+                },
+                false,
+            );
+        </script>
+    </body>
+</html>
