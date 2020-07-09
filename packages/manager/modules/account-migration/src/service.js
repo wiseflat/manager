@@ -1,10 +1,15 @@
+import map from 'lodash/map';
+import { CACHED_OBJECT_LIST_PAGES, X_PAGINATION_MODE } from './constants';
+import Migration from './migration.class';
+
 export default class {
   /* @ngInject */
   constructor($q, $http, OvhApiMe) {
     this.$q = $q;
     this.$http = $http;
     this.OvhApiMe = OvhApiMe;
-    this.migrationList = null;
+    this.migrations = null;
+    this.migrationDetailsList = null;
   }
 
   getUserAgreements() {
@@ -12,20 +17,31 @@ export default class {
   }
 
   getMigrationDetails(migrationId) {
-    return this.$http.get(`/me/migration/${migrationId}`).$promise;
+    return this.$http.get(`/me/migration/${migrationId}`);
   }
 
-  needMigration() {
-    return this.$q
-      .all([this.OvhApiMe.v6().get(), this.getMigrationList()])
-      .then(([me, migrations]) => {
-        this.migrationList = migrations;
-        return me.ovhSubsidiary === 'FI' && migrations.length > 0;
+  getDetailedList() {
+    return this.getMigrationList().then((list) => {
+      this.migrations = list;
+      const promises = map(list, ({ id }) => this.getMigrationDetails(id));
+      return this.$q.all(promises).then((details) => {
+        this.migrationDetailsList = new Migration(
+          ...map(details, (detail) => detail.data),
+        );
+        console.log(this.migrationDetailsList);
+        return this.migrationDetailsList;
       });
+    });
   }
 
   getMigrationList() {
-    return this.$http.get('/me/migration').then((res) => res.data);
+    return this.$http
+      .get('/me/migration', {
+        headers: {
+          [X_PAGINATION_MODE]: CACHED_OBJECT_LIST_PAGES,
+        },
+      })
+      .then((res) => res.data);
   }
 
   getMigrationContracts(migrationId) {

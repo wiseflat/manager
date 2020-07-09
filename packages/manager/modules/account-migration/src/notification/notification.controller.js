@@ -12,10 +12,14 @@ export default class MigrationNotificationController {
   }
 
   $onInit() {
-    this.accountMigrationService.needMigration().then((res) => {
-      console.log(res);
-      this.needMigration = res;
+    this.accountMigrationService.getMigrationList().then(({ status }) => {
+      if (status === 'TODO') {
+        this.needMigration = true;
+      }
     });
-    this.accountMigrationService.getMigrationDetails('1');
+
+    this.accountMigrationService.getDetailedList().then((res) => {
+      console.log(res.hasOrderPending());
+    });
   }
 }

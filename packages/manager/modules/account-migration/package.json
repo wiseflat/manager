@@ -11,6 +11,9 @@
   "license": "BSD-3-Clause",
   "author": "OVH SAS",
   "main": "./src/index.js",
+  "devDependencies": {
+    "lodash": "^4.17.15"
+  },
   "peerDependencies": {
     "@ovh-ux/manager-core": "^9.0.0",
     "@ovh-ux/ng-at-internet": "^5.0.1",
