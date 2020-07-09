@@ -28,7 +28,6 @@ export default class {
         this.migrationDetailsList = new Migration(
           ...map(details, (detail) => detail.data),
         );
-        console.log(this.migrationDetailsList);
         return this.migrationDetailsList;
       });
     });
