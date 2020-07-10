@@ -1,4 +1,9 @@
-import { FAQ_LINK } from '../constants';
+import moment from 'moment';
+import {
+  FAQ_LINK,
+  MIGRATION_END_DATE,
+  MIGRATION_START_DATE,
+} from '../constants';
 
 export default class MigrationNotificationController {
   /* @ngInject */
@@ -9,17 +14,21 @@ export default class MigrationNotificationController {
     this.ORDERS_URL = this.RedirectionService.getURL('orders');
     this.CONTACTS_URL = this.RedirectionService.getURL('contacts');
     this.accountMigrationService = accountMigrationService;
+    this.needMigration = false;
+    this.migrationDetail = null;
+    this.MIGRATION_END_DATE = moment(MIGRATION_END_DATE).format('LL');
+    this.MIGRATION_START_DATE = moment(MIGRATION_START_DATE).format('LL');
   }
 
   $onInit() {
-    this.accountMigrationService.getMigrationList().then(({ status }) => {
-      if (status === 'TODO') {
+    this.accountMigrationService.getMigrationList().then((res) => {
+      if (res[0].status === 'TODO') {
         this.needMigration = true;
       }
     });
 
     this.accountMigrationService.getDetailedList().then((res) => {
-      console.log(res.hasOrderPending());
+      this.migrationDetail = res;
     });
   }
 }
