@@ -1,5 +1,4 @@
 <oui-modal
-    data-heading="{{:: 'user_agreements_accept_all_title' | translate }}"
     data-primary-action=":: $ctrl.acceptAndNext()"
     data-primary-label="{{ (
         ($ctrl.currentAgreementIndex === ($ctrl.agreements.length - 1))
@@ -18,6 +17,7 @@
         total: $ctrl.agreements.length
     }"
     ></h6>
+    <h3 data-ng-bind=":: $ctrl.currentAgreement.name"></h3>
     <oui-textarea
         data-name="agreement"
         data-model="$ctrl.currentAgreement.text"
@@ -36,6 +36,9 @@
             <span class="oui-checkbox__label">
                 <span
                     data-translate="user_agreements_accept_all_read_and_accepted"
+                    data-translate-values="{
+                        contractTitle: $ctrl.currentAgreement.name
+                    }"
                 ></span>
                 <span class="oui-checkbox__icon">
                     <span

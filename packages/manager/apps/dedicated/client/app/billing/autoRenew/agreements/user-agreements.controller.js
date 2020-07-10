@@ -71,18 +71,27 @@ angular.module('UserAccount').controller('UserAccount.controllers.agreements', [
       );
     };
 
-    $scope.accept = function accept(contractId) {
-      $scope.loaders[`accept_${contractId}`] = true;
+    $scope.accept = function accept(contract) {
+      $scope.loaders[`accept_${contract.id}`] = true;
 
-      Service.accept(contractId).then(
-        () => {
-          $scope.getToValidate();
-          $scope.$broadcast('paginationServerSide.reload', 'agreementsList');
-        },
-        (d) => {
-          Alerter.set('alert alert-danger', d, d, 'agreements_alerter');
-        },
-      );
+      Service.accept(contract)
+        .then(
+          () => {
+            $scope.getToValidate();
+            $scope.$broadcast('paginationServerSide.reload', 'agreementsList');
+          },
+          (d) => {
+            Alerter.set(
+              'alert alert-danger',
+              get(d, 'data.message', d),
+              d,
+              'agreements_alerter',
+            );
+          },
+        )
+        .finally(() => {
+          $scope.loaders[`accept_${contract.id}`] = false;
+        });
     };
 
     $scope.resetMessages = function resetMessages() {

@@ -16,20 +16,18 @@ export default class {
 
   acceptAndNext() {
     this.AgreementUnderProcess = true;
-    this.UserAccountServicesAgreements.accept(this.currentAgreement.contractId)
+    this.UserAccountServicesAgreements.accept(this.currentAgreement)
       .then(() => {
         if (this.currentAgreementIndex !== this.agreements.length - 1) {
           this.currentAgreementIndex += 1;
           this.currentAgreement = this.agreements[this.currentAgreementIndex];
         } else {
-          this.goBack(
-            this.$translate.instant('user_agreements_accept_all_success'),
-            'success',
-          );
+          this.goBack(true);
         }
       })
       .catch((error) =>
         this.goBack(
+          true,
           this.$translate.instant('user_agreements_accept_all_error', {
             message: get(error, 'data.message'),
           }),
@@ -39,34 +37,5 @@ export default class {
       .finally(() => {
         this.AgreementUnderProcess = false;
       });
-  }
-
-  activate() {
-    this.atInternet.trackClick({
-      name: 'autorenew::activate',
-      type: 'action',
-      chapter1: 'dedicated',
-      chapter2: 'account',
-      chapter3: 'billing',
-    });
-
-    this.isActivating = true;
-    return this.activateAutorenew()
-      .then(() =>
-        this.goBack(
-          this.$translate.instant(
-            'billing_autorenew_service_activation_success',
-          ),
-        ),
-      )
-      .catch((error) =>
-        this.goBack(
-          this.$translate.instant(
-            'billing_autorenew_service_activation_error',
-            { message: get(error, 'data.message') },
-          ),
-          'danger',
-        ),
-      );
   }
 }

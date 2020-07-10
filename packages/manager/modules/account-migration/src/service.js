@@ -1,3 +1,4 @@
+import find from 'lodash/find';
 import map from 'lodash/map';
 import { CACHED_OBJECT_LIST_PAGES, X_PAGINATION_MODE } from './constants';
 import Migration from './migration.class';
@@ -12,17 +13,12 @@ export default class {
     this.migrationDetailsList = null;
   }
 
-  getUserAgreements() {
-    return this.$http.get('/me/agreements').then(({ data }) => data);
-  }
-
   getMigrationDetails(migrationId) {
     return this.$http.get(`/me/migration/${migrationId}`);
   }
 
   getDetailedList() {
     return this.getMigrationList().then((list) => {
-      this.migrations = list;
       const promises = map(list, ({ id }) => this.getMigrationDetails(id));
       return this.$q.all(promises).then((details) => {
         this.migrationDetailsList = new Migration(
@@ -35,28 +31,88 @@ export default class {
   }
 
   getMigrationList() {
-    return this.$http
-      .get('/me/migration', {
-        headers: {
-          [X_PAGINATION_MODE]: CACHED_OBJECT_LIST_PAGES,
-        },
-      })
-      .then((res) => res.data);
+    return this.migrations
+      ? this.$q.when(this.migrations)
+      : this.$http
+          .get('/me/migration', {
+            headers: {
+              [X_PAGINATION_MODE]: CACHED_OBJECT_LIST_PAGES,
+            },
+          })
+          .then((res) => {
+            this.migrations = res.data;
+            return this.migrations;
+          });
   }
 
-  getMigrationContracts(migrationId) {
-    return this.$http.get(`/me/migration/${migrationId}/contract`).$promise;
+  getPendingMigration() {
+    return this.getMigrationList().then((migrationList) =>
+      find(migrationList, { status: 'TODO' }),
+    );
   }
 
-  getContractDetails(migrationId, contractId) {
-    return this.$http
-      .get(`/me/migration/${migrationId}/contract/${contractId}`)
-      .then(({ data }) => data);
+  getAgreementDetails(contractId) {
+    return this.getPendingMigration().then((migration) => {
+      return migration
+        ? this.$http
+            .get(
+              `/me/migration/${migration.id}/contract/${contractId}/agreement`,
+            )
+            .then(({ data }) => data)
+        : null;
+    });
   }
 
-  acceptAgreement(migrationId, contractId) {
-    return this.$http.post(
-      `/me/migration/${migrationId}/contract/${contractId}/accept`,
-    ).$promise;
+  getMigrationContracts() {
+    return this.getPendingMigration().then((migration) => {
+      return migration
+        ? this.$http
+            .get(`/me/migration/${migration.id}/contract`)
+            .then(({ data }) => data)
+        : [];
+    });
+  }
+
+  getContractInfo(contractId) {
+    return this.getPendingMigration().then((migration) => {
+      return migration
+        ? this.$http
+            .get(`/me/migration/${migration.id}/contract/${contractId}`)
+            .then(({ data }) => ({
+              ...data,
+              migrationId: migration.id,
+            }))
+        : null;
+    });
+  }
+
+  getContractDetails(contractId) {
+    return this.$q
+      .all([
+        this.getContractInfo(contractId),
+        this.getAgreementDetails(contractId),
+      ])
+      .then(([contract, agreement]) => ({
+        ...agreement,
+        ...contract,
+      }));
+  }
+
+  getAllContracts() {
+    return this.getMigrationContracts().then((contractIds) =>
+      this.$q.all(
+        map(contractIds, (contractId) => this.getContractDetails(contractId)),
+      ),
+    );
+  }
+
+  acceptAgreement(contractId) {
+    return this.getPendingMigration().then((migration) => {
+      return migration
+        ? this.$http.post(
+            `/me/migration/${migration.id}/contract/${contractId}/accept`,
+          )
+        : null;
+    });
   }
 }

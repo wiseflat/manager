@@ -1,5 +1,6 @@
 import filter from 'lodash/filter';
 import get from 'lodash/get';
+import toInteger from 'lodash/toInteger';
 
 angular
   .module('UserAccount')
@@ -31,8 +32,8 @@ angular
         this.alreadyAccepted = false;
 
         $q.all([
-          Service.getAgreement($stateParams.id),
-          Service.getContract($stateParams.id),
+          Service.getAgreement(toInteger($stateParams.id)),
+          Service.getContract(toInteger($stateParams.id)),
           User.getUser(),
         ])
           .then(([agreement, contract, user]) => {
@@ -66,7 +67,10 @@ angular
       };
 
       this.accept = () => {
-        Service.accept($stateParams.id)
+        Service.accept({
+          ...this.agreement,
+          ...this.contract,
+        })
           .then(() => {
             this.accepted = true;
             Alerter.success(

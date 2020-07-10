@@ -19,11 +19,10 @@ export default /* @ngInject */ ($stateProvider) => {
       agreements: /* @ngInject */ ($transition$) =>
         $transition$.params().agreements,
       goBack: /* @ngInject */ ($state, $timeout, Alerter) => (
+        reload = false,
         message = false,
         type = 'success',
       ) => {
-        const reload = !!message;
-
         const promise = $state.go(
           'app.account.billing.autorenew.agreements',
           {},
