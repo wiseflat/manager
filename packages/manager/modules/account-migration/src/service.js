@@ -1,6 +1,11 @@
 import find from 'lodash/find';
+import get from 'lodash/get';
 import map from 'lodash/map';
-import { CACHED_OBJECT_LIST_PAGES, X_PAGINATION_MODE } from './constants';
+import {
+  CACHED_OBJECT_LIST_PAGES,
+  X_PAGINATION_MODE,
+  MIGRATION_DATES,
+} from './constants';
 import Migration from './migration.class';
 
 export default class {
@@ -14,6 +19,12 @@ export default class {
     this.cache = {
       migrations: 'MIGRATION_MODULE_MIGRATION_IDS',
     };
+  }
+
+  getMigrationDates() {
+    return this.getPendingMigration().then((migration) =>
+      migration ? get(MIGRATION_DATES, migration.from, {}) : null,
+    );
   }
 
   getMigrationDetails(migrationId) {

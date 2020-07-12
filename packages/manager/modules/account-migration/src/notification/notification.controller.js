@@ -1,20 +1,18 @@
 import moment from 'moment';
 import { get, find } from 'lodash';
-import {
-  FAQ_LINK,
-  MIGRATION_END_DATE,
-  MIGRATION_START_DATE,
-} from '../constants';
+import { FAQ_LINK } from '../constants';
 
 export default class MigrationNotificationController {
   /* @ngInject */
   constructor(
+    $q,
     $translate,
     $state,
     atInternet,
     accountMigrationService,
     RedirectionService,
   ) {
+    this.$q = $q;
     this.$state = $state;
     this.$translate = $translate;
 
@@ -25,8 +23,6 @@ export default class MigrationNotificationController {
     this.CONTACTS_URL = this.RedirectionService.getURL('contacts');
     this.ORDERS_URL = this.RedirectionService.getURL('orders');
 
-    this.MIGRATION_END_DATE = moment(MIGRATION_END_DATE).format('LL');
-    this.MIGRATION_START_DATE = moment(MIGRATION_START_DATE).format('LL');
     this.FAQ_LINK = FAQ_LINK;
 
     this.migrationDetail = null;
@@ -34,15 +30,25 @@ export default class MigrationNotificationController {
   }
 
   $onInit() {
-    this.accountMigrationService.getMigrationList().then((res) => {
-      if (res[0].status === 'TODO') {
-        this.needMigration = true;
-      }
-    });
-
-    this.accountMigrationService.getDetailedList().then((res) => {
-      this.migrationDetail = res;
-    });
+    return this.$q
+      .all([
+        this.accountMigrationService.getDetailedList(),
+        this.accountMigrationService.getMigrationDates(),
+      ])
+      .then(([migration, migrationDates]) => {
+        this.migrationDetail = migration;
+        if (migration.status === 'TODO') {
+          this.needMigration = true;
+          this.migrationStartDate = moment(
+            migrationDates.START,
+            'MM/DD/YYYY',
+          ).format('LL');
+          this.migrationEndDate = moment(
+            migrationDates.END,
+            'MM/DD/YYYY',
+          ).format('LL');
+        }
+      });
   }
 
   goToAcceptAllAgreements() {
