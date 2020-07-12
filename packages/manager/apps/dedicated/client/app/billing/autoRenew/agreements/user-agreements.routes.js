@@ -12,10 +12,21 @@ export default /* @ngInject */ (
       controller: 'UserAccount.controllers.agreements',
       translations: { value: ['.'], format: 'json' },
       resolve: {
-        gotoAcceptAllAgreements: /* @ngInject */ ($state) => (agreements) =>
-          $state.go('app.account.billing.autorenew.agreements.accept-all', {
-            agreements,
-          }),
+        gotoAcceptAllAgreements: /* @ngInject */ ($state, atInternet) => (
+          agreements,
+        ) => {
+          atInternet.trackClick({
+            name:
+              'server::dedicated::account::billing::autorenew::agreements::popup-agreement',
+            type: 'action',
+          });
+          return $state.go(
+            'app.account.billing.autorenew.agreements.accept-all',
+            {
+              agreements,
+            },
+          );
+        },
       },
     });
 

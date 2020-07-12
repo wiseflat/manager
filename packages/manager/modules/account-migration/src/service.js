@@ -11,6 +11,9 @@ export default class {
     this.OvhApiMe = OvhApiMe;
     this.migrations = null;
     this.migrationDetailsList = null;
+    this.cache = {
+      migrations: 'MIGRATION_MODULE_MIGRATION_IDS',
+    };
   }
 
   getMigrationDetails(migrationId) {
@@ -37,6 +40,7 @@ export default class {
             headers: {
               [X_PAGINATION_MODE]: CACHED_OBJECT_LIST_PAGES,
             },
+            cache: this.cache.migrations,
           })
           .then((res) => {
             this.migrations = res.data;
