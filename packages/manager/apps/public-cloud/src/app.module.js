@@ -22,6 +22,7 @@ import navbar from '@ovh-ux/manager-navbar';
 import ovhManagerCore from '@ovh-ux/manager-core';
 import ovhManagerMfaEnrollment from '@ovh-ux/mfa-enrollment';
 import ovhManagerPci from '@ovh-ux/manager-pci';
+import ngOvhAccountMigrationComponents from '@ovh-ux/manager-account-migration';
 import ngOvhApiWrappers from '@ovh-ux/ng-ovh-api-wrappers';
 import ngOvhUserPref from '@ovh-ux/ng-ovh-user-pref';
 import ngUiRouterBreadcrumb from '@ovh-ux/ng-ui-router-breadcrumb';
@@ -57,6 +58,7 @@ angular
       ngAnimate,
       ngUiRouterBreadcrumb,
       ngUiRouterLineProgress,
+      ngOvhAccountMigrationComponents,
       ngOvhApiWrappers,
       ngOvhUserPref,
       navbar,

@@ -8,6 +8,7 @@ import { Environment } from '@ovh-ux/manager-config';
 import ovhManagerCore from '@ovh-ux/manager-core';
 import ngAtInternet from '@ovh-ux/ng-at-internet';
 import ngAtInternetUiRouterPlugin from '@ovh-ux/ng-at-internet-ui-router-plugin';
+import ngOvhAccountMigrationComponents from '@ovh-ux/manager-account-migration';
 import ngOvhApiWrappers from '@ovh-ux/ng-ovh-api-wrappers';
 import ngOvhBrowserAlert from '@ovh-ux/ng-ovh-browser-alert';
 import ngOvhCheckboxTable from '@ovh-ux/ng-ovh-checkbox-table';
@@ -60,6 +61,7 @@ angular
       ovhManagerCore,
       ngAtInternet,
       ngAtInternetUiRouterPlugin,
+      ngOvhAccountMigrationComponents,
       ngOvhApiWrappers,
       ngOvhBrowserAlert,
       ngOvhCheckboxTable,

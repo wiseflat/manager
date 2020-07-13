@@ -18,6 +18,7 @@
             >
                 <ui-router-breadcrumb></ui-router-breadcrumb>
                 <div class="pci-project-view mt-3 pb-4" data-ui-view>
+                    <account-migration-notification></account-migration-notification>
                     <div data-ng-if="$ctrl.project">
                         <oui-page-header
                             heading="{{ ::$ctrl.project.description }}"
