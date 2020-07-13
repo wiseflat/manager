@@ -38,7 +38,6 @@ export default class MigrationNotificationController {
       .then(([migration, migrationDates]) => {
         this.needMigration =
           typeof migration !== 'undefined' && migration.status === 'TODO';
-        console.log(this.needMigration);
         if (this.needMigration) {
           this.migrationStartDate = moment(
             migrationDates.START,

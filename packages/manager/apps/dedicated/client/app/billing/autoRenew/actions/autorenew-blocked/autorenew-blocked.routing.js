@@ -9,8 +9,14 @@ export default /* @ngInject */ ($stateProvider) => {
     layout: 'modal',
     translations: { value: ['.'], format: 'json' },
     resolve: {
-      gotoContracts: /* @ngInject */ ($state) => () =>
-        $state.go('app.account.billing.autorenew.agreements'),
+      gotoContracts: /* @ngInject */ ($state, atInternet) => () => {
+        atInternet.trackClick({
+          name:
+            'server::dedicated::account::billing::autorenew::configure-renew-impossible::go-to-agreements',
+          type: 'action',
+        });
+        return $state.go('app.account.billing.autorenew.agreements');
+      },
     },
   });
 };
