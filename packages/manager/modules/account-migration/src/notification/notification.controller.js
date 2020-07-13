@@ -32,13 +32,13 @@ export default class MigrationNotificationController {
   $onInit() {
     return this.$q
       .all([
-        this.accountMigrationService.getDetailedList(),
+        this.accountMigrationService.getPendingMigration(),
         this.accountMigrationService.getMigrationDates(),
       ])
       .then(([migration, migrationDates]) => {
-        this.migrationDetail = migration;
-        if (migration.status === 'TODO') {
-          this.needMigration = true;
+        this.needMigration =
+          typeof migration !== 'undefined' && migration.status === 'TODO';
+        if (this.needMigration) {
           this.migrationStartDate = moment(
             migrationDates.START,
             'MM/DD/YYYY',
@@ -47,7 +47,13 @@ export default class MigrationNotificationController {
             migrationDates.END,
             'MM/DD/YYYY',
           ).format('LL');
+          return this.$q
+            .when(this.accountMigrationService.getDetailedList())
+            .then((res) => {
+              this.migrationDetail = res;
+            });
         }
+        return null;
       });
   }
 
