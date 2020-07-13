@@ -15,6 +15,14 @@ export default class {
   }
 
   acceptAndNext() {
+    if (this.currentAgreementIndex === this.agreements.length - 1) {
+      this.atInternet.trackClick({
+        name: 'autorenew::agreements',
+        type: 'action',
+        chapter1: 'popup-agreement',
+        chapter2: 'accept-all',
+      });
+    }
     this.AgreementUnderProcess = true;
     this.UserAccountServicesAgreements.accept(this.currentAgreement)
       .then(() => {
