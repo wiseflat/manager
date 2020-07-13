@@ -32,25 +32,26 @@ export default class MigrationNotificationController {
   $onInit() {
     return this.$q
       .all([
-        this.accountMigrationService.getPendingMigration(),
+        this.accountMigrationService.getMigrationList(),
         this.accountMigrationService.getMigrationDates(),
       ])
-      .then(([migration, migrationDates]) => {
-        this.needMigration =
-          typeof migration !== 'undefined' && migration.status === 'TODO';
-        console.log(this.needMigration);
-        if (this.needMigration) {
-          this.migrationStartDate = moment(
-            migrationDates.START,
-            'MM/DD/YYYY',
-          ).format('LL');
-          this.migrationEndDate = moment(
-            migrationDates.END,
-            'MM/DD/YYYY',
-          ).format('LL');
-          return this.accountMigrationService.getDetailedList().then((res) => {
-            this.migrationDetail = res;
-          });
+      .then(([[migration], migrationDates]) => {
+        if (migration) {
+          if (migrationDates) {
+            this.migrationStartDate = moment(
+              migrationDates.START,
+              'MM/DD/YYYY',
+            ).format('LL');
+            this.migrationEndDate = moment(
+              migrationDates.END,
+              'MM/DD/YYYY',
+            ).format('LL');
+          }
+          return this.accountMigrationService
+            .getMigrationDetails(migration.id)
+            .then((res) => {
+              this.migrationDetail = res;
+            });
         }
         return null;
       });

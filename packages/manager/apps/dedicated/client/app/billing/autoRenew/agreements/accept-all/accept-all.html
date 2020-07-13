@@ -6,10 +6,10 @@
             : 'user_agreements_accept_all_accept_and_next'
     ) | translate }}"
     data-primary-disabled="!$ctrl.currentAgreement.accepted"
-    data-secondary-action=":: $ctrl.goBack()"
+    data-secondary-action=":: $ctrl.goBack(true)"
     data-secondary-label="{{:: 'wizard_cancel' | translate }}"
     data-loading="$ctrl.AgreementUnderProcess"
-    data-on-dismiss=":: $ctrl.goBack()"
+    data-on-dismiss=":: $ctrl.goBack(true)"
 >
     <h6
         data-ng-bind="'user_agreements_accept_all_count' | translate: {

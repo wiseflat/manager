@@ -24,20 +24,11 @@ export default class {
   }
 
   getMigrationDetails(migrationId) {
-    return this.$http.get(`/me/migration/${migrationId}`, {
-      cache: this.cache,
-    });
-  }
-
-  getDetailedList() {
-    return this.getMigrationList().then((list) => {
-      const promises = map(list, ({ id }) => this.getMigrationDetails(id));
-      return this.$q
-        .all(promises)
-        .then(
-          (details) => new Migration(...map(details, (detail) => detail.data)),
-        );
-    });
+    return this.$http
+      .get(`/me/migration/${migrationId}`, {
+        cache: this.cache,
+      })
+      .then((detail) => new Migration(detail.data));
   }
 
   getMigrationList() {

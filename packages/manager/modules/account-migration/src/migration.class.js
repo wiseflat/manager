@@ -24,4 +24,8 @@ export default class {
     const contracts = find(this.steps, (step) => step.name === 'CONTRACTS');
     return contracts.status !== 'OK';
   }
+
+  isMigrationPending() {
+    return this.status === 'TODO';
+  }
 }
