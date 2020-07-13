@@ -38,6 +38,7 @@ export default class MigrationNotificationController {
       .then(([migration, migrationDates]) => {
         this.needMigration =
           typeof migration !== 'undefined' && migration.status === 'TODO';
+        console.log(this.needMigration);
         if (this.needMigration) {
           this.migrationStartDate = moment(
             migrationDates.START,
@@ -47,11 +48,9 @@ export default class MigrationNotificationController {
             migrationDates.END,
             'MM/DD/YYYY',
           ).format('LL');
-          return this.$q
-            .when(this.accountMigrationService.getDetailedList())
-            .then((res) => {
-              this.migrationDetail = res;
-            });
+          return this.accountMigrationService.getDetailedList().then((res) => {
+            this.migrationDetail = res;
+          });
         }
         return null;
       });
