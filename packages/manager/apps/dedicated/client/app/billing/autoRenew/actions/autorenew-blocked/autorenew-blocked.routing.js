@@ -11,9 +11,9 @@ export default /* @ngInject */ ($stateProvider) => {
     resolve: {
       gotoContracts: /* @ngInject */ ($state, atInternet) => () => {
         atInternet.trackClick({
-          name:
-            'server::dedicated::account::billing::autorenew::configure-renew-impossible::go-to-agreements',
+          name: 'autorenew::configure-renew-impossible',
           type: 'action',
+          chapter1: 'go-to-agreements',
         });
         return $state.go('app.account.billing.autorenew.agreements');
       },
