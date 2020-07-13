@@ -10,15 +10,11 @@ import Migration from './migration.class';
 
 export default class {
   /* @ngInject */
-  constructor($q, $http, OvhApiMe) {
+  constructor($cacheFactory, $q, $http, OvhApiMe) {
     this.$q = $q;
     this.$http = $http;
     this.OvhApiMe = OvhApiMe;
-    this.migrations = null;
-    this.migrationDetailsList = null;
-    this.cache = {
-      migrations: 'MIGRATION_MODULE_MIGRATION_IDS',
-    };
+    this.cache = $cacheFactory('AccountMigrationCache');
   }
 
   getMigrationDates() {
@@ -28,35 +24,31 @@ export default class {
   }
 
   getMigrationDetails(migrationId) {
-    return this.$http.get(`/me/migration/${migrationId}`);
+    return this.$http.get(`/me/migration/${migrationId}`, {
+      cache: this.cache,
+    });
   }
 
   getDetailedList() {
     return this.getMigrationList().then((list) => {
       const promises = map(list, ({ id }) => this.getMigrationDetails(id));
-      return this.$q.all(promises).then((details) => {
-        this.migrationDetailsList = new Migration(
-          ...map(details, (detail) => detail.data),
+      return this.$q
+        .all(promises)
+        .then(
+          (details) => new Migration(...map(details, (detail) => detail.data)),
         );
-        return this.migrationDetailsList;
-      });
     });
   }
 
   getMigrationList() {
-    return this.migrations
-      ? this.$q.when(this.migrations)
-      : this.$http
-          .get('/me/migration', {
-            headers: {
-              [X_PAGINATION_MODE]: CACHED_OBJECT_LIST_PAGES,
-            },
-            cache: this.cache.migrations,
-          })
-          .then((res) => {
-            this.migrations = res.data;
-            return this.migrations;
-          });
+    return this.$http
+      .get('/me/migration', {
+        headers: {
+          [X_PAGINATION_MODE]: CACHED_OBJECT_LIST_PAGES,
+        },
+        cache: this.cache,
+      })
+      .then((res) => res.data);
   }
 
   getPendingMigration() {
@@ -71,6 +63,9 @@ export default class {
         ? this.$http
             .get(
               `/me/migration/${migration.id}/contract/${contractId}/agreement`,
+              {
+                cache: this.cache,
+              },
             )
             .then(({ data }) => data)
         : null;
@@ -81,7 +76,9 @@ export default class {
     return this.getPendingMigration().then((migration) => {
       return migration
         ? this.$http
-            .get(`/me/migration/${migration.id}/contract`)
+            .get(`/me/migration/${migration.id}/contract`, {
+              cache: this.cache,
+            })
             .then(({ data }) => data)
         : [];
     });
@@ -91,7 +88,9 @@ export default class {
     return this.getPendingMigration().then((migration) => {
       return migration
         ? this.$http
-            .get(`/me/migration/${migration.id}/contract/${contractId}`)
+            .get(`/me/migration/${migration.id}/contract/${contractId}`, {
+              cache: this.cache,
+            })
             .then(({ data }) => ({
               ...data,
               migrationId: migration.id,
@@ -123,9 +122,11 @@ export default class {
   acceptAgreement(contractId) {
     return this.getPendingMigration().then((migration) => {
       return migration
-        ? this.$http.post(
-            `/me/migration/${migration.id}/contract/${contractId}/accept`,
-          )
+        ? this.$http
+            .post(`/me/migration/${migration.id}/contract/${contractId}/accept`)
+            .then(() => {
+              this.cache.removeAll();
+            })
         : null;
     });
   }
