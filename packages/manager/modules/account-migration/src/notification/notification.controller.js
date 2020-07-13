@@ -10,6 +10,7 @@ export default class MigrationNotificationController {
     $state,
     atInternet,
     accountMigrationService,
+    OvhApiMe,
     RedirectionService,
   ) {
     this.$q = $q;
@@ -18,12 +19,11 @@ export default class MigrationNotificationController {
 
     this.atInternet = atInternet;
     this.accountMigrationService = accountMigrationService;
+    this.OvhApiMe = OvhApiMe;
     this.RedirectionService = RedirectionService;
 
     this.CONTACTS_URL = this.RedirectionService.getURL('contacts');
     this.ORDERS_URL = this.RedirectionService.getURL('orders');
-
-    this.FAQ_LINK = FAQ_LINK;
 
     this.migrationDetail = null;
     this.needMigration = false;
@@ -32,10 +32,12 @@ export default class MigrationNotificationController {
   $onInit() {
     return this.$q
       .all([
+        this.me ? this.me : this.OvhApiMe.v6().get(),
         this.accountMigrationService.getPendingMigration(),
         this.accountMigrationService.getMigrationDates(),
       ])
-      .then(([migration, migrationDates]) => {
+      .then(([me, migration, migrationDates]) => {
+        this.FAQ_LINK = FAQ_LINK[me.ovhSubsidiary];
         this.needMigration =
           typeof migration !== 'undefined' && migration.status === 'TODO';
         if (this.needMigration) {
@@ -56,9 +58,7 @@ export default class MigrationNotificationController {
   }
 
   goToAcceptAllAgreements() {
-    this.trackClick(
-      'server::dedicated::account::billing::autorenew::agreements::go-to-accept-agreement',
-    );
+    this.trackClick('alert::notifications::go-to-faq-agreement');
 
     const contracts = find(
       this.migrationDetail.steps,
