@@ -1,5 +1,6 @@
 import filter from 'lodash/filter';
 import find from 'lodash/find';
+import get from 'lodash/get';
 import map from 'lodash/map';
 import set from 'lodash/set';
 
@@ -128,11 +129,18 @@ angular.module('UserAccount').service('UserAccountServicesAgreements', [
           this.getPendingAccountMigrationAgreements(),
         ])
         .then(([pendingAgreements, pendingAccountMigrationAgreements]) => {
+          const sortByDate = (a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateB - dateA;
+          };
+          pendingAccountMigrationAgreements.sort(sortByDate);
+          pendingAgreements.list.results.sort(sortByDate);
           set(
             pendingAgreements,
             'list.results',
-            pendingAgreements.list.results.concat(
-              pendingAccountMigrationAgreements,
+            pendingAccountMigrationAgreements.concat(
+              get(pendingAgreements, 'list.results', []),
             ),
           );
           set(

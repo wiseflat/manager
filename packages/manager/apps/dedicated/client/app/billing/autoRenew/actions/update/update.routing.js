@@ -10,9 +10,12 @@ export default /* @ngInject */ ($stateProvider) => {
           accountMigrationService.getMigrationDates(),
         )
         .then((migrationDates) => {
-          return moment().isBefore(moment(migrationDates.START, 'MM/DD/YYYY'))
-            ? null
-            : 'app.account.billing.autorenew.blocked';
+          if (migrationDates) {
+            return moment().isBefore(moment(migrationDates.START, 'MM/DD/YYYY'))
+              ? null
+              : 'app.account.billing.autorenew.blocked';
+          }
+          return null;
         }),
     translations: { value: ['.'], format: 'json' },
     resolve: {

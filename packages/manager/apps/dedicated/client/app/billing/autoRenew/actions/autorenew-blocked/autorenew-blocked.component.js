@@ -1,4 +1,3 @@
-import controller from './autorenew-blocked.controller';
 import template from './autorenew-blocked.html';
 
 export default {
@@ -6,6 +5,5 @@ export default {
     goToAutorenew: '<',
     gotoContracts: '<',
   },
-  controller,
   template,
 };

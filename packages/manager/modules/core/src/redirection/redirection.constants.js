@@ -12,6 +12,7 @@ const universes = {
 };
 
 const URI = {
+  agreements: '#/billing/autorenew/agreements',
   autorenew: '#/billing/autorenew',
   billing: '#/billing/history',
   catalog: '#/catalog',
@@ -33,6 +34,7 @@ const URI = {
 
 export default {
   EU: {
+    agreements: `${managerRoot.EU}/${universes.dedicated}/${URI.agreements}`,
     autorenew: `${managerRoot.EU}/${universes.dedicated}/${URI.autorenew}`,
     billing: `${managerRoot.EU}/${universes.dedicated}/${URI.billing}`,
     catalog: `${managerRoot.EU}/${URI.catalog}`,
@@ -84,6 +86,7 @@ export default {
     userEmails: `${managerRoot.EU}/${universes.dedicated}/${URI.userEmails}`,
   },
   CA: {
+    agreements: `${managerRoot.CA}/${universes.dedicated}/${URI.agreements}`,
     autorenew: `${managerRoot.CA}/${universes.dedicated}/${URI.autorenew}`,
     billing: `${managerRoot.CA}/${universes.dedicated}/${URI.billing}`,
     catalog: `${managerRoot.CA}/${URI.catalog}`,
@@ -122,6 +125,7 @@ export default {
     userEmails: `${managerRoot.CA}/${universes.dedicated}/${URI.userEmails}`,
   },
   US: {
+    agreements: `${managerRoot.US}/${universes.dedicated}/${URI.agreements}`,
     billing: `${managerRoot.US}/${universes.dedicated}/${URI.billing}`,
     billingEnterprise: 'https://billing.us.ovhcloud.com/login',
     catalog: `${managerRoot.US}/${URI.catalog}`,

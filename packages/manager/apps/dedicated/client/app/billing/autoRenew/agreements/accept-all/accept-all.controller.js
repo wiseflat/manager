@@ -2,8 +2,14 @@ import get from 'lodash/get';
 
 export default class {
   /* @ngInject */
-  constructor($translate, atInternet, UserAccountServicesAgreements) {
+  constructor(
+    $translate,
+    accountMigrationService,
+    atInternet,
+    UserAccountServicesAgreements,
+  ) {
     this.$translate = $translate;
+    this.accountMigrationService = accountMigrationService;
     this.atInternet = atInternet;
     this.UserAccountServicesAgreements = UserAccountServicesAgreements;
   }
@@ -31,8 +37,9 @@ export default class {
           this.currentAgreement = this.agreements[this.currentAgreementIndex];
           this.AgreementUnderProcess = false;
         } else {
-          this.UserAccountServicesAgreements.markAllAgreementsAsAgreed();
-          this.goBack(true);
+          this.accountMigrationService.refreshMigrationDetails().then(() => {
+            this.goBack(true);
+          });
         }
       })
       .catch((error) =>

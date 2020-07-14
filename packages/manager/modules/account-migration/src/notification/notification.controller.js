@@ -21,6 +21,7 @@ export default class MigrationNotificationController {
     this.OvhApiMe = OvhApiMe;
     this.RedirectionService = RedirectionService;
 
+    this.AGREEMENTS_URL = this.RedirectionService.getURL('agreements');
     this.CONTACTS_URL = this.RedirectionService.getURL('contacts');
     this.ORDERS_URL = this.RedirectionService.getURL('orders');
 
@@ -55,11 +56,6 @@ export default class MigrationNotificationController {
         }
         return null;
       });
-  }
-
-  goToAcceptAllAgreements() {
-    this.trackClick('alert::notifications::go-to-faq-agreement');
-    this.$state.go('app.account.billing.autorenew.agreements');
   }
 
   trackClick(type) {
