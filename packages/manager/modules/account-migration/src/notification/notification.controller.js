@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { get, find } from 'lodash';
 import { FAQ_LINK } from '../constants';
 
 export default class MigrationNotificationController {
@@ -10,6 +9,7 @@ export default class MigrationNotificationController {
     $state,
     atInternet,
     accountMigrationService,
+    OvhApiMe,
     RedirectionService,
   ) {
     this.$q = $q;
@@ -18,12 +18,11 @@ export default class MigrationNotificationController {
 
     this.atInternet = atInternet;
     this.accountMigrationService = accountMigrationService;
+    this.OvhApiMe = OvhApiMe;
     this.RedirectionService = RedirectionService;
 
     this.CONTACTS_URL = this.RedirectionService.getURL('contacts');
     this.ORDERS_URL = this.RedirectionService.getURL('orders');
-
-    this.FAQ_LINK = FAQ_LINK;
 
     this.migrationDetail = null;
     this.needMigration = false;
@@ -37,6 +36,7 @@ export default class MigrationNotificationController {
       ])
       .then(([[migration], migrationDates]) => {
         if (migration) {
+          this.faqLink = FAQ_LINK[migration.from];
           if (migrationDates) {
             this.migrationStartDate = moment(
               migrationDates.START,
@@ -58,9 +58,7 @@ export default class MigrationNotificationController {
   }
 
   goToAcceptAllAgreements() {
-    this.trackClick(
-      'server::dedicated::account::billing::autorenew::agreements::go-to-accept-agreement',
-    );
+    this.trackClick('alert::notifications::go-to-faq-agreement');
     this.$state.go('app.account.billing.autorenew.agreements');
   }
 
