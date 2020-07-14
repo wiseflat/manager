@@ -29,7 +29,9 @@ export default class {
         if (this.currentAgreementIndex !== this.agreements.length - 1) {
           this.currentAgreementIndex += 1;
           this.currentAgreement = this.agreements[this.currentAgreementIndex];
+          this.AgreementUnderProcess = false;
         } else {
+          this.UserAccountServicesAgreements.markAllAgreementsAsAgreed();
           this.goBack(true);
         }
       })
@@ -41,9 +43,6 @@ export default class {
           }),
           'danger',
         ),
-      )
-      .finally(() => {
-        this.AgreementUnderProcess = false;
-      });
+      );
   }
 }

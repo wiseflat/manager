@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import { find, get, set } from 'lodash';
 
 export default class {
   constructor(migration) {
@@ -15,6 +15,13 @@ export default class {
     return debt.status !== 'OK';
   }
 
+  getPendingDebt() {
+    const debt = find(this.steps, (step) => step.name === 'DEBT');
+    return get(debt, 'debt.balanceAmount.value') > 0
+      ? get(debt, 'debt.balanceAmount.text')
+      : get(debt, 'debt.ovhAccountAmount.text');
+  }
+
   hasNicPending() {
     const nic = find(this.steps, (step) => step.name === 'NIC');
     return nic.status !== 'OK';
@@ -23,6 +30,18 @@ export default class {
   hasContractsPending() {
     const contracts = find(this.steps, (step) => step.name === 'CONTRACTS');
     return contracts.status !== 'OK';
+  }
+
+  setContractsAsAgreed() {
+    const contracts = find(this.steps, (step) => step.name === 'CONTRACTS');
+    set(contracts, 'status', 'OK');
+  }
+
+  hasOnlyContractsPending() {
+    return (
+      this.hasContractsPending() &&
+      !(this.hasOrderPending() || this.hasDebtPending() || this.hasNicPending())
+    );
   }
 
   isMigrationPending() {

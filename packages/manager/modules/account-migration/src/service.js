@@ -14,6 +14,7 @@ export default class {
     this.$q = $q;
     this.$http = $http;
     this.OvhApiMe = OvhApiMe;
+    this.migrationDetails = null;
     this.cache = $cacheFactory('AccountMigrationCache');
   }
 
@@ -24,11 +25,16 @@ export default class {
   }
 
   getMigrationDetails(migrationId) {
-    return this.$http
-      .get(`/me/migration/${migrationId}`, {
-        cache: this.cache,
-      })
-      .then((detail) => new Migration(detail.data));
+    return this.migrationDetails
+      ? this.$q.when(this.migrationDetails)
+      : this.$http
+          .get(`/me/migration/${migrationId}`, {
+            cache: this.cache,
+          })
+          .then((detail) => {
+            this.migrationDetails = new Migration(detail.data);
+            return this.migrationDetails;
+          });
   }
 
   getMigrationList() {
@@ -120,5 +126,11 @@ export default class {
             })
         : null;
     });
+  }
+
+  markAllAgreementsAsAgreed() {
+    if (this.migrationDetails) {
+      this.migrationDetails.setContractsAsAgreed();
+    }
   }
 }

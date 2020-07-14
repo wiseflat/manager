@@ -61,15 +61,7 @@ export default class MigrationNotificationController {
     this.trackClick(
       'server::dedicated::account::billing::autorenew::agreements::go-to-accept-agreement',
     );
-
-    const contracts = find(
-      this.migrationDetail.steps,
-      (step) => step.name === 'CONTRACTS',
-    );
-
-    this.$state.go('app.account.billing.autorenew.agreements.accept-all', {
-      agreements: get(contracts, 'contracts.agreements'),
-    });
+    this.$state.go('app.account.billing.autorenew.agreements');
   }
 
   trackClick(type) {
