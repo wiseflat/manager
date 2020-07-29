@@ -3,52 +3,66 @@ const execa = require('execa');
 const program = require('commander');
 const path = require('path');
 const remove = require('lodash/remove');
+const uniq = require('lodash/uniq');
 const EventEmitter = require('events');
-const { Worker } = require('worker_threads');
+const ProgressBar = require('progress');
+const project = require('@lerna/project');
+const PackageGraph = require('@lerna/package-graph');
+const { Worker, SHARE_ENV } = require('worker_threads');
 
 EventEmitter.defaultMaxListeners = 100; // Increase the default limit to avoid memory leaks
 
 const myEmitter = new EventEmitter();
 
+let bar;
+let projectPackages;
+let packageGraph;
 let modules;
 let i = 0;
 
+function getDeps(basePackages, type = 'dependencies') {
+  const depKey =
+    type === 'dependencies' ? 'localDependencies' : 'localDependents';
+  return basePackages.reduce((dependendentsPackages, packageName) => {
+    const localDeps = [...packageGraph.get(packageName)[depKey].keys()];
+
+    return uniq([
+      packageName,
+      ...dependendentsPackages,
+      ...localDeps,
+      ...getDeps(localDeps, type),
+    ]);
+  }, []);
+}
+
+function getDependents(packages) {
+  return getDeps(packages, 'dependents');
+}
+
+function getDependencies(packages) {
+  return getDeps(packages, 'dependencies');
+}
+
+function getAllDeps(packages) {
+  const dependents = getDependents(packages);
+  return getDependencies(dependents);
+}
+
 async function getPackagesByWorkspace(workspace) {
   try {
-    const { stdout } = await execa.command('lerna list -alp --json', {
-      shell: true,
-    });
-    const workspacePackagesInfos = JSON.parse(stdout).filter((packageInfos) =>
-      packageInfos.location.startsWith(workspace),
-    );
+    const workspacePackages = projectPackages
+      .filter(({ location }) => location.startsWith(workspace))
+      .map(({ name }) => name);
 
-    if (workspacePackagesInfos.length > 0) {
-      const scopeArgs = workspacePackagesInfos
-        .map((packageInfos) => `--scope=${packageInfos.name}`)
-        .join(' ');
-      const {
-        stdout: packages,
-      } = await execa.command(
-        `lerna list -alp --json ${scopeArgs} --include-dependencies`,
-        { shell: true },
-      );
-      return JSON.parse(packages);
-    }
-    return [];
+    return getDependencies(workspacePackages);
   } catch (error) {
     return [];
   }
 }
 
-async function getPackagesByPackageName(packageName) {
+async function getPackagesByPackagesName(packages) {
   try {
-    const { stdout } = await execa.command(
-      `lerna list -alp --json --scope=${packageName} --include-dependencies`,
-      {
-        shell: true,
-      },
-    );
-    return JSON.parse(stdout);
+    return getDependencies(packages);
   } catch (error) {
     return [];
   }
@@ -56,51 +70,67 @@ async function getPackagesByPackageName(packageName) {
 
 async function getAllPackages() {
   try {
-    const { stdout } = await execa.command(`lerna list -alp --json`, {
-      shell: true,
-    });
-    return JSON.parse(stdout);
+    return projectPackages.map(({ name }) => name);
   } catch (error) {
     return [];
   }
 }
 
-async function retrieveDependencies(_modules) {
-  const packages = await Promise.all(
-    _modules.map((pck) =>
-      execa
-        .command(
-          `lerna list -alp --include-dependencies --json --scope="${pck.name}"`,
-          { shell: true },
-        )
-        .then(({ stdout }) => {
-          const dependents = JSON.parse(stdout).filter(
-            (p) => p.name !== pck.name,
-          );
-          return Object.assign(pck, { dependents });
-        }),
-    ),
+async function getChangedPackages() {
+  try {
+    const { stdout } = await execa.command(
+      `lerna changed --include-merged-tags --json --toposort`,
+      {
+        shell: true,
+      },
+    );
+    return getAllDeps(JSON.parse(stdout).map(({ name }) => name));
+  } catch (error) {
+    return [];
+  }
+}
+
+async function retrieveDependencies(packages) {
+  return Promise.resolve(
+    packages.map((pkg) => {
+      const packageInfo = packageGraph.get(pkg);
+
+      return {
+        name: packageInfo.name,
+        location: packageInfo.location,
+        version: packageInfo.version,
+        dependents: [...packageInfo.localDependencies.keys()],
+      };
+    }),
   );
-  return packages;
 }
 
 function unstack() {
-  console.log(`-=-=-=- #${i} -=-=-=-`);
-  console.log(
-    `TODO (${modules.todo.length})`,
-    modules.todo.map((m) => m.name).join(', '),
-  );
-  console.log(
-    `DOING (${modules.doing.length})`,
-    modules.doing.map((m) => m.name).join(', '),
-  );
-  console.log(
-    `DONE (${modules.done.length})`,
-    modules.done.map((m) => m.name).join(', '),
-  );
+  if (program.verbose) {
+    console.log(`-=-=-=- #${i} -=-=-=-`);
+    console.log(
+      `TODO (${modules.todo.length})`,
+      modules.todo.map(({ name }) => name).join(', '),
+    );
+    console.log(
+      `DOING (${modules.doing.length})`,
+      modules.doing.map(({ name }) => name).join(', '),
+    );
+    console.log(
+      `DONE (${modules.done.length})`,
+      modules.done.map(({ name }) => name).join(', '),
+    );
+    i += 1;
+  }
+
+  if (modules.todo.length === 0 && modules.doing.length === 0) {
+    myEmitter.emit('complete');
+    return;
+  }
+
   modules.todo.map((pck) => {
     const deps = pck.dependents.filter(
-      (dep) => !modules.done.find((el) => el.name === dep.name),
+      (dep) => !modules.done.find(({ name }) => name === dep),
     );
 
     if (
@@ -117,20 +147,23 @@ function unstack() {
               path.join(__dirname, '/worker/build_module.js'),
               {
                 workerData,
+                env: SHARE_ENV,
               },
             );
 
             worker.on('online', () => {
-              console.log(
-                `Launching intensive build task for package ${workerData.name}`,
-              );
+              if (program.verbose) {
+                console.log(`Start build of ${workerData.name}`);
+              }
             });
             worker.on('message', (messageFromWorker) => {
-              console.log(messageFromWorker);
+              if (program.verbose) {
+                console.log(messageFromWorker);
+              }
             });
             worker.on('error', reject);
             worker.on('exit', (code) => {
-              if (code) {
+              if (code !== 0) {
                 reject(new Error(`Worker stopped with exit code ${code}`));
               }
               resolve();
@@ -139,6 +172,9 @@ function unstack() {
 
       return promise
         .then(() => {
+          if (!program.verbose) {
+            bar.tick();
+          }
           remove(modules.doing, workerData);
           modules.done.push(workerData);
           myEmitter.emit('unstack');
@@ -149,7 +185,6 @@ function unstack() {
     }
     return null;
   });
-  i += 1;
 }
 
 program
@@ -159,6 +194,7 @@ program
     'Limit the number of worker threads',
     parseInt,
   )
+  .option('--optimize', 'Build only packages with changes')
   .option(
     '-p, --package [package]',
     'Scope build to a specific package and its dependencies',
@@ -167,7 +203,13 @@ program
     '-w, --workspace [workspace]',
     'Scope build to a specific workspace, its packages and their dependencies',
   )
+  .option('--verbose', 'output extra debugging')
   .action(async () => {
+    process.env.VERBOSE = program.verbose;
+
+    projectPackages = await project.getPackages();
+    packageGraph = new PackageGraph(projectPackages);
+
     let packagesInfos = [];
 
     if (program.workspace) {
@@ -175,7 +217,9 @@ program
         path.resolve(program.workspace),
       );
     } else if (program.package) {
-      packagesInfos = await getPackagesByPackageName(program.package);
+      packagesInfos = await getPackagesByPackagesName([program.package]);
+    } else if (program.optimize) {
+      packagesInfos = await getChangedPackages();
     } else {
       packagesInfos = await getAllPackages();
     }
@@ -187,8 +231,22 @@ program
         done: [],
       };
 
+      console.log(`${todo.length} package(s) require a build process.`);
+
+      if (!program.verbose) {
+        bar = new ProgressBar('  building [:bar] :percent (:current/:total)', {
+          complete: '=',
+          incomplete: ' ',
+          width: 20,
+          total: todo.length,
+        });
+      }
+
       myEmitter.on('unstack', () => unstack());
       myEmitter.emit('unstack');
+      myEmitter.on('complete', () => {
+        console.log('Build operation has been done successfully!');
+      });
     });
   })
   .parse(process.argv);
