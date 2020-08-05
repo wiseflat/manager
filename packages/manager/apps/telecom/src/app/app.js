@@ -40,7 +40,7 @@ import ngOvhFeatureFlipping from '@ovh-ux/ng-ovh-feature-flipping';
 
 import uiRouter, { RejectType } from '@uirouter/angularjs';
 import TelecomAppCtrl from './app.controller';
-import pack from './telecom/pack';
+import pack from './telecom/pack/pack';
 import telephony from './telecom/telephony';
 
 import errorPage from './error-page/error-page.module';
