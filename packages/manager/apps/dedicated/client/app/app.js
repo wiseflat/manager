@@ -53,6 +53,7 @@ import dedicatedCloudDatacenterDrp from './dedicatedCloud/datacenter/drp';
 import dedicatedCloudDatacenterDashboardDeleteDrp from './dedicatedCloud/datacenter/dashboard/deleteDrp';
 import dedicatedCloudTerminate from './dedicatedCloud/terminate/terminate.module';
 import dedicatedCloudDashboard from './dedicatedCloud/dashboard';
+import dedicatedCloudOperationExecutionDateEdit from './dedicatedCloud/operation/executionDateEdit';
 import dedicatedUniverseComponents from './dedicatedUniverseComponents';
 import errorPage from './error';
 import ovhManagerPccDashboard from './dedicatedCloud/dashboard';
@@ -84,6 +85,7 @@ angular
       dedicatedCloudDatacenterDashboardDeleteDrp,
       dedicatedCloudTerminate,
       dedicatedCloudDashboard,
+      dedicatedCloudOperationExecutionDateEdit,
       dedicatedServer,
       dedicatedUniverseComponents,
       'directives',

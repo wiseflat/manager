@@ -6,6 +6,8 @@ import map from 'lodash/map';
 import set from 'lodash/set';
 import values from 'lodash/values';
 
+import { IP_TYPE } from './ip-ip.constant';
+
 angular
   .module('Module.ip.controllers')
   .controller(
@@ -31,6 +33,7 @@ angular
       $scope.currentView = 'table';
       $scope.containsAllServices = false;
       $scope.getAll = false;
+      $scope.IP_TYPE = IP_TYPE;
 
       /* Init */
 
@@ -64,7 +67,7 @@ angular
 
       $scope.canReverseDelegations = function canReverseDelegations(ipBlock) {
         return (
-          ipBlock.version === 'IPV6' && /(\/64|\/56)$/.test(ipBlock.ipBlock)
+          ipBlock.version === IP_TYPE.V6 && /(\/64|\/56)$/.test(ipBlock.ipBlock)
         );
       };
 
@@ -83,7 +86,7 @@ angular
       };
 
       function sortIp(a, b) {
-        if (a.version === 'IPV4') {
+        if (a.version === IP_TYPE.V4) {
           const aa = a.ipBlock.replace(/\/\d+$/, '').split('.');
           const bb = b.ipBlock.replace(/\/\d+$/, '').split('.');
 
