@@ -82,5 +82,17 @@ angular.module('App').controller(
           );
         });
     }
+
+    getDBType({ type, versionNumber }) {
+      const translateKey = `privateDatabase_dashboard_version_${type}`;
+      return this.$translate.instant(translateKey, {
+        t0: versionNumber,
+      });
+    }
+
+    translateToDBType(version) {
+      const [type, versionNumber] = version.split('_');
+      return this.getDBType({ type, versionNumber });
+    }
   },
 );
