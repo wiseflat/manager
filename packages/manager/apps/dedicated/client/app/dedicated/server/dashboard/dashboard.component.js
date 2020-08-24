@@ -7,6 +7,7 @@ export default {
     biosSettings: '<',
     changeOwnerUrl: '<',
     eligibleData: '<',
+    goToInstallation: '<',
     goToSgxIntroduction: '<',
     goToSgxManage: '<',
     monitoringProtocolEnum: '<',

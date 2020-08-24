@@ -9,6 +9,10 @@ export default /* @ngInject */ ($stateProvider) => {
     reloadOnSearch: false,
     redirectTo: 'app.dedicated.server.dashboard',
     resolve: {
+      goToInstallation: /* @ngInject */ ($state, server) => () =>
+        $state.go('app.dedicated.server.installation', {
+          server,
+        }),
       isLegacy: /* @ngInject */ (server) =>
         !NEW_RANGE.PATTERN.test(server.commercialRange),
       interfaces: /* @ngInject */ (
