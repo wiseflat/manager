@@ -5,39 +5,63 @@ import get from 'lodash/get';
 import forEach from 'lodash/forEach';
 import isEmpty from 'lodash/isEmpty';
 
+import { Environment } from '@ovh-ux/manager-config';
+
 export default class FlavorsListController {
   /* @ngInject */
-  constructor($q, PciProjectFlavors) {
+  constructor($q, OvhApiMe, PciProjectFlavors) {
     this.$q = $q;
+    this.OvhApiMe = OvhApiMe;
     this.PciProjectFlavors = PciProjectFlavors;
   }
 
   $onInit() {
     this.isLoading = true;
     this.flavorCount = this.flavorCount || 1;
-    return this.getFlavors().finally(() => {
-      this.isLoading = false;
-    });
+    return this.$q
+      .all({
+        flavors: this.getFlavors(),
+        me: this.OvhApiMe.v6().get().$promise,
+      })
+      .then(({ me }) => {
+        this.PriceFormatter = new Intl.NumberFormat(
+          Environment.getUserLocale().replace('_', '-'),
+          {
+            style: 'currency',
+            currency: me.currency.code,
+            maximumFractionDigits: 5, // default is 2. But this rounds off the price
+          },
+        );
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
   }
 
   $onChanges(changesObj) {
     // remove selected flavor if quota is not sufficient
-    if (changesObj.flavorCount &&
+    if (
+      changesObj.flavorCount &&
       !changesObj.flavorCount.isFirstChange() &&
-      changesObj.flavorCount.currentValue !== changesObj.flavorCount.previousValue &&
+      changesObj.flavorCount.currentValue !==
+        changesObj.flavorCount.previousValue &&
       this.selectedFlavor &&
-      this.region) {
-        const hasQuota = this.region.hasEnoughQuotaForFlavors(this.selectedFlavor, changesObj.flavorCount.currentValue);
-        if(!hasQuota) {
-          this.flavor = null;
-          this.onFlavorChange(this.flavor);
-        }
+      this.region
+    ) {
+      const hasQuota = this.region.hasEnoughQuotaForFlavors(
+        this.selectedFlavor,
+        changesObj.flavorCount.currentValue,
+      );
+      if (!hasQuota) {
+        this.flavor = null;
+        this.onFlavorChange(this.flavor);
+      }
     }
   }
 
   getFlavors() {
     let flavorsPromise = null;
-    if(!isEmpty(this.flavors)) {
+    if (!isEmpty(this.flavors)) {
       flavorsPromise = this.$q.when(this.flavors);
     } else {
       flavorsPromise = this.PciProjectFlavors.getFlavors(
