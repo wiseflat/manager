@@ -5,7 +5,6 @@ export default /* @ngInject */ function TelecomTelephonyLineCtrl(
   $stateParams,
   $translate,
   TelephonyMediator,
-  SidebarMenu,
   TucToast,
 ) {
   const self = this;
@@ -29,14 +28,6 @@ export default /* @ngInject */ function TelecomTelephonyLineCtrl(
     return self.line.save().then(
       () => {
         self.line.stopEdition();
-        SidebarMenu.updateItemDisplay(
-          {
-            title: self.line.getDisplayedName(),
-          },
-          self.line.serviceName,
-          'telecom-telephony-section',
-          self.line.billingAccount,
-        );
       },
       (error) => {
         self.line.stopEdition(true);

@@ -5,7 +5,6 @@ export default /* @ngInject */ function TelecomTelephonyFaxCtrl(
   atInternet,
   TelecomMediator,
   TelephonyMediator,
-  SidebarMenu,
   TucToast,
 ) {
   const self = this;
@@ -28,14 +27,6 @@ export default /* @ngInject */ function TelecomTelephonyFaxCtrl(
     return self.fax.save().then(
       () => {
         self.fax.stopEdition();
-        SidebarMenu.updateItemDisplay(
-          {
-            title: self.fax.getDisplayedName(),
-          },
-          self.fax.serviceName,
-          'telecom-telephony-section',
-          self.fax.billingAccount,
-        );
       },
       (error) => {
         self.fax.stopEdition(true);

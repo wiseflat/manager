@@ -9,7 +9,6 @@ export default class TelecomTelephonyAliasCtrl {
     $state,
     $stateParams,
     $translate,
-    SidebarMenu,
     TelephonyMediator,
     TucToast,
     tucVoipService,
@@ -18,7 +17,6 @@ export default class TelecomTelephonyAliasCtrl {
     this.$q = $q;
     this.$state = $state;
     this.$translate = $translate;
-    this.SidebarMenu = SidebarMenu;
     this.TelephonyMediator = TelephonyMediator;
     this.TucToast = TucToast;
     this.tucVoipService = tucVoipService;
@@ -99,16 +97,6 @@ export default class TelecomTelephonyAliasCtrl {
 
       return this.tucVoipServiceAlias
         .editDescription(this.alias)
-        .then(() => {
-          this.SidebarMenu.updateItemDisplay(
-            {
-              title: this.alias.getDisplayedName(),
-            },
-            this.alias.serviceName,
-            'telecom-telephony-section',
-            this.alias.billingAccount,
-          );
-        })
         .catch((error) => {
           this.alias.description = oldDescription;
           this.TucToast.error(
