@@ -8,3 +8,7 @@ dist-*
 /packages/manager/tools/testcafe/config/**/*.json
 /reports
 .eslintcache
+
+# local env files
+.env.local
+.env.*.local
