@@ -9,10 +9,12 @@ class OvhMicroFrontend {
     this.messages = [];
     this.listeners = [];
     this.config = new Deferred();
+    this.app = null;
   }
 
-  init() {
-    return fetch2APIConfig().then((config) => {
+  init(app) {
+    return fetch2APIConfig(app).then((config) => {
+      this.app = app;
       this.config.resolve(config);
       return {
         config,
@@ -86,6 +88,7 @@ class OvhMicroFrontend {
             parent: resolvedFragment,
             config,
             ufrontend: new OvhMicroFrontendFragmentAPI(this, resolvedFragment),
+            app: this.app,
           });
         })
         .catch(reject);

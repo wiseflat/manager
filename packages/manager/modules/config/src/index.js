@@ -26,11 +26,12 @@ export const findLanguage = _findLanguage;
 export const LANGUAGES = _LANGUAGES;
 export const localeStorageKey = _localeStorageKey;
 
-export const fetchConfiguration = () => {
-  return fetch('/engine/2api/configuration', {
+export const fetchConfiguration = (appName) => {
+  return fetch(`/engine/2api/configuration?app=${appName}`, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
       Accept: 'application/json',
+      'Content-Language': _Environment.getUserLocale(),
     },
     credentials: 'same-origin',
   })
