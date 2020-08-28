@@ -1,5 +1,8 @@
 import angular from 'angular';
 
+import { Environment } from '@ovh-ux/manager-config';
+import { User } from '@ovh-ux/manager-models';
+
 import find from 'lodash/find';
 import get from 'lodash/get';
 import has from 'lodash/has';
@@ -33,6 +36,10 @@ export default class {
 
   $onInit() {
     this.isLoading = true;
+    this.user = new User(
+      Environment.getUser(),
+      Environment.getUser().certificates,
+    );
 
     if (has(this.navbarOptions, 'toggle')) {
       this.togglerisLoading = true;
@@ -48,8 +55,8 @@ export default class {
 
     this.fixed = get(this.navbarOptions, 'fixed', false);
 
-    return this.getUser()
-      .then(() => this.$translate.refresh())
+    return this.$translate
+      .refresh()
       .then(() => this.buildMainLinks())
       .then(() => this.buildBrand())
       .then(() => this.buildResponsiveLinks())
@@ -57,12 +64,6 @@ export default class {
         this.$scope.$emit('navbar.loaded');
         this.isLoading = false;
       });
-  }
-
-  getUser() {
-    return this.Navbar.getUser().then((user) => {
-      this.user = user;
-    });
   }
 
   buildBrand() {

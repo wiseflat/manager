@@ -270,6 +270,7 @@ export const bootstrapApplication = () => {
     }))
     .then((configuration) => {
       Environment.setRegion(configuration.region);
+      Environment.setUser(configuration.user);
       return {
         ...configuration,
         locale: Environment.getUserLocale(),
