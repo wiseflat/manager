@@ -91,8 +91,12 @@ angular.module('App').controller(
     }
 
     translateToDBType(version) {
-      const [type, versionNumber] = version.split('_');
-      return this.getDBType({ type, versionNumber });
+      if (version) {
+        const [type, versionNumber] = version.split('_');
+        return this.getDBType({ type, versionNumber });
+      }
+
+      return null;
     }
   },
 );
