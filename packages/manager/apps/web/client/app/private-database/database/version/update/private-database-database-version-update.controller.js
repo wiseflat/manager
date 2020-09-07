@@ -1,5 +1,6 @@
 import get from 'lodash/get';
 import remove from 'lodash/remove';
+import orderBy from 'lodash/orderBy';
 
 angular.module('App').controller(
   'PrivateDatabaseChangeVersionCtrl',
@@ -22,6 +23,7 @@ angular.module('App').controller(
       };
       this.model = {
         versions: [],
+        dbList: [],
         choice: null,
       };
 
@@ -45,6 +47,33 @@ angular.module('App').controller(
               this.$scope.currentActionData.version,
           );
 
+          return versions;
+        })
+        .then(() => {
+          this.model.dbList = orderBy(
+            this.model.versions.map((db) => {
+              const [dbType, dbVersion] = db.split('_');
+
+              return {
+                dbType,
+                dbVersion: parseFloat(dbVersion),
+                label: this.$translate.instant(
+                  `privateDatabase_dashboard_version_${dbType}`,
+                  {
+                    t0: dbVersion,
+                  },
+                ),
+                value: db,
+              };
+            }),
+            ['dbType', 'dbVersion'],
+            ['asc', 'desc'],
+          );
+          this.model.dbList.unshift({
+            label: this.$translate.instant(
+              'privateDatabase_change_version_available_select',
+            ),
+          });
           this.loading.init = false;
         })
         .catch((err) => {
