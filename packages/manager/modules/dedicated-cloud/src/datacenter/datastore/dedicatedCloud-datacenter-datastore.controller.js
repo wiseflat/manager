@@ -141,7 +141,7 @@ angular.module('App').controller(
 
     orderDatastore(datacenter) {
       if (!this.currentService.usesLegacyOrder) {
-        this.$state.go('app.dedicatedClouds.datacenter.datastores.order');
+        this.$state.go('dedicatedClouds.datacenter.datastores.order');
       } else {
         this.$scope.setAction(
           'datacenter/datastore/orderLegacy/dedicatedCloud-datacenter-datastore-orderLegacy',

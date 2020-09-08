@@ -21,7 +21,6 @@ angular.module(moduleName, [
   ducPrice,
   ducTabs,
   ducTranslate,
-  config,
   components,
 ]);
 

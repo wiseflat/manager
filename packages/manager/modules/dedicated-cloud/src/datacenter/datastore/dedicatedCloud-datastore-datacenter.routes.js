@@ -1,6 +1,6 @@
 angular.module('App').config(
   /* @ngInject */ ($stateProvider) => {
-    $stateProvider.state('app.dedicatedClouds.datacenter.datastores', {
+    $stateProvider.state('dedicatedClouds.datacenter.datastores', {
       reloadOnSearch: false,
       url: '/datastores',
       views: {
@@ -14,7 +14,7 @@ angular.module('App').config(
       translations: { value: ['../../../dedicated/server'], format: 'json' },
     });
 
-    $stateProvider.state('app.dedicatedClouds.datacenter.datastores.order', {
+    $stateProvider.state('dedicatedClouds.datacenter.datastores.order', {
       resolve: {
         datacenterId: /* @ngInject */ ($stateParams) =>
           $stateParams.datacenterId,
@@ -22,7 +22,7 @@ angular.module('App').config(
       },
       url: '/order',
       views: {
-        'pccDatacenterView@app.dedicatedClouds.datacenter': {
+        'pccDatacenterView@dedicatedClouds.datacenter': {
           controller: 'ovhManagerPccDatacenterDatastoreOrder',
           controllerAs: '$ctrl',
           templateUrl:

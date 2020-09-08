@@ -12,10 +12,10 @@ import {
 
 export default /* @ngInject */ ($stateProvider) => {
   $stateProvider
-    .state('app.dedicatedClouds.datacenter.drp.ovh.secondPccStep', {
+    .state('dedicatedClouds.datacenter.drp.ovh.secondPccStep', {
       url: '/secondPcc',
       views: {
-        'innerView@app.dedicatedClouds.datacenter.drp': {
+        'innerView@dedicatedClouds.datacenter.drp': {
           component: component.name,
         },
       },
@@ -58,12 +58,12 @@ export default /* @ngInject */ ($stateProvider) => {
         drpInformations: /* @ngInject */ ($transition$) =>
           $transition$.params().drpInformations,
         getHostsOrderLink: /* @ngInject */ ($state) => (datacenterId, pccId) =>
-          $state.href('app.dedicatedClouds.datacenter.hosts', {
+          $state.href('dedicatedClouds.datacenter.hosts', {
             productId: pccId,
             datacenterId,
           }),
         goToPreviousStep: /* @ngInject */ ($state) => (drpInformations) =>
-          $state.go('app.dedicatedClouds.datacenter.drp.ovh.mainPccStep', {
+          $state.go('dedicatedClouds.datacenter.drp.ovh.mainPccStep', {
             drpInformations,
           }),
         pccList: /* @ngInject */ ($transition$, DedicatedCloud) =>
@@ -78,7 +78,7 @@ export default /* @ngInject */ ($stateProvider) => {
           ),
       },
     })
-    .state('app.dedicatedClouds.datacenter.drp.ovh.secondPccStep.orderIp', {
+    .state('dedicatedClouds.datacenter.drp.ovh.secondPccStep.orderIp', {
       url: '/orderIp',
       controller: 'agoraIpOrderCtrl',
       template,
@@ -86,7 +86,7 @@ export default /* @ngInject */ ($stateProvider) => {
       translations: { value: ['.'], format: 'json' },
     })
     .state(
-      'app.dedicatedClouds.datacenter.drp.ovh.secondPccStep.legacyOrderIp',
+      'dedicatedClouds.datacenter.drp.ovh.secondPccStep.legacyOrderIp',
       {
         url: '/legacyOrderIp',
         controller: 'IpLegacyOrderCtrl',

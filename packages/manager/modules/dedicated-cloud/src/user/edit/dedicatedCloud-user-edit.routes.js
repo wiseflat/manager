@@ -1,5 +1,5 @@
 angular.module('App').config(($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.users.edit', {
+  $stateProvider.state('dedicatedClouds.users.edit', {
     url: '/edit/:userId',
     templateUrl: 'dedicatedCloud/user/edit/dedicatedCloud-user-edit.html',
     controller: 'DedicatedCloudUserEditCtrl',

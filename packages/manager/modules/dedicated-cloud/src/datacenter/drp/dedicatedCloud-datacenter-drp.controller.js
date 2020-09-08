@@ -55,7 +55,7 @@ export default class {
   initializeTransitions() {
     this.$transitions.onError(
       {
-        from: 'app.dedicatedClouds.datacenter.drp.**.orderIp',
+        from: 'dedicatedClouds.datacenter.drp.**.orderIp',
       },
       () => {
         this.Alerter.error(

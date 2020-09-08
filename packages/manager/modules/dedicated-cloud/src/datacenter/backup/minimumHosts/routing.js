@@ -1,12 +1,12 @@
 import { BACKUP_MINIMUM_HOST_COUNT } from '../backup.constants';
 
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.datacenter.backup.minimum-hosts', {
+  $stateProvider.state('dedicatedClouds.datacenter.backup.minimum-hosts', {
     url: '/minimum-hosts',
     component: 'dedicatedCloudDatacenterBackupMinimumHosts',
     resolve: {
       goToOrderHosts: /* @ngInject */ ($state, productId, datacenterId) => () =>
-        $state.go('app.dedicatedClouds.datacenter.hosts.order', {
+        $state.go('dedicatedClouds.datacenter.hosts.order', {
           datacenterId,
           productId,
         }),

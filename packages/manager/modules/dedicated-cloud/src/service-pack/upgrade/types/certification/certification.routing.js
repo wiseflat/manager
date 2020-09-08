@@ -3,7 +3,7 @@ import stepModuleNames from './certification.steps';
 import component from '../../upgrade.component';
 
 export const state = {
-  name: 'app.dedicatedClouds.servicePackUpgrade.certification',
+  name: 'dedicatedClouds.servicePackUpgrade.certification',
   params: {
     activationType: 'basic',
   },
@@ -28,7 +28,7 @@ export const state = {
   },
   url: '/certification',
   views: {
-    'pccView@app.dedicatedClouds': component.name,
+    'pccView@dedicatedClouds': component.name,
   },
 };
 

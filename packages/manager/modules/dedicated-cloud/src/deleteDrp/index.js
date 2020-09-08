@@ -4,7 +4,7 @@ const moduleName = 'dedicatedCloudDeleteDrpModule';
 
 angular.module(moduleName, []).config(
   /* @ngInject */ ($stateProvider) => {
-    $stateProvider.state('app.dedicatedClouds.deleteDrp', {
+    $stateProvider.state('dedicatedClouds.deleteDrp', {
       url: '/deleteDrp',
       views: {
         modal: {

@@ -12,11 +12,11 @@ angular
   .config(
     /* @ngInject */ ($stateProvider) => {
       $stateProvider.state(
-        'app.dedicatedClouds.datacenter.datastores.resourceUpgrade',
+        'dedicatedClouds.datacenter.datastores.resourceUpgrade',
         clone(state),
       );
       $stateProvider.state(
-        'app.dedicatedClouds.datacenter.hosts.resourceUpgrade',
+        'dedicatedClouds.datacenter.hosts.resourceUpgrade',
         clone(state),
       );
     },

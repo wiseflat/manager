@@ -14,7 +14,7 @@ import {
 } from './backup.constants';
 
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.datacenter.backup', {
+  $stateProvider.state('dedicatedClouds.datacenter.backup', {
     url: '/backup',
     views: {
       pccDatacenterView: {
@@ -33,16 +33,16 @@ export default /* @ngInject */ ($stateProvider) => {
         .then(([licence, backup, hosts]) => {
           if (!licence.isSplaActive) {
             return {
-              state: 'app.dedicatedClouds.datacenter.backup.spla-licence',
+              state: 'dedicatedClouds.datacenter.backup.spla-licence',
             };
           }
           if (hosts.length < BACKUP_MINIMUM_HOST_COUNT) {
             return {
-              state: 'app.dedicatedClouds.datacenter.backup.minimum-hosts',
+              state: 'dedicatedClouds.datacenter.backup.minimum-hosts',
             };
           }
           if (backup.isInactive() || (backup.isLegacy() && backup.isActive())) {
-            return { state: 'app.dedicatedClouds.datacenter.backup.new' };
+            return { state: 'dedicatedClouds.datacenter.backup.new' };
           }
           return false;
         }),
@@ -120,13 +120,13 @@ export default /* @ngInject */ ($stateProvider) => {
       goToUpgradeOffer: /* @ngInject */ ($state, productId, datacenterId) => (
         actualOffer,
       ) =>
-        $state.go('app.dedicatedClouds.datacenter.backup.upgrade', {
+        $state.go('dedicatedClouds.datacenter.backup.upgrade', {
           datacenterId,
           productId,
           actualOffer,
         }),
       goToNewBackup: /* @ngInject */ ($state, datacenterId, productId) => () =>
-        $state.go('app.dedicatedClouds.datacenter.backup.new', {
+        $state.go('dedicatedClouds.datacenter.backup.new', {
           datacenterId,
           productId,
         }),
@@ -136,7 +136,7 @@ export default /* @ngInject */ ($stateProvider) => {
           currentService.usesLegacyOrder,
         ),
       licenceLink: /* @ngInject */ ($state, productId) =>
-        $state.href('app.dedicatedClouds.license', {
+        $state.href('dedicatedClouds.license', {
           productId,
         }),
       goToDeleteBackup: /* @ngInject */ (
@@ -144,7 +144,7 @@ export default /* @ngInject */ ($stateProvider) => {
         datacenterId,
         productId,
       ) => () =>
-        $state.go('app.dedicatedClouds.datacenter.backup.delete', {
+        $state.go('dedicatedClouds.datacenter.backup.delete', {
           datacenterId,
           productId,
         }),
@@ -152,7 +152,7 @@ export default /* @ngInject */ ($stateProvider) => {
         message = false,
         type = 'success',
       ) => {
-        const promise = $state.go('app.dedicatedClouds.datacenter.backup', {
+        const promise = $state.go('dedicatedClouds.datacenter.backup', {
           productId,
           datacenterId,
         });
@@ -162,7 +162,7 @@ export default /* @ngInject */ ($stateProvider) => {
               `alert-${type}`,
               message,
               null,
-              'app.dedicatedClouds.datacenter.backup',
+              'dedicatedClouds.datacenter.backup',
             );
           });
         }
@@ -177,7 +177,7 @@ export default /* @ngInject */ ($stateProvider) => {
       hosts: /* @ngInject */ (datacenterId, DedicatedCloud, productId) =>
         DedicatedCloud.getHosts(productId, datacenterId),
       operationsUrl: /* @ngInject */ ($state, datacenterId, productId) =>
-        $state.href('app.dedicatedClouds.operation', {
+        $state.href('dedicatedClouds.operation', {
           datacenterId,
           productId,
         }),

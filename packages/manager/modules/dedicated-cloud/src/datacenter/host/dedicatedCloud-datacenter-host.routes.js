@@ -1,6 +1,6 @@
 angular.module('App').config(
   /* @ngInject */ ($stateProvider) => {
-    $stateProvider.state('app.dedicatedClouds.datacenter.hosts', {
+    $stateProvider.state('dedicatedClouds.datacenter.hosts', {
       url: '/hosts',
       reloadOnSearch: false,
       views: {
@@ -14,10 +14,10 @@ angular.module('App').config(
       translations: { value: ['../../../dedicated/server'], format: 'json' },
     });
 
-    $stateProvider.state('app.dedicatedClouds.datacenter.hosts.order', {
+    $stateProvider.state('dedicatedClouds.datacenter.hosts.order', {
       url: '/order',
       views: {
-        'pccDatacenterView@app.dedicatedClouds.datacenter': {
+        'pccDatacenterView@dedicatedClouds.datacenter': {
           templateUrl:
             'dedicatedCloud/datacenter/host/order/dedicatedCloud-datacenter-host-order.html',
           controller: 'DedicatedCloudDatacentersHostOrderCtrl',

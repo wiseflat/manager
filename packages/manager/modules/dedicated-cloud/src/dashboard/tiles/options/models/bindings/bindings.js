@@ -398,7 +398,7 @@ export default class {
         drpRemotePccStatus === DEDICATEDCLOUD_DATACENTER_DRP_STATUS.delivered &&
         this.model.drp.currentDrp.vpnStatus !==
           DEDICATEDCLOUD_DATACENTER_DRP_VPN_CONFIGURATION_STATUS.configuring,
-      sref: 'app.dedicatedClouds.deleteDrp',
+      sref: 'dedicatedClouds.deleteDrp',
     };
   }
 }

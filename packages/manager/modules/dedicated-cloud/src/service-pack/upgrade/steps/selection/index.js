@@ -1,5 +1,5 @@
 import picker from '../../../components/picker';
-import noDefaultMeansOfPayment from '../../../../../components/no-default-means-of-payment';
+// import noDefaultMeansOfPayment from '../../../../components/no-default-means-of-payment';
 import servicePackNoDefaultMeansOfPayment from '../../../components/no-default-means-of-payment';
 
 import component from './selection.component';
@@ -12,7 +12,7 @@ angular
     'oui',
     'pascalprecht.translate',
     picker,
-    noDefaultMeansOfPayment,
+    // noDefaultMeansOfPayment,
     servicePackNoDefaultMeansOfPayment,
     'ui.router',
   ])

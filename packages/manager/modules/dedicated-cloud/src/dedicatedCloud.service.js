@@ -12,22 +12,17 @@ import snakeCase from 'lodash/snakeCase';
 import some from 'lodash/some';
 import toNumber from 'lodash/toNumber';
 
-angular
-  .module('services')
-  .constant('VEEAM_STATE_ENUM', {
-    ENABLED: 'enabled',
-    DISABLED: 'disabled',
-    DISABLING: 'DISABLING',
-    ENABLING: 'ENABLING',
-    ERROR: 'ERROR',
-    REMOVING: 'REMOVING',
-  })
-  .constant('COMMERCIAL_RANGE_ENUM', {
-    '2014v1Infrastructure': '2014 Infrastructure',
-    '2014v1Enterprise': '2014 Enterprise',
-    '2013v1': '2013',
-  })
-  .service('DedicatedCloud', function DedicatedCloudService(
+import {
+  DEDICATED_CLOUD_CONSTANTS,
+  UNAVAILABLE_PCC_CODE,
+  VM_ENCRYPTION_KMS,
+  VEEAM_STATE_ENUM,
+  COMMERCIAL_RANGE_ENUM,
+} from './dedicatedCloud.constant';
+
+export default class DedicatedCloudService {
+  /* @ngInject */
+  constructor(
     $q,
     $cacheFactory,
     $rootScope,
@@ -35,9 +30,6 @@ angular
     OvhHttp,
     Poll,
     Poller,
-    DEDICATED_CLOUD_CONSTANTS,
-    UNAVAILABLE_PCC_CODE,
-    VM_ENCRYPTION_KMS,
   ) {
     const self = this;
     const dedicatedCloudCache = {
@@ -91,13 +83,13 @@ angular
       }).then((service) =>
         isString(service) || service.status === 'expired'
           ? {
-              ...(isObject(service) ? service : undefined),
-              isExpired: true,
-            }
+            ...(isObject(service) ? service : undefined),
+            isExpired: true,
+          }
           : {
-              ...service,
-              isExpired: false,
-            },
+            ...service,
+            isExpired: false,
+          },
       );
 
     this.getDescription = (serviceName) =>
@@ -1474,4 +1466,5 @@ angular
     self.stopAllPolling = (opts) => {
       Poller.kill({ namespace: opts.namespace });
     };
-  });
+  }
+}

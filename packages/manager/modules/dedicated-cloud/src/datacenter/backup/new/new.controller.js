@@ -50,7 +50,7 @@ export default class {
           message: get(error, ['data', 'message'], error.message),
         },
       ),
-      'app.dedicatedClouds.datacenter.backup.new',
+      'dedicatedClouds.datacenter.backup.new',
     );
     this.scrollToTop();
     this.data.currentStep = 0;

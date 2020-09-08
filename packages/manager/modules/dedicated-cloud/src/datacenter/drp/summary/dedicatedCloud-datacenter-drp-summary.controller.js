@@ -85,7 +85,7 @@ export default class {
     return this.dedicatedCloudDrp
       .configureVpn(this.drpInformations)
       .then(() =>
-        this.$state.go('app.dedicatedClouds').then(() => {
+        this.$state.go('dedicatedClouds').then(() => {
           this.Alerter.success(
             this.$translate.instant(
               'dedicatedCloud_datacenter_drp_vpn_success',

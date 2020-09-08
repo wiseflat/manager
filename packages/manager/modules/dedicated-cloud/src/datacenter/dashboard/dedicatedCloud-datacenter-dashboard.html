@@ -92,7 +92,7 @@
                         data-placement="end"
                     >
                         <oui-action-menu-item
-                            data-ui-sref="app.dedicatedClouds.datacenter.drp"
+                            data-ui-sref="dedicatedClouds.datacenter.drp"
                             data-ng-if="::$ctrl.drpStatus === 'disabled'"
                         >
                             <span
@@ -100,7 +100,7 @@
                             ></span>
                         </oui-action-menu-item>
                         <oui-action-menu-item
-                            data-ui-sref="app.dedicatedClouds.datacenter.drp.summary({ 'drpInformations': $ctrl.currentDrp })"
+                            data-ui-sref="dedicatedClouds.datacenter.drp.summary({ 'drpInformations': $ctrl.currentDrp })"
                             data-ng-if="::$ctrl.currentDrp.vpnStatus === $ctrl.DRP_VPN_STATUS.notConfigured"
                         >
                             <span
@@ -109,7 +109,7 @@
                         </oui-action-menu-item>
                         <oui-action-menu-item
                             data-ng-if="::$ctrl.drpStatus === $ctrl.DRP_STATUS.delivered && $ctrl.drpRemotePccStatus === $ctrl.DRP_STATUS.delivered"
-                            data-ui-sref="app.dedicatedClouds.datacenter.dashboard.deleteDrp"
+                            data-ui-sref="dedicatedClouds.datacenter.dashboard.deleteDrp"
                         >
                             <span
                                 data-translate="dedicatedCloud_options_zerto_action_delete"

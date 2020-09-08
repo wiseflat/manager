@@ -1,5 +1,5 @@
 angular.module('App').config(($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.security', {
+  $stateProvider.state('dedicatedClouds.security', {
     url: '/security',
     reloadOnSearch: false,
     views: {

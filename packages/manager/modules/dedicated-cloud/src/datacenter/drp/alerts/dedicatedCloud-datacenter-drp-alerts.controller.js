@@ -31,14 +31,14 @@ export default class {
 
   isOnSummaryState() {
     if (this.currentState !== undefined) {
-      return this.currentState === 'app.dedicatedClouds.datacenter.drp.summary';
+      return this.currentState === 'dedicatedClouds.datacenter.drp.summary';
     }
 
     return false;
   }
 
   goToVpnConfigurationState() {
-    return this.$state.go('app.dedicatedClouds.datacenter.drp.summary', {
+    return this.$state.go('dedicatedClouds.datacenter.drp.summary', {
       datacenterId: this.currentDrp.datacenterId,
       drpInformations: this.currentDrp,
     });

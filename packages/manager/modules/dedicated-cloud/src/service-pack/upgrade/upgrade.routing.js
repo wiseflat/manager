@@ -1,8 +1,8 @@
 export const state = {
   abstract: true,
-  name: 'app.dedicatedClouds.servicePackUpgrade',
+  name: 'dedicatedClouds.servicePackUpgrade',
   resolve: {
-    goBack: /* @ngInject */ ($state) => () => $state.go('app.dedicatedClouds'),
+    goBack: /* @ngInject */ ($state) => () => $state.go('dedicatedClouds'),
   },
   translations: {
     format: 'json',

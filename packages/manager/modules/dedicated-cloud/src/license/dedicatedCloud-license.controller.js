@@ -53,7 +53,7 @@ angular
 
       $scope.enableLicense = function enableLicense() {
         if (!currentService.usesLegacyOrder) {
-          $state.go('app.dedicatedClouds.license.enable');
+          $state.go('dedicatedClouds.license.enable');
         } else {
           $scope.setAction(
             'license/enable/legacy/dedicatedCloud-license-enableLegacy',

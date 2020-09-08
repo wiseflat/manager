@@ -1,9 +1,9 @@
 import preference from '../../../../../service-pack/upgrade/preference';
 
-import { name as serviceName, OptionsService } from './order.service';
+import OptionsService from './order.service';
 
 const moduleName = 'ovhManagerPccDashboardOptionsOrder';
 
-angular.module(moduleName, [preference]).service(serviceName, OptionsService);
+angular.module(moduleName, [preference]).service('ovhManagerPccDashboardOptionsOrderService', OptionsService);
 
 export default moduleName;

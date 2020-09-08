@@ -1,5 +1,5 @@
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.dashboard', {
+  $stateProvider.state('dedicatedClouds.dashboard', {
     views: {
       pccView: 'pccDashboard',
     },

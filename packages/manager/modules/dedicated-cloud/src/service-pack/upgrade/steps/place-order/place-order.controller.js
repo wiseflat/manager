@@ -2,7 +2,7 @@ import {
   CONTROLLER_NAME as CONFIRM_CONTROLLER_NAME,
   TEMPLATE_CACHE_KEY as CONFIRM_TEMPLATE_CACHE_KEY,
 } from './confirm/confirm.constants';
-import { NAVIGATION } from '../../../../../components/stepper/step/step.constants';
+import { NAVIGATION } from '../../../../components/stepper/step/step.constants';
 
 export default class {
   /* @ngInject */

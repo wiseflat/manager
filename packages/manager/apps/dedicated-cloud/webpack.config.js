@@ -17,6 +17,14 @@ module.exports = (env = {}) => {
     REGION ? Object.assign(env, { region: REGION }) : env,
   );
 
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      WEBPACK_ENV: {
+        production: JSON.stringify(env.production),
+      },
+    }),
+  );
+
   return merge(config, {
     entry: path.resolve('./src/index.js'),
     resolve: {

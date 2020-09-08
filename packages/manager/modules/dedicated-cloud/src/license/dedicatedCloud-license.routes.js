@@ -1,5 +1,5 @@
 angular.module('App').config(($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.license', {
+  $stateProvider.state('dedicatedClouds.license', {
     url: '/license',
     views: {
       pccView: {

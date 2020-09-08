@@ -7,7 +7,7 @@ angular
   .component(component.name, component)
   .config(
     /* @ngInject */ ($stateProvider) => {
-      $stateProvider.state('app.dedicatedClouds.drpDatacenterSelection', {
+      $stateProvider.state('dedicatedClouds.drpDatacenterSelection', {
         url: '/drpDatacenterSelection',
         views: {
           modal: {
@@ -19,7 +19,7 @@ angular
           goToDrpConfiguration: /* @ngInject */ ($state, currentDrp) => (
             datacenterId,
           ) =>
-            $state.go('app.dedicatedClouds.datacenter.drp', {
+            $state.go('dedicatedClouds.datacenter.drp', {
               datacenterId,
               drpInformations: currentDrp,
             }),

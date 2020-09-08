@@ -136,7 +136,7 @@ angular.module('App').controller(
 
     orderHost(datacenter) {
       if (!this.currentService.usesLegacyOrder) {
-        this.$state.go('app.dedicatedClouds.datacenter.hosts.order');
+        this.$state.go('dedicatedClouds.datacenter.hosts.order');
       } else {
         this.$scope.setAction(
           'datacenter/host/orderLegacy/dedicatedCloud-datacenter-host-orderLegacy',

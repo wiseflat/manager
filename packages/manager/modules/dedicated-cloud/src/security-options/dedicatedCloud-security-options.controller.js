@@ -2,7 +2,7 @@ import isObject from 'lodash/isObject';
 import map from 'lodash/map';
 import set from 'lodash/set';
 
-import config from '../../config/config';
+import config from '../config/config';
 
 angular
   .module('App')

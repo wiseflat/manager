@@ -1,5 +1,5 @@
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.datacenter.backup.upgrade', {
+  $stateProvider.state('dedicatedClouds.datacenter.backup.upgrade', {
     url: '/upgrade',
     params: {
       actualOffer: null,

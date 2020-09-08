@@ -1,14 +1,14 @@
 import component from './dedicatedCloud-datacenter-drp-onPremise.component';
 
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.datacenter.drp.onPremise', {
+  $stateProvider.state('dedicatedClouds.datacenter.drp.onPremise', {
     url: '/onPremise',
     abstract: true,
     views: {
-      'progressTrackerView@app.dedicatedClouds.datacenter.drp': {
+      'progressTrackerView@dedicatedClouds.datacenter.drp': {
         component: component.name,
       },
     },
-    redirectTo: 'app.dedicatedClouds.datacenter.drp.onPremise.ovhPccStep',
+    redirectTo: 'dedicatedClouds.datacenter.drp.onPremise.ovhPccStep',
   });
 };

@@ -5,10 +5,10 @@ import template from '../../../../../../ip/ip/agoraOrder/ip-ip-agoraOrder.html';
 
 export default /* @ngInject */ ($stateProvider) => {
   $stateProvider
-    .state('app.dedicatedClouds.datacenter.drp.ovh.mainPccStep', {
+    .state('dedicatedClouds.datacenter.drp.ovh.mainPccStep', {
       url: '/mainPcc',
       views: {
-        'innerView@app.dedicatedClouds.datacenter.drp': {
+        'innerView@dedicatedClouds.datacenter.drp': {
           component: 'dedicatedCloudDatacenterDrpOvhMainPccStep',
         },
       },
@@ -25,9 +25,9 @@ export default /* @ngInject */ ($stateProvider) => {
         drpInformations: /* @ngInject */ ($transition$) =>
           $transition$.params().drpInformations,
         goBackToChoice: /* @ngInject */ ($state) => (selectedDrpType) =>
-          $state.go('app.dedicatedClouds.datacenter.drp', { selectedDrpType }),
+          $state.go('dedicatedClouds.datacenter.drp', { selectedDrpType }),
         goToNextStep: /* @ngInject */ ($state) => (drpInformations) =>
-          $state.go('app.dedicatedClouds.datacenter.drp.ovh.secondPccStep', {
+          $state.go('dedicatedClouds.datacenter.drp.ovh.secondPccStep', {
             drpInformations,
           }),
         ipAddressDetails: /* @ngInject */ (currentService, dedicatedCloudDrp) =>
@@ -36,7 +36,7 @@ export default /* @ngInject */ ($stateProvider) => {
           ),
       },
     })
-    .state('app.dedicatedClouds.datacenter.drp.ovh.mainPccStep.legacyOrderIp', {
+    .state('dedicatedClouds.datacenter.drp.ovh.mainPccStep.legacyOrderIp', {
       url: '/legacyOrderIp',
       controller: 'IpLegacyOrderCtrl',
       controllerAs: 'ctrl',
@@ -44,7 +44,7 @@ export default /* @ngInject */ ($stateProvider) => {
       layout: 'modal',
       translations: { value: ['.'], format: 'json' },
     })
-    .state('app.dedicatedClouds.datacenter.drp.ovh.mainPccStep.orderIp', {
+    .state('dedicatedClouds.datacenter.drp.ovh.mainPccStep.orderIp', {
       url: '/orderIp',
       controller: 'agoraIpOrderCtrl',
       controllerAs: 'ctrl',

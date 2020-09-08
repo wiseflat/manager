@@ -76,7 +76,7 @@ angular.module('App').controller(
     }
 
     getBackUrl() {
-      return this.$state.href('app.dedicatedClouds.datacenter.datastores');
+      return this.$state.href('dedicatedClouds.datacenter.datastores');
     }
 
     getOrderUrl() {

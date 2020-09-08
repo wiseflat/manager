@@ -1,5 +1,5 @@
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.operation.execution-date-edit', {
+  $stateProvider.state('dedicatedClouds.operation.execution-date-edit', {
     url: '/execution-date-edit',
     views: {
       modal: {
@@ -19,7 +19,7 @@ export default /* @ngInject */ ($stateProvider) => {
         const reload = message && type === 'success';
 
         const promise = $state.go(
-          'app.dedicatedClouds.operation',
+          'dedicatedClouds.operation',
           { productId },
           {
             reload,

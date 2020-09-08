@@ -3,7 +3,7 @@ import isEqual from 'lodash/isEqual';
 
 import { Environment } from '@ovh-ux/manager-config';
 
-import config from '../../../../config/config';
+import config from '../../../config/config';
 
 angular.module('App').controller(
   'DedicatedCloudSecurityKMSAddCtrl',

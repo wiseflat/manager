@@ -1,10 +1,10 @@
 import component from './dedicatedCloud-datacenter-drp-summary.component';
 
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.datacenter.drp.summary', {
+  $stateProvider.state('dedicatedClouds.datacenter.drp.summary', {
     url: '/summary',
     views: {
-      'innerView@app.dedicatedClouds.datacenter.drp': {
+      'innerView@dedicatedClouds.datacenter.drp': {
         component: component.name,
       },
     },
@@ -13,7 +13,7 @@ export default /* @ngInject */ ($stateProvider) => {
     },
     resolve: {
       goToDeleteDrpModal: /* @ngInject */ ($state) => () =>
-        $state.go('app.dedicatedClouds.datacenter.drp.summary.deleteDrp'),
+        $state.go('dedicatedClouds.datacenter.drp.summary.deleteDrp'),
     },
   });
 };

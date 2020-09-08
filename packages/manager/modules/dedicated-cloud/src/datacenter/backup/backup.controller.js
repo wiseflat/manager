@@ -18,7 +18,7 @@ export default class {
 
   $onInit() {
     this.actualOffer = this.backup.backupOffer;
-    this.alertMain = 'app.dedicatedClouds.datacenter.backup';
+    this.alertMain = 'dedicatedClouds.datacenter.backup';
     this.loader = {
       updatingCapabilities: false,
     };

@@ -5,10 +5,10 @@ import template from '../../../../../../ip/ip/agoraOrder/ip-ip-agoraOrder.html';
 
 export default /* @ngInject */ ($stateProvider) => {
   $stateProvider
-    .state('app.dedicatedClouds.datacenter.drp.onPremise.ovhPccStep', {
+    .state('dedicatedClouds.datacenter.drp.onPremise.ovhPccStep', {
       url: '/ovhPcc',
       views: {
-        'innerView@app.dedicatedClouds.datacenter.drp': {
+        'innerView@dedicatedClouds.datacenter.drp': {
           component: 'dedicatedCloudDatacenterDrpOnPremiseOvhPccStep',
         },
       },
@@ -37,10 +37,10 @@ export default /* @ngInject */ ($stateProvider) => {
         drpInformations: /* @ngInject */ ($transition$) =>
           $transition$.params().drpInformations,
         goBackToChoice: /* @ngInject */ ($state) => (selectedDrpType) =>
-          $state.go('app.dedicatedClouds.datacenter.drp', { selectedDrpType }),
+          $state.go('dedicatedClouds.datacenter.drp', { selectedDrpType }),
         goToNextStep: /* @ngInject */ ($state) => (drpInformations) =>
           $state.go(
-            'app.dedicatedClouds.datacenter.drp.onPremise.onPremisePccStep',
+            'dedicatedClouds.datacenter.drp.onPremise.onPremisePccStep',
             { drpInformations },
           ),
         ipAddressDetails: /* @ngInject */ (currentService, dedicatedCloudDrp) =>
@@ -50,7 +50,7 @@ export default /* @ngInject */ ($stateProvider) => {
       },
     })
     .state(
-      'app.dedicatedClouds.datacenter.drp.onPremise.ovhPccStep.legacyOrderIp',
+      'dedicatedClouds.datacenter.drp.onPremise.ovhPccStep.legacyOrderIp',
       {
         url: '/legacy-order-ip',
         controller: 'IpLegacyOrderCtrl',
@@ -59,7 +59,7 @@ export default /* @ngInject */ ($stateProvider) => {
         translations: { value: ['.'], format: 'json' },
       },
     )
-    .state('app.dedicatedClouds.datacenter.drp.onPremise.ovhPccStep.orderIp', {
+    .state('dedicatedClouds.datacenter.drp.onPremise.ovhPccStep.orderIp', {
       url: '/order-ip',
       controller: 'agoraIpOrderCtrl',
       template,

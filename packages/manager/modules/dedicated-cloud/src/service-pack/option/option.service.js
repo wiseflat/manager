@@ -1,7 +1,7 @@
 import find from 'lodash/find';
 import get from 'lodash/get';
 
-import config from '../../../config/config';
+import config from '../../config/config';
 import { OPTIONS } from './option.constants';
 
 export const name = 'ovhManagerPccServicePackOptionService';

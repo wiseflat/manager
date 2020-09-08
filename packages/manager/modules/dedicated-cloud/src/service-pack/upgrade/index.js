@@ -3,7 +3,7 @@ import certification from './types/certification';
 import configurationOnly from './types/configuration-only';
 
 import servicePack from '..';
-import stepper from '../../../components/stepper';
+import stepper from '../../components/stepper';
 
 import component from './upgrade.component';
 import { registerState } from './upgrade.routing';

@@ -52,7 +52,7 @@
                 class="oui-dropdown-option mb-1"
                 role="menuitem"
                 data-ng-if=":: $ctrl.currentService.isMinorSolutionUpdateAvailable() && !$ctrl.currentService.vcenterUpgradePendingTask"
-                data-ui-sref="app.dedicatedClouds.dashboard.update({
+                data-ui-sref="dedicatedClouds.dashboard.update({
                     currentService: $ctrl.currentService,
                     targetVersion: $ctrl.currentService.version.lastMinor,
                 })"
@@ -72,7 +72,7 @@
                 class="oui-dropdown-option mb-1"
                 role="menuitem"
                 data-ng-if=":: $ctrl.currentService.isMajorSolutionUpdateAvailable() && !$ctrl.currentService.vcenterUpgradePendingTask"
-                data-ui-sref="app.dedicatedClouds.dashboard.update({
+                data-ui-sref="dedicatedClouds.dashboard.update({
                     currentService: $ctrl.currentService,
                     targetVersion: $ctrl.currentService.version.lastMajor,
                 })"
@@ -92,7 +92,7 @@
                 class="oui-dropdown-option mb-1"
                 role="menuitem"
                 data-ng-if="$ctrl.currentService.vcenterUpgradePendingTask"
-                data-ui-sref="app.dedicatedClouds.operation.execution-date-edit({
+                data-ui-sref="dedicatedClouds.operation.execution-date-edit({
                     productId: $ctrl.currentService.serviceName,
                     operationToEdit: $ctrl.currentService.vcenterUpgradePendingTask
                 })"
@@ -181,7 +181,7 @@
                 class="oui-dropdown-option mb-1"
                 role="menuitem"
                 data-ng-if="$ctrl.bindings.numberOfIPBlocks.total"
-                data-ui-sref="app.dedicatedClouds.dashboard.associate-ip-bloc"
+                data-ui-sref="dedicatedClouds.dashboard.associate-ip-bloc"
                 data-track-on="click"
                 data-track-name="dedicated::dedicatedClouds::dashboard::associate-ip-bloc"
                 data-track-type="action"

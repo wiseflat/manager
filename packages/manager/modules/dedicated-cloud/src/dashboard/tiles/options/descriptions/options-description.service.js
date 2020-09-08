@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import config from '../../../../../config/config';
+import config from '../../../../config/config';
 
 import { ACTIVATION_STATUS } from '../components/activation-status/activation-status.constants';
 import { ORDER_STATUS } from '../options.constants';

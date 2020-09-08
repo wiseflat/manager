@@ -49,7 +49,7 @@ angular.module('App').controller(
 
     orderDatastore(datacenter) {
       if (!this.currentService.usesLegacyOrder) {
-        this.$state.go('app.dedicatedClouds.datacenter.datastores.order', {
+        this.$state.go('dedicatedClouds.datacenter.datastores.order', {
           datacenterId: datacenter.id,
         });
       } else {
@@ -63,7 +63,7 @@ angular.module('App').controller(
 
     orderHost(datacenter) {
       if (!this.currentService.usesLegacyOrder) {
-        this.$state.go('app.dedicatedClouds.datacenter.hosts.order', {
+        this.$state.go('dedicatedClouds.datacenter.hosts.order', {
           datacenterId: datacenter.id,
         });
       } else {

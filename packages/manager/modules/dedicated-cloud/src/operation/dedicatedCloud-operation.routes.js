@@ -1,5 +1,5 @@
 angular.module('App').config(($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.operation', {
+  $stateProvider.state('dedicatedClouds.operation', {
     url: '/operation',
     reloadOnSearch: false,
     views: {
@@ -11,7 +11,7 @@ angular.module('App').config(($stateProvider) => {
     },
     resolve: {
       goToExecutionDateEdit: /* @ngInject */ ($state, $transition$) => (task) =>
-        $state.go('app.dedicatedClouds.operation.execution-date-edit', {
+        $state.go('dedicatedClouds.operation.execution-date-edit', {
           productId: $transition$.params().productId,
           operationToEdit: task,
         }),

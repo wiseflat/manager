@@ -87,10 +87,10 @@ angular
         });
 
     this.modifyUserRights = ({ userId }) => {
-      $state.go('app.dedicatedClouds.users.rights', { userId });
+      $state.go('dedicatedClouds.users.rights', { userId });
     };
 
     this.editUser = ({ userId }) => {
-      $state.go('app.dedicatedClouds.users.edit', { userId });
+      $state.go('dedicatedClouds.users.edit', { userId });
     };
   });

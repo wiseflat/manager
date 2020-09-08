@@ -30,6 +30,18 @@ angular
         unregisterHook();
       });
     },
-  );
+  )
+  .run(
+    /* @ngInject */ ($state) => {
+      $state.defaultErrorHandler((error) => {
+        console.log(error);
+      });
+    },
+  )
+  .config(
+    /* @ngInject */ ($qProvider) => {
+      $qProvider.errorOnUnhandledRejections(false);
+    },
+  );;
 
 export default moduleName;

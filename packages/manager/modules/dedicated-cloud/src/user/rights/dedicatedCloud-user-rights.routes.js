@@ -1,5 +1,5 @@
 angular.module('App').config(($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.users.rights', {
+  $stateProvider.state('dedicatedClouds.users.rights', {
     url: '/:userId/rights',
     views: {
       pccUserView: {

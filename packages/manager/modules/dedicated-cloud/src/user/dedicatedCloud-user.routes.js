@@ -1,5 +1,5 @@
 angular.module('App').config(($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.users', {
+  $stateProvider.state('dedicatedClouds.users', {
     url: '/users',
     reloadOnSearch: false,
     views: {

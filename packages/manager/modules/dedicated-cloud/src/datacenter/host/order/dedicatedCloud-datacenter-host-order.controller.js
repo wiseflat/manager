@@ -108,7 +108,7 @@ angular.module('App').controller(
     }
 
     getBackUrl() {
-      return this.$state.href('app.dedicatedClouds.datacenter.hosts');
+      return this.$state.href('dedicatedClouds.datacenter.hosts');
     }
 
     getOrderUrl() {

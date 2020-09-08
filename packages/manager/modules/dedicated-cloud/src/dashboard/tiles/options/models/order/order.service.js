@@ -1,8 +1,6 @@
 import reduce from 'lodash/reduce';
 
-export const name = 'ovhManagerPccDashboardOptionsOrderService';
-
-export const OptionsService = class {
+export default class OptionsService {
   /* @ngInject */
   constructor($q, OvhApiMe, servicePackUpgradePreferenceService, ovhUserPref) {
     this.$q = $q;
@@ -75,9 +73,4 @@ export const OptionsService = class {
 
     return null;
   }
-};
-
-export default {
-  name,
-  OptionsService,
-};
+}

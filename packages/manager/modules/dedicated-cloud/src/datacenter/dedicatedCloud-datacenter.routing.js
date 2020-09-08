@@ -1,5 +1,5 @@
 angular.module('App').config(($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.datacenter', {
+  $stateProvider.state('dedicatedClouds.datacenter', {
     url: '/datacenter/:datacenterId',
     views: {
       dedicatedCloudView: {
@@ -8,6 +8,6 @@ angular.module('App').config(($stateProvider) => {
         controllerAs: '$ctrl',
       },
     },
-    redirectTo: 'app.dedicatedClouds.datacenter.dashboard',
+    redirectTo: 'dedicatedClouds.datacenter.dashboard',
   });
 });

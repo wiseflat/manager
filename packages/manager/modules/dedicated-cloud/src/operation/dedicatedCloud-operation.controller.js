@@ -102,21 +102,21 @@ angular
             switch (field) {
               case 'datacenterId':
                 action = () =>
-                  $state.go('app.dedicatedClouds.datacenter', {
+                  $state.go('dedicatedClouds.datacenter', {
                     productId: $stateParams.productId,
                     datacenterId: operation.datacenterId,
                   });
                 break;
               case 'hostId':
                 action = () =>
-                  $state.go('app.dedicatedClouds.datacenter.hosts', {
+                  $state.go('dedicatedClouds.datacenter.hosts', {
                     productId: $stateParams.productId,
                     datacenterId: operation.datacenterId,
                   });
                 break;
               case 'filerId':
                 action = () =>
-                  $state.go('app.dedicatedClouds.datacenter.datastores', {
+                  $state.go('dedicatedClouds.datacenter.datastores', {
                     productId: $stateParams.productId,
                     datacenterId: operation.datacenterId,
                   });
@@ -142,7 +142,7 @@ angular
                 t0: operation.userId,
               }),
               action: () => {
-                $state.go('app.dedicatedClouds.users');
+                $state.go('dedicatedClouds.users');
               },
               field,
             });

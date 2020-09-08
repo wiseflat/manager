@@ -3,10 +3,10 @@ import get from 'lodash/get';
 import component from './dedicatedCloud-datacenter-drp.component';
 
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.datacenter.drp', {
+  $stateProvider.state('dedicatedClouds.datacenter.drp', {
     url: '/drp',
     views: {
-      'pccDatacenterView@app.dedicatedClouds.datacenter': component.name,
+      'pccDatacenterView@dedicatedClouds.datacenter': component.name,
     },
     params: {
       selectedDrpType: null,
@@ -27,7 +27,7 @@ export default /* @ngInject */ ($stateProvider) => {
         pccStep,
       ) =>
         $state.href(
-          `app.dedicatedClouds.datacenter.drp.${drpType}.${pccStep}.${
+          `dedicatedClouds.datacenter.drp.${drpType}.${pccStep}.${
             isLegacyOrder ? 'legacyOrderIp' : 'orderIp'
           }`,
         ),
@@ -125,11 +125,11 @@ export default /* @ngInject */ ($stateProvider) => {
         drpInformations,
         stateToGo,
       ) =>
-        $state.go(`app.dedicatedClouds.datacenter.drp.${stateToGo}`, {
+        $state.go(`dedicatedClouds.datacenter.drp.${stateToGo}`, {
           drpInformations,
         }),
       goToSummary: /* @ngInject */ ($state) => (drpInformations) =>
-        $state.go('app.dedicatedClouds.datacenter.drp.summary', {
+        $state.go('dedicatedClouds.datacenter.drp.summary', {
           drpInformations,
         }),
     },

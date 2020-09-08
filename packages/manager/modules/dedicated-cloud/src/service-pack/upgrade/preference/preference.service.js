@@ -3,9 +3,7 @@ import omit from 'lodash/omit';
 
 import { PREFERENCE_NAME } from '../../../dashboard/tiles/options/models/order/order.constants';
 
-export const name = 'servicePackUpgradePreferenceService';
-
-export const PreferenceService = class {
+export default class PreferenceService {
   /* @ngInject */
   constructor(ovhUserPref) {
     this.ovhUserPref = ovhUserPref;
@@ -54,9 +52,4 @@ export const PreferenceService = class {
       .remove(PREFERENCE_NAME)
       .then(() => this.ovhUserPref.assign(preference));
   }
-};
-
-export default {
-  name,
-  PreferenceService,
-};
+}

@@ -1,5 +1,5 @@
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('app.dedicatedClouds.datacenter.backup.new', {
+  $stateProvider.state('dedicatedClouds.datacenter.backup.new', {
     url: '/new',
     component: 'dedicatedCloudDatacenterBackupNew',
     redirectTo: (transition) =>
@@ -10,7 +10,7 @@ export default /* @ngInject */ ($stateProvider) => {
           if (
             !(backup.isInactive() || (backup.isLegacy() && backup.isActive()))
           ) {
-            return { state: 'app.dedicatedClouds.datacenter.backup' };
+            return { state: 'dedicatedClouds.datacenter.backup' };
           }
           return false;
         }),

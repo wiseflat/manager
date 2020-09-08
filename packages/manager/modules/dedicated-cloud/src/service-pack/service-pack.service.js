@@ -11,9 +11,7 @@ import values from 'lodash/values';
 
 import { OPTION_TYPES } from './option/option.constants';
 
-export const name = 'ovhManagerPccServicePackService';
-
-export const ServicePackService = class ServicePack {
+export default class ServicePackService {
   /* @ngInject */
   constructor(
     $http,
@@ -244,9 +242,4 @@ export const ServicePackService = class ServicePack {
       ),
     );
   }
-};
-
-export default {
-  name,
-  ServicePackService,
-};
+}

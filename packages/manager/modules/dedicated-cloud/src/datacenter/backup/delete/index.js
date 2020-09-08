@@ -9,7 +9,7 @@ angular
   .module(moduleName, ['oc.lazyLoad', 'ovhManagerCore', 'ui.router'])
   .config(
     /* @ngInject */ ($stateProvider) => {
-      $stateProvider.state('app.dedicatedClouds.datacenter.backup.delete.**', {
+      $stateProvider.state('dedicatedClouds.datacenter.backup.delete.**', {
         url: '/delete',
         lazyLoad: ($transition$) => {
           const $ocLazyLoad = $transition$.injector().get('$ocLazyLoad');
