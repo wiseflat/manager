@@ -60,7 +60,7 @@ angular.module('App').controller(
                 label: this.$translate.instant(
                   `privateDatabase_dashboard_version_${dbType}`,
                   {
-                    t0: dbVersion,
+                    version: dbVersion,
                   },
                 ),
                 value: db,
@@ -115,7 +115,7 @@ angular.module('App').controller(
     getDBType({ type, versionNumber }) {
       const translateKey = `privateDatabase_dashboard_version_${type}`;
       return this.$translate.instant(translateKey, {
-        t0: versionNumber,
+        version: versionNumber,
       });
     }
 
