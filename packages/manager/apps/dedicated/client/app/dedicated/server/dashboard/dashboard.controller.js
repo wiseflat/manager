@@ -95,7 +95,7 @@ export default class DedicatedServerDashboard {
     const yLabel =
       unit === 'bps'
         ? this.$translate.instant(
-            'server_configuration_mitigation_statistics_unit_KB',
+            'server_configuration_mitigation_statistics_unit_B',
           )
         : unit;
     this.options = {
@@ -257,7 +257,7 @@ export default class DedicatedServerDashboard {
     return (
       !this.server.isExpired &&
       this.server.canOrderQuota &&
-      get(this.trafficInformations.trafficOrderables, 'length')
+      get(this.trafficInformations.trafficOrderables.data, 'length')
     );
   }
 

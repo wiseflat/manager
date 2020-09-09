@@ -1,3 +1,80 @@
+## [13.2.4](https://github.com/ovh/manager/compare/@ovh-ux/manager-dedicated@13.2.3...@ovh-ux/manager-dedicated@13.2.4) (2020-09-03)
+
+
+### Bug Fixes
+
+* **billing.autorenew:** pass service type for resiliation ([#3563](https://github.com/ovh/manager/issues/3563)) ([ddb600a](https://github.com/ovh/manager/commit/ddb600a33ba1ed86b68e5009b8f476b33e4d9498))
+* **dedicated:** add ssh key name validation ([#3556](https://github.com/ovh/manager/issues/3556)) ([d26ddbb](https://github.com/ovh/manager/commit/d26ddbb7cf848ce0872cab0ed2a581bcb7aa37c4))
+* **dedicated:** monitoring units ([#3564](https://github.com/ovh/manager/issues/3564)) ([a67515a](https://github.com/ovh/manager/commit/a67515a9988ea03822983daaa568c60fd0437258))
+
+
+
+## [13.2.3](https://github.com/ovh/manager/compare/@ovh-ux/manager-dedicated@13.2.2...@ovh-ux/manager-dedicated@13.2.3) (2020-09-01)
+
+
+### Bug Fixes
+
+* **i18n:** add missing translations [CDS 552] ([075dcb3](https://github.com/ovh/manager/commit/075dcb3250b6be3a583e4756f19f024c02423575))
+* **order:** add order status tracking ([c86845d](https://github.com/ovh/manager/commit/c86845de577d6d5620889442c611e5bdee7cec58))
+
+
+
+## [13.2.2](https://github.com/ovh/manager/compare/@ovh-ux/manager-dedicated@13.2.1...@ovh-ux/manager-dedicated@13.2.2) (2020-08-26)
+
+
+### Bug Fixes
+
+* **dedicated:** private cloud guide urls ([#3472](https://github.com/ovh/manager/issues/3472)) ([c5226e9](https://github.com/ovh/manager/commit/c5226e92f51b1aec842ba72f574167b6022b9094)), closes [#MANAGER-5495](https://github.com/ovh/manager/issues/MANAGER-5495)
+
+
+
+## [13.2.1](https://github.com/ovh/manager/compare/@ovh-ux/manager-dedicated@13.2.0...@ovh-ux/manager-dedicated@13.2.1) (2020-08-26)
+
+
+### Bug Fixes
+
+* **dedicated-server:** bandwidth shown is not correct ([3f77b44](https://github.com/ovh/manager/commit/3f77b448724efe00e5150ea5707c9fff43071d6e)), closes [#DTRSD-18400](https://github.com/ovh/manager/issues/DTRSD-18400)
+
+
+
+# [13.2.0](https://github.com/ovh/manager/compare/@ovh-ux/manager-dedicated@13.1.3...@ovh-ux/manager-dedicated@13.2.0) (2020-08-26)
+
+
+### Bug Fixes
+
+* **dashboard.options:** check sectorSpecificCompliance availability ([#3477](https://github.com/ovh/manager/issues/3477)) ([0e6c721](https://github.com/ovh/manager/commit/0e6c721afc704b6fb310d2b6ce60e938f9612bbc))
+* **dedicated:** pcc ip option order ([#3498](https://github.com/ovh/manager/issues/3498)) ([cb229ec](https://github.com/ovh/manager/commit/cb229ec31aba0d83519c2d2ecaae70c59a4f55db))
+* **dedicated:** pcc mailing list ([#3478](https://github.com/ovh/manager/issues/3478)) ([dcabcb6](https://github.com/ovh/manager/commit/dcabcb656aba8c1134e11093191aba40d2697054)), closes [#MANAGER-5531](https://github.com/ovh/manager/issues/MANAGER-5531)
+* **dedicated-cloud.license:** allow to have no contracts ([#3476](https://github.com/ovh/manager/issues/3476)) ([e4d97ef](https://github.com/ovh/manager/commit/e4d97ef8aabe1b5a61338518d05599f076016474))
+* **dedicated-cloud.terminate:** redirect to complete state ([#3508](https://github.com/ovh/manager/issues/3508)) ([4726a47](https://github.com/ovh/manager/commit/4726a47a3dffa2b0ef549ec0726de883394f62d0))
+* **payment-method:** iframe integration validation ([#3507](https://github.com/ovh/manager/issues/3507)) ([9a7c3b9](https://github.com/ovh/manager/commit/9a7c3b9cff37e933f181d9cd33894ae38ad2bd17))
+* **pcc:** use cartServiceOption for resource upgrade ([c980ba8](https://github.com/ovh/manager/commit/c980ba80c67c07f7762b0dcb49b34b3082ec790b))
+
+
+### Features
+
+* **dedicated-cloud:** allow to delete at expiration ([#3466](https://github.com/ovh/manager/issues/3466)) ([ca873c7](https://github.com/ovh/manager/commit/ca873c7eec1d39b8b1ef7f40531aaf6804f61e76))
+
+
+
+## [13.1.3](https://github.com/ovh/manager/compare/@ovh-ux/manager-dedicated@13.1.2...@ovh-ux/manager-dedicated@13.1.3) (2020-08-25)
+
+
+### Bug Fixes
+
+* **dedicated:** ips are not listing ([c2ee4ad](https://github.com/ovh/manager/commit/c2ee4adb055d735a49d43447c8eeee97b47605e2)), closes [#DTRSD-17970](https://github.com/ovh/manager/issues/DTRSD-17970)
+
+
+
+## [13.1.2](https://github.com/ovh/manager/compare/@ovh-ux/manager-dedicated@13.1.1...@ovh-ux/manager-dedicated@13.1.2) (2020-08-25)
+
+
+### Bug Fixes
+
+* **autorenew:** add serviceType parameter ([44eb046](https://github.com/ovh/manager/commit/44eb0468eaa010f89fc81d4ec0c26d169d7367d0))
+
+
+
 ## [13.1.1](https://github.com/ovh/manager/compare/@ovh-ux/manager-dedicated@13.1.0...@ovh-ux/manager-dedicated@13.1.1) (2020-08-18)
 
 
