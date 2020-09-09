@@ -16,14 +16,16 @@ export default class PrivateDatabase {
    * @param $cacheFactory
    * @param $http
    * @param $q
+   * @param $translate
    * @param OvhHttp
    * @param Poll
    */
-  constructor($rootScope, $cacheFactory, $http, $q, OvhHttp, Poll) {
+  constructor($rootScope, $cacheFactory, $http, $q, $translate, OvhHttp, Poll) {
     this.$rootScope = $rootScope;
     this.cach = $cacheFactory;
     this.$http = $http;
     this.$q = $q;
+    this.$translate = $translate;
     this.OvhHttp = OvhHttp;
     this.Poll = Poll;
 
@@ -1203,6 +1205,24 @@ export default class PrivateDatabase {
       }
       return null;
     });
+  }
+
+  translate(keyToTranslate, { versionNumber }) {
+    return this.$translate.instant(keyToTranslate, {
+      version: versionNumber,
+    });
+  }
+
+  convertToDBType(keyToTranslate, dbParam) {
+    if (dbParam && typeof dbParam === 'string') {
+      const [type, versionNumber] = dbParam.split('_');
+      return this.translate(keyToTranslate.concat(type), { versionNumber });
+    }
+    if (dbParam && typeof dbParam === 'object') {
+      return this.translate(keyToTranslate.concat(dbParam.type), dbParam);
+    }
+
+    return null;
   }
 
   static getStartTime(range) {

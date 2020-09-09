@@ -8,7 +8,7 @@
     >
         <div
             data-wizard-step
-            data-wizard-step-valid="versionCtrl.model.choice.value.length"
+            data-wizard-step-valid="versionCtrl.model.choice.length"
         >
             <div class="text-center" data-ng-if="versionCtrl.loading.init">
                 <oui-spinner></oui-spinner>
@@ -26,7 +26,7 @@
             >
                 <p
                     data-translate="privateDatabase_change_version_step1"
-                    data-translate-values="{ t0: versionCtrl.getDBType(versionCtrl.privateDBToUpdate) }"
+                    data-translate-values="{ t0: versionCtrl.convertToDBType(versionCtrl.privateDBToUpdate) }"
                 ></p>
 
                 <form class="form-horizontal mt-4">
@@ -38,16 +38,22 @@
                         ></label>
                         <div class="col-md-6">
                             <div class="oui-select oui-select_inline">
-                                <oui-select
+                                <select
+                                    class="oui-select__input"
                                     id="changeVersion"
-                                    data-name="db"
-                                    data-match="label"
-                                    data-model="versionCtrl.model.choice"
-                                    data-items="versionCtrl.model.dbList"
-                                    data-title="{{:: 'privateDatabase_change_version_available_select' | translate}}"
-                                    data-placeholder="{{:: 'privateDatabase_change_version_available_select' | translate }}"
+                                    data-ng-model="versionCtrl.model.choice"
+                                    data-ng-options="versionCtrl.convertToDBType(version) for version in versionCtrl.model.versions track by version"
                                 >
-                                </oui-select>
+                                    <option
+                                        value=""
+                                        disabled
+                                        data-translate="privateDatabase_change_version_available_select"
+                                    ></option>
+                                </select>
+                                <span
+                                    class="oui-icon oui-icon-chevron-down"
+                                    aria-hidden="true"
+                                ></span>
                             </div>
                         </div>
                     </div>
@@ -59,8 +65,8 @@
             <p
                 data-translate="privateDatabase_change_version_step2"
                 data-translate-values="{
-                   t0: versionCtrl.getDBType(versionCtrl.privateDBToUpdate),
-                   t1: versionCtrl.translateToDBType(versionCtrl.model.choice.value)
+                   t0: versionCtrl.convertToDBType(versionCtrl.privateDBToUpdate),
+                   t1: versionCtrl.convertToDBType(versionCtrl.model.choice)
                }"
             ></p>
 

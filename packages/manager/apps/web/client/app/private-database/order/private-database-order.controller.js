@@ -230,5 +230,10 @@ angular.module('App').controller(
       window.open(this.order.url);
       this.init();
     }
+
+    convertToDBType(value) {
+      const keyToTranslate = 'privateDatabase_dashboard_version_';
+      return this.privateDatabaseService.convertToDBType(keyToTranslate, value);
+    }
   },
 );
