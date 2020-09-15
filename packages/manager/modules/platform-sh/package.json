@@ -1,0 +1,26 @@
+{
+  "name": "@ovh-ux/manager-platform-sh",
+  "version": "0.0.0",
+  "private": true,
+  "description": "OVHcloud PlatformSh Product",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ovh/manager.git",
+    "directory": "packages/manager/modules/platform-sh"
+  },
+  "license": "BSD-3-Clause",
+  "author": "OVH SAS",
+  "main": "./src/index.js",
+  "peerDependencies": {
+    "@ovh-ux/manager-core": "^10.0.0 || ^11.0.0",
+    "@ovh-ux/ng-at-internet": "^5.0.1",
+    "@ovh-ux/ng-at-internet-ui-router-plugin": "^3.1.0",
+    "@ovh-ux/ng-ovh-cloud-universe-components": "^1.5.0",
+    "@ovh-ux/ui-kit": "^4.1.12",
+    "@uirouter/angularjs": "^1.0.23",
+    "angular": "^1.7.5",
+    "angular-translate": "^2.18.1",
+    "oclazyload": "^1.1.0",
+    "ovh-api-services": "^9.39.1"
+  }
+}
