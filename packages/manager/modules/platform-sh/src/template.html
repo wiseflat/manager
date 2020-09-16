@@ -8,4 +8,60 @@
             </oui-guide-menu-item>
         </oui-guide-menu>
     </oui-header>
+    <oui-datagrid data-rows="[{}]">
+        <oui-datagrid-topbar>
+            <button
+                type="button"
+                class="float-right oui-button oui-button_secondary oui-button_icon-only mb-2 oui-button_s"
+                data-ng-click="$ctrl.refreshList()"
+            >
+                <span
+                    class="oui-icon oui-icon-refresh"
+                    aria-hidden="true"
+                ></span>
+            </button>
+        </oui-datagrid-topbar>
+        <oui-datagrid-column
+            data-title=":: 'platform_sh_project_name' | translate"
+            data-property="name"
+        >
+        </oui-datagrid-column>
+        <oui-datagrid-column
+            data-title=":: 'platform_sh_region' | translate"
+            data-property="region"
+        >
+        </oui-datagrid-column>
+        <oui-datagrid-column
+            data-title=":: 'platform_sh_plan_type' | translate"
+            data-property="planType"
+        >
+        </oui-datagrid-column>
+        <oui-datagrid-column
+            data-title=":: 'platform_sh_status' | translate"
+            data-property="status"
+        >
+            <span
+                class="oui-badge"
+                data-ng-class="{
+                    'oui-status_error': $row.isError(),
+                    'oui-status_success': $row.isDone(),
+                    'oui-status_info': $row.isInProcess(),
+                }"
+                data-ng-bind="'platform_sh_status_' +  $row.status | translate"
+            ></span>
+        </oui-datagrid-column>
+        <oui-datagrid-column
+            data-title=":: 'platform_sh_renewal_date' | translate"
+            data-property="renewalDate"
+        >
+        </oui-datagrid-column>
+        <oui-action-menu data-compact data-placement="end">
+            <oui-action-menu-item data-external
+                ><span data-translate="platform_sh_launch_console"></span
+            ></oui-action-menu-item>
+            <oui-action-menu-item
+                ><span data-translate="platform_sh_terminate"></span
+            ></oui-action-menu-item>
+        </oui-action-menu>
+    </oui-datagrid>
 </div>

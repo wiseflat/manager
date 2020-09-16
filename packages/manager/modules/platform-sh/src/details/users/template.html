@@ -1,0 +1,28 @@
+<div>
+    <h2 data-translate="platform_sh_users"></h2>
+    <p data-translate="platform_sh_users_decription"></p>
+    <oui-datagrid data-rows="$ctrl.userList">
+        <oui-datagrid-topbar>
+            <button
+                type="button"
+                class="float-right oui-button oui-button_secondary oui-button_icon-only mb-2 oui-button_s"
+                data-ng-click="$ctrl.refreshUserList()"
+            >
+                <span class="fa fa-refresh" aria-hidden="true"></span>
+            </button>
+        </oui-datagrid-topbar>
+        <oui-datagrid-column
+            data-title=":: 'platform_sh_users_id' | translate"
+            data-property="id"
+        >
+        </oui-datagrid-column>
+        <oui-datagrid-column
+            data-title=":: 'platform_sh_users_name' | translate"
+            data-property="name"
+        >
+            <span
+                data-translate="{{:: 'platform_sh_users_' + $row.name }}"
+            ></span>
+        </oui-datagrid-column>
+    </oui-datagrid>
+</div>

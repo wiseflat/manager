@@ -1,0 +1,28 @@
+<oui-header
+    data-heading="{{ ::$ctrl.platformSh.description }}"
+    data-description="{{ ::$ctrl.platformSh.id }}"
+>
+    <oui-guide-menu data-text="{{ ::'platform_sh_guides' | translate }}">
+        <oui-guide-menu-item data-href="{{:: $ctrl.guideUrl }}" data-external
+            ><span data-translate="platform_sh_guides_main"></span>
+        </oui-guide-menu-item>
+    </oui-guide-menu>
+    <oui-header-tabs>
+        <oui-header-tabs-item
+            data-state="platform-sh.details.overview"
+            data-ng-click="$ctrl.clearCache()"
+            ><span data-translate="platform_sh_overview"></span
+        ></oui-header-tabs-item>
+        <oui-header-tabs-item
+            data-ng-if="!$ctrl.platformSh.isDirectService()"
+            data-state="platform-sh.details.users"
+            ><span data-translate="platform_sh_users"></span
+        ></oui-header-tabs-item>
+        <oui-header-tabs-item data-state="platform-sh.details.tasks"
+            ><span data-translate="platform_sh_tasks"></span
+        ></oui-header-tabs-item>
+    </oui-header-tabs>
+</oui-header>
+<div class="container-fluid cui-page__content cui-page__content-flex">
+    <div data-ui-view></div>
+</div>

@@ -1,4 +1,11 @@
 {
   "platform_sh_guides": "Guides",
-  "platform_sh_guides_main": "Main"
+  "platform_sh_guides_main": "Main",
+  "platform_sh_project_name": "Project Name",
+  "platform_sh_region": "Region/DC",
+  "platform_sh_plan_type": "Plan Type",
+  "platform_sh_status": "Status",
+  "platform_sh_renewal_date": "Renewal Date",
+  "platform_sh_launch_console": "Launch Console",
+  "platform_sh_terminate": "Terminate"
 }
