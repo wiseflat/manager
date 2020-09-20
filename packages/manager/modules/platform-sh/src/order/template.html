@@ -1,0 +1,136 @@
+<oui-header
+    class="mb-2"
+    data-heading="{{ ::'platform_sh_order_title' | translate }}"
+>
+    <oui-guide-menu data-text="{{ ::'platform_sh_order_guides' | translate }}">
+        <oui-guide-menu-item data-href="{{:: $ctrl.GUIDELINK }}" data-external
+            ><span data-translate="platform_sh_order_guides_main"></span>
+        </oui-guide-menu-item>
+    </oui-guide-menu>
+</oui-header>
+<!-- <form novalidate> -->
+<oui-stepper>
+    <oui-step-form
+        data-header="{{ 'platform_sh_order_choose_web_solution' | translate }}"
+        data-submit-text="{{ 'platform_sh_order_create_next' | translate }}"
+        data-navigation="$ctrl.navigation"
+        data-editable="!$ctrl.chooseWebSolution"
+        data-on-focus="$ctrl.onWebSolutionFocus()"
+        data-on-submit="$ctrl.onSolutionSubmit(form)"
+    >
+        <section>
+            <oui-select-picker
+                data-ng-repeat="version in [{}] track by $index"
+                class="d-inline-block col-md-6 col-lg-4 my-3"
+                data-name="{{ version }}"
+                data-model="$ctrl.selectedVersion"
+                data-label="{{:: 'START UP Plan' }}"
+                data-variant="light"
+                data-values="[version]"
+                data-required
+            >
+                <oui-select-picker-section
+                    data-ng-if="plan === $ctrl.selectedPlan"
+                >
+                    <ul>
+                        <li>From 19 euro per month</li>
+                        <li>Forum support</li>
+                        <li>User included 1 to Max 1</li>
+                        <li>Environment Dev / Staging - Included 1</li>
+                        <li>Manual Backup (Retention 2 backups Max)</li>
+                    </ul>
+                </oui-select-picker-section>
+                <oui-select-picker-section>
+                    <span>Container Restrictions</span>
+                    <span>Single App: php/node.js/python</span>
+                    <span>Single service: mysql/memcached</span>
+                </oui-select-picker-section>
+            </oui-select-picker>
+        </section>
+    </oui-step-form>
+    <!-- Select project type -->
+    <oui-step-form
+        data-header="{{ ::'platform_sh_order_select_project_type' | translate }}"
+        data-prevent-next="!$ctrl.selectedPlan"
+        data-navigation="$ctrl.navigation"
+        data-valid="$ctrl.planTypeSelected"
+    >
+        <button class="oui-button oui-button_secondary" type="button">
+            <span
+                data-translate="platform_sh_order_select_project_type_new_project"
+            ></span>
+        </button>
+        <button class="oui-button oui-button_secondary" type="button">
+            <span
+                data-translate="platform_sh_order_select_project_type_template"
+            ></span>
+        </button>
+    </oui-step-form>
+    <!-- Project details -->
+    <oui-step-form
+        data-header="{{ ::'platform_sh_order_project_details' | translate }}"
+        data-prevent-next="!$ctrl.selectedPlan"
+        data-navigation="$ctrl.navigation"
+        data-valid="$ctrl.planTypeSelected"
+    >
+        <!-- Project name -->
+        <oui-field
+            data-label="{{ ::'platform_sh_order_project_name' | translate }}"
+            data-size="xl"
+            data-error-messages="{ pattern: ('platform_sh_order_project_name_help' | translate) }"
+        >
+            <input
+                class="oui-input"
+                type="text"
+                id="projectName"
+                name="projectName"
+                required
+                placeholder="{{ ::'platform_sh_order_project_name_placeholder' | translate }}"
+                data-ng-model="$ctrl.data.projectName"
+                data-ng-pattern="$ctrl.PATTERN"
+            />
+        </oui-field>
+        <!-- Project region -->
+        <oui-field
+            data-label="{{ ::'platform_sh_order_region' | translate }}"
+            data-size="xl"
+        >
+            <oui-select
+                data-name="region"
+                data-model="$ctrl.data.region"
+                data-items="$ctrl.regionList"
+                data-match="name"
+                data-placeholder="{{ ::'platform_sh_order_region_placeholder' | translate }}"
+                data-required
+            >
+            </oui-select>
+        </oui-field>
+    </oui-step-form>
+    <!-- Select template -->
+    <oui-step-form
+        data-header="{{ ::'platform_sh_order_select_template' | translate }}"
+        data-prevent-next="!$ctrl.selectedPlan"
+        data-navigation="$ctrl.navigation"
+        data-valid="$ctrl.templateSelected"
+    >
+        <!-- Add template list here -->
+    </oui-step-form>
+    <!-- Storage and user licenses details -->
+    <oui-step-form
+        data-header="{{ ::'platform_sh_order_select_storage' | translate }}"
+        data-prevent-next="!$ctrl.selectedPlan"
+        data-navigation="$ctrl.navigation"
+        data-valid="$ctrl.planTypeSelected"
+    >
+        <!-- Storage details list -->
+    </oui-step-form>
+    <!-- Terms of condiations and payment -->
+    <oui-step-form
+        data-header="{{ ::'platform_sh_order_payment' | translate }}"
+        data-prevent-next="!$ctrl.selectedPlan"
+        data-navigation="$ctrl.navigation"
+        data-valid="$ctrl.acceptAgreements"
+    >
+        <!-- Add payment flow -->
+    </oui-step-form>
+</oui-stepper>

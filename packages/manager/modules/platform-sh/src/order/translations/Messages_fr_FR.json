@@ -1,0 +1,18 @@
+{
+  "platform_sh_order_title": "Order a Web Solution by P-SH",
+  "platform_sh_order_choose_web_solution": "Choose a Web Cloud Solution",
+  "platform_sh_order_description": "You can order platform sh from here",
+  "platform_sh_order_select_project_type": "Select project type",
+  "platform_sh_order_select_project_type_new_project": "New project",
+  "platform_sh_order_select_project_type_new_project_description": "Use your own code or migrate an existing project to Platform.sh",
+  "platform_sh_order_select_project_type_template": "Use a template",
+  "platform_sh_order_select_project_type_template_description": "Choose from one of our pre-existing code base templates to start your project",
+  "platform_sh_order_project_details": "Project Details",
+  "platform_sh_order_project_name": "Project name",
+  "platform_sh_order_region": "Region",
+  "platform_sh_order_project_name_placeholder": "Project name",
+  "platform_sh_order_region_placeholder": "Region",
+  "platform_sh_order_select_template": "Select your template",
+  "platform_sh_order_select_storage": "Select storage",
+  "platform_sh_order_payment": "Payment"
+}

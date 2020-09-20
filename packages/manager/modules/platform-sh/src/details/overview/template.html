@@ -1,1 +1,115 @@
-<div>Overview</div>
+<div>
+    <!-- error messages -->
+    <cui-message-container
+        data-messages="$ctrl.messages"
+    ></cui-message-container>
+
+    <h2 data-translate="platform_sh_overview_title"></h2>
+    <p data-translate="platform_sh_overview_detail_decription"></p>
+
+    <div class="row d-lg-flex">
+        <!-- Information tile -->
+        <div class="col-sm-12 col-md-4">
+            <oui-tile
+                data-heading="{{ ::'platform_sh_overview_general_information' | translate }}"
+            >
+                <!-- Project Status -->
+                <oui-tile-definition
+                    data-term="{{ ::'platform_sh_overview_project_status' | translate }}"
+                >
+                    <oui-tile-description>
+                        <span class="oui-badge oui-status_success"></span>
+                    </oui-tile-description>
+                </oui-tile-definition>
+                <!-- Plan Type -->
+                <oui-tile-definition
+                    data-term="{{ ::'platform_sh_overview_plan_type' | translate }}"
+                >
+                    <oui-tile-description>
+                        <span>Plan type</span>
+                    </oui-tile-description>
+                    <oui-action-menu data-compact data-placement="end">
+                        <oui-action-menu-item
+                            ><span
+                                data-translate="platform_sh_overview_change_plan_type"
+                            ></span>
+                        </oui-action-menu-item>
+                    </oui-action-menu>
+                </oui-tile-definition>
+                <!-- Region -->
+                <oui-tile-definition
+                    data-term="{{ ::'platform_sh_overview_region' | translate }}"
+                >
+                </oui-tile-definition>
+                <!-- Number of environments -->
+                <oui-tile-definition
+                    data-term="{{ ::'platform_sh_overview_number_of_environments' | translate }}"
+                >
+                    <oui-action-menu data-compact data-placement="end">
+                        <oui-action-menu-item
+                            ><span
+                                data-translate="platform_sh_overview_edit_environments"
+                            ></span>
+                        </oui-action-menu-item>
+                    </oui-action-menu>
+                </oui-tile-definition>
+                <!-- Number of user license -->
+                <oui-tile-definition
+                    data-term="{{ ::'platform_sh_overview_number_of_user_license' | translate }}"
+                >
+                    <oui-action-menu data-compact data-placement="end">
+                        <oui-action-menu-item
+                            ><span
+                                data-translate="platform_sh_overview_edit_user_license"
+                            ></span>
+                        </oui-action-menu-item>
+                    </oui-action-menu>
+                </oui-tile-definition>
+                <!-- Storage -->
+                <oui-tile-definition
+                    data-term="{{ ::'platform_sh_overview_storage' | translate }}"
+                >
+                    <oui-action-menu data-compact data-placement="end">
+                        <oui-action-menu-item
+                            ><span
+                                data-translate="platform_sh_overview_edit_storage"
+                            ></span>
+                        </oui-action-menu-item>
+                    </oui-action-menu>
+                </oui-tile-definition>
+            </oui-tile>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <oui-tile
+                data-heading="{{ ::'platform_sh_overview_management_interface' | translate }}"
+            >
+                <oui-tile-button aria-label="" href="#" external>
+                    <span
+                        data-translate="platform_sh_overview_sso_login"
+                    ></span>
+                </oui-tile-button>
+                <oui-tile-button aria-label="" href="#">
+                    <span data-translate="platform_sh_overview_cancel"></span>
+                </oui-tile-button>
+                <!-- Project ID -->
+                <oui-tile-definition
+                    data-term="{{ ::'platform_sh_overview_project_id' | translate }}"
+                    data-description="{{ 'ID' }}"
+                >
+                </oui-tile-definition>
+            </oui-tile>
+        </div>
+        <!-- Tips and tricks -->
+        <div class="col-sm-12 col-md-4">
+            <oui-tile
+                data-heading="{{ ::'platform_sh_overview_tips' | translate }}"
+            >
+                <oui-tile-button aria-label="" href="#" external>
+                    <span
+                        data-translate="platform_sh_overview_getting_started"
+                    ></span>
+                </oui-tile-button>
+            </oui-tile>
+        </div>
+    </div>
+</div>

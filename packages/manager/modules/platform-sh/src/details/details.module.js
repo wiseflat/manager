@@ -5,7 +5,7 @@ import overview from './overview';
 import routing from './details.routing';
 import users from './users';
 
-const moduleName = 'ovhCloudConnectDetails';
+const moduleName = 'ovhPlatformShDetails';
 
 angular
   .module(moduleName, [overview, users])

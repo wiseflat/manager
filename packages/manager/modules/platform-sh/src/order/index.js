@@ -5,7 +5,7 @@ import '@uirouter/angularjs';
 import 'angular-translate';
 import 'oclazyload';
 
-const moduleName = 'ovhPlatformShDetailsLazyLoading';
+const moduleName = 'ovhPlatformShOrderLazyLoading';
 
 angular
   .module(moduleName, [
@@ -16,12 +16,12 @@ angular
   ])
   .config(
     /* @ngInject */ ($stateProvider) => {
-      $stateProvider.state('platform-sh.details.**', {
-        url: '/details/:ovhPlatformShId',
+      $stateProvider.state('platform-sh.order.**', {
+        url: '/order/:projectType',
         lazyLoad: ($transition$) => {
           const $ocLazyLoad = $transition$.injector().get('$ocLazyLoad');
           console.log('lazyload');
-          return import('./details.module').then((mod) =>
+          return import('./order.module').then((mod) =>
             $ocLazyLoad.inject(mod.default || mod),
           );
         },

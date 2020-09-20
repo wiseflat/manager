@@ -1,0 +1,21 @@
+{
+  "platform_sh_overview_title": "Platform Sh",
+  "platform_sh_overview_detail_decription": "Description",
+  "platform_sh_overview_general_information": "General Information",
+  "platform_sh_overview_project_status": "Project Status",
+  "platform_sh_overview_plan_type": "Plan Type",
+  "platform_sh_overview_region": "Region",
+  "platform_sh_overview_number_of_environments": "No of Environments",
+  "platform_sh_overview_number_of_user_license": "No of User License",
+  "platform_sh_overview_storage": "storage",
+  "platform_sh_overview_change_plan_type": "Change",
+  "platform_sh_overview_edit_environments": "Edit environments",
+  "platform_sh_overview_edit_user_license": "Edit user license",
+  "platform_sh_overview_edit_storage": "Edit storage",
+  "platform_sh_overview_sso_login": "Login to OVH PAAS console Powered by P-SH",
+  "platform_sh_overview_cancel": "Cancel on Subscription expiry",
+  "platform_sh_overview_project_id": "Project_ID",
+  "platform_sh_overview_tips": "Tips and tricks",
+  "platform_sh_overview_getting_started": "Getting started",
+  "platform_sh_overview_management_interface": "Management Interface"
+}
