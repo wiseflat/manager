@@ -1,8 +1,11 @@
 import head from 'lodash/head';
 import isEmpty from 'lodash/isEmpty';
 import isObject from 'lodash/isObject';
+import get from 'lodash/get';
 
 import { QUOTA_DECIMAL_PRECISION } from './general-informations.constants';
+import { HOSTING_CDN_ORDER_CDN_VERSION_V1 } from '../cdn/order/hosting-cdn-order.constant';
+import { SHARED_CDN_GET_MORE_INFO } from '../cdn/shared/hosting-cdn-shared-settings.constants';
 
 export default class HostingGeneralInformationsCtrl {
   /* @ngInject */
@@ -43,7 +46,6 @@ export default class HostingGeneralInformationsCtrl {
     this.serviceName = this.$stateParams.productId;
     this.defaultRuntime = null;
     this.availableOffers = [];
-
     this.contactManagementLink = this.RedirectionService.getURL(
       'contactManagement',
       { serviceName: this.serviceName, category: 'HOSTING' },
@@ -230,6 +232,10 @@ export default class HostingGeneralInformationsCtrl {
     this.$scope.$parent.$ctrl.setSelectedTab('BOOST');
   }
 
+  goToMultisiteTab() {
+    this.$scope.$parent.$ctrl.setSelectedTab('MULTISITE');
+  }
+
   goToPrivateSqlActivation() {
     return this.$state.go('app.hosting.database.private-sql-activation');
   }
@@ -241,5 +247,32 @@ export default class HostingGeneralInformationsCtrl {
 
   activateEmailOffer() {
     this.$state.go('app.hosting.activate', { serviceName: this.serviceName });
+  }
+
+  getCDNBannerKeyToTranslate() {
+    if (
+      get(this.$scope.cdnProperties, 'version') ===
+      HOSTING_CDN_ORDER_CDN_VERSION_V1
+    ) {
+      return 'hosting_dashboard_service_cdn_customer_has_cdn_v1_banner_msg';
+    }
+
+    if (get(this.$scope.hosting, 'hasCdn') === false) {
+      return 'hosting_dashboard_service_cdn_customer_has_no_cdn_banner_msg';
+    }
+
+    return null;
+  }
+
+  getCDNMoreInfoLink() {
+    return SHARED_CDN_GET_MORE_INFO[this.$scope.ovhSubsidiary];
+  }
+
+  goToOrderOrUpgrade() {
+    return this.$state.go(
+      this.$scope.hosting.hasCdn
+        ? 'app.hosting.cdn.upgrade'
+        : 'app.hosting.cdn.order',
+    );
   }
 }

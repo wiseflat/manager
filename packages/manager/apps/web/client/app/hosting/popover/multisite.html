@@ -8,6 +8,17 @@
     >
         <span data-translate="hosting_tab_DOMAINS_table_popover_modify"></span>
     </oui-button>
+    <oui-button
+        data-variant="link"
+        class="d-block"
+        data-on-click="activateDomain(domain)"
+        data-disabled="domain.status !== HOSTING_STATUS.CREATED"
+        data-ng-if="domain.cdn === 'NONE' && cdnProperties.version === 'cdn-hosting'"
+    >
+        <span
+            data-translate="hosting_tab_DOMAINS_table_popover_activate"
+        ></span>
+    </oui-button>
     <div
         data-ng-controller="HostingTabDomainsMultisiteLogs"
         data-ng-if="!!domain.ownLog"
@@ -42,10 +53,30 @@
     <oui-button
         data-variant="link"
         class="d-block"
-        data-ng-if="hosting.isCloudWeb"
+        data-on-click="activateDomain(domain)"
+        data-disabled="domain.status !== HOSTING_STATUS.CREATED"
+        data-ng-if="domain.cdn === 'ACTIVE'"
+    >
+        <span
+            data-translate="hosting_tab_DOMAINS_table_popover_modify_cdn"
+        ></span>
+    </oui-button>
+    <oui-button
+        data-variant="link"
+        class="d-block"
+        data-ng-if="hosting.isCloudWeb && cdnProperties.version === '2013v1'"
         data-disabled="domain.status !== HOSTING_STATUS.CREATED"
         data-on-click="restartDomain(domain)"
     >
         <span data-translate="hosting_tab_DOMAINS_table_popover_restart"></span>
+    </oui-button>
+    <oui-button
+        data-variant="link"
+        class="d-block"
+        data-ng-if="domain.cdn === 'ACTIVE' && cdnProperties.version === 'cdn-hosting'"
+        data-disabled="domain.status !== HOSTING_STATUS.CREATED"
+        data-on-click="setAction('cdn/flush/hosting-cdn-flush', {domain})"
+    >
+        <span data-translate="hosting_tab_DOMAINS_table_popover_purge"></span>
     </oui-button>
 </div>

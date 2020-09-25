@@ -16,12 +16,14 @@ angular
     (
       $scope,
       $q,
+      $state,
       $stateParams,
       $location,
       $rootScope,
       $translate,
       Hosting,
       HOSTING,
+      HostingCdnSharedService,
       HOSTING_STATUS,
       HostingDomain,
       hostingSSLCertificate,
@@ -62,7 +64,15 @@ angular
           $scope.search.text,
         )
           .then((domains) => {
+            return HostingCdnSharedService.getSharedCDNDomains(
+              $scope.hosting.serviceName,
+            ).then(({ data: sharedDomains }) => {
+              return { domains, sharedDomains };
+            });
+          })
+          .then(({ domains, sharedDomains }) => {
             $scope.domains = domains;
+            $scope.sharedDomains = sharedDomains;
             $scope.hasResult = !isEmpty($scope.domains);
             $scope.domains.list.results.forEach((domain) => {
               if (domain.status === HOSTING_STATUS.UPDATING) {
@@ -195,6 +205,13 @@ angular
               $scope.alerts.main,
             );
           });
+
+      $scope.activateDomain = (domain) => {
+        $state.go(`app.hosting.cdn.shared`, {
+          domain,
+          domainName: domain.domain,
+        });
+      };
 
       $scope.$on('hostingDomain.restart.done', (response, data) => {
         assign(find($scope.domains.list.results, { name: data.domain }), {
