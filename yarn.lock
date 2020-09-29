@@ -15133,6 +15133,12 @@ ovh-api-services@^11.0.0:
   dependencies:
     lodash "^4.17.20"
 
+"ovh-api-services@git+https://github.com/ovh-ux/ovh-api-services.git#feat/overthebox-configuration":
+  version "10.1.0"
+  resolved "git+https://github.com/ovh-ux/ovh-api-services.git#e92c4ea31b593972130f081834ff276a5de94d31"
+  dependencies:
+    lodash "^4.17.20"
+
 ovh-common-style@^3.2.2, ovh-common-style@ovh-ux/ovh-common-style#^3.2.2:
   version "3.2.2"
   resolved "https://codeload.github.com/ovh-ux/ovh-common-style/tar.gz/cd9f7bea9240b7e2334ae5cd7e74529478b271d4"
