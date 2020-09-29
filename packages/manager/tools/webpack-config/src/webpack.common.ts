@@ -21,7 +21,7 @@ const cacheLoader = {
 
 // The common webpack configuration
 
-export = opts => {
+export = (opts) => {
   const lessLoaderOptions = {
     sourceMap: true,
     plugins: [
@@ -79,14 +79,10 @@ export = opts => {
     ],
 
     resolve: {
-      modules: [
-        './node_modules',
-        path.resolve('./node_modules'),
-      ],
+      modules: ['./node_modules', path.resolve('./node_modules')],
     },
 
     resolveLoader: {
-
       // webpack module resolution paths
       modules: [
         './node_modules', // #1 check in module's relative node_module directory
@@ -96,7 +92,6 @@ export = opts => {
 
     module: {
       rules: [
-
         // load HTML files as string (raw-loader)
         {
           test: /\.html$/,
@@ -195,7 +190,13 @@ export = opts => {
               loader: 'babel-loader', // babelify JS sources
               options: {
                 presets: [
-                  require.resolve('@babel/preset-env'), // babel preset configuration
+                  [
+                    require.resolve('@babel/preset-env'), // babel preset configuration
+                    {
+                      useBuiltIns: 'usage',
+                      corejs: 3,
+                    },
+                  ],
                 ],
                 plugins: [
                   require.resolve('@babel/plugin-proposal-class-properties'), // class properties
@@ -203,6 +204,7 @@ export = opts => {
                   require.resolve('@babel/plugin-proposal-private-methods'), // private methods
                   require.resolve('@babel/plugin-syntax-dynamic-import'), // dynamic es6 imports
                   require.resolve('babel-plugin-angularjs-annotate'), // ng annotate
+                  '@babel/transform-runtime',
                 ],
                 shouldPrintComment: (val) => !/@ngInject/.test(val),
               },
@@ -219,7 +221,10 @@ export = opts => {
           use: [
             cacheLoader,
             {
-              loader: path.resolve(__dirname, './loaders/translation-ui-router.js'),
+              loader: path.resolve(
+                __dirname,
+                './loaders/translation-ui-router.js',
+              ),
               options: {
                 subdirectory: 'translations',
                 filtering: false,
@@ -236,7 +241,10 @@ export = opts => {
           use: [
             cacheLoader,
             {
-              loader: path.resolve(__dirname, './loaders/translation-inject.js'),
+              loader: path.resolve(
+                __dirname,
+                './loaders/translation-inject.js',
+              ),
               options: {
                 filtering: false,
               },
@@ -251,7 +259,6 @@ export = opts => {
       runtimeChunk: 'single',
       // bundle spliting configuration
       splitChunks: {
-
         // vendors bundle containing node_modules source code
         cacheGroups: {
           bower: {
@@ -276,7 +283,6 @@ export = opts => {
           },
         },
       },
-
     }, // \optimization
   };
 };
