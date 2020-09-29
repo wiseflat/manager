@@ -22,7 +22,6 @@ export default class {
     $timeout,
     $uibModal,
     $window,
-    goBack,
     OvhApiSms,
     OvhApiMe,
     TucToast,
@@ -43,7 +42,6 @@ export default class {
         document: OvhApiMe.Document().v6(),
       },
     };
-    this.goBack = goBack;
     this.TucToast = TucToast;
     this.TucToastError = TucToastError;
   }
