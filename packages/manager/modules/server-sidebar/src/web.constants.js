@@ -236,6 +236,30 @@ export const MICROSOFT_CONFIG = {
   regions: ['EU'],
 };
 
+export const PSH_CONFIG = {
+  id: 'psh',
+  loadOnState: 'platform-sh',
+  // types: [
+  //   {
+  //     path: '/pass/platform-sh',
+  //     state: 'platform-sh',
+  //     stateParams: ['serviceName'],
+  //     app: [WEB],
+  //   },
+  // ],
+  children: [
+    {
+      id: 'psh_all_accounts',
+      state: 'platform-sh',
+      stateUrl: '/pass/platform-sh/projects',
+      app: [WEB],
+    },
+  ],
+  icon: 'oui-icon oui-icon-platformsh_concept',
+  app: [WEB],
+  regions: ['EU', 'CA', 'US'],
+};
+
 export const WEB_SIDEBAR_CONFIG = [
   DOMAIN_CONFIG,
   HOSTING_CONFIG,
@@ -243,6 +267,7 @@ export const WEB_SIDEBAR_CONFIG = [
   EMAIL_PRO_CONFIG,
   EMAIL_CONFIG,
   MICROSOFT_CONFIG,
+  PSH_CONFIG,
 ];
 
 export const WEB_ORDER_SIDEBAR_CONFIG = [
@@ -338,6 +363,14 @@ export const WEB_ORDER_SIDEBAR_CONFIG = [
     icon: 'ovh-font ovh-font-database',
     state: 'app.private-database-order-clouddb',
     regions: ['EU'],
+    app: [WEB],
+  },
+  {
+    id: 'orderPsh',
+    title: 'psh',
+    icon: 'oui-icon oui-icon-platformsh_concept',
+    state: 'platform-sh.add',
+    regions: ['EU', 'CA', 'US'],
     app: [WEB],
   },
 ];
