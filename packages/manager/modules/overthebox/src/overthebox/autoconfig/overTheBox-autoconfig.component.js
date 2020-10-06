@@ -4,4 +4,7 @@ import template from './overTheBox-autoconfig.html';
 export default {
   controller,
   template,
+  bindings: {
+    serviceName: '<',
+  },
 };

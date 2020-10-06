@@ -13,21 +13,6 @@ export = (env) => {
   const proxy = [serverProxy.v6(region)];
   const sso = new Sso(region);
 
-  // Connect to sdev
-  proxy.unshift({
-    target: 'https://api.ovh.com:54990/1.0',
-    context: ['/engine/apiv6/overthebox'],
-    changeOrigin: true,
-    logLevel: 'debug',
-    secure: false,
-    headers: {
-      'X-Ovh-Nic': 'os5216-ovh',
-    },
-    pathRewrite: {
-      '^/engine/apiv6/': '/',
-    },
-  });
-
   if (yn(env.local2API) || yn(process.env.npm_package_config_local2API)) {
     proxy.unshift(serverProxy.aapi);
   }

@@ -12,7 +12,8 @@
   "author": "OVH SAS",
   "main": "./src/index.js",
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "ovh-api-services": "git+https://github.com/ovh-ux/ovh-api-services.git#feat/overthebox-configuration"
   },
   "devDependencies": {
     "@ovh-ux/component-rollup-config": "^7.0.0"

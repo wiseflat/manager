@@ -1,3 +1,26 @@
 {
-
+  "overTheBox_autoconfig_dhcp_title": "DHCP",
+  "overTheBox_autoconfig_dhcp_config": "Configuration",
+  "overTheBox_autoconfig_dhcp_interface": "Interface",
+  "overTheBox_autoconfig_dhcp_offset": "Offset",
+  "overTheBox_autoconfig_dhcp_pool_size": "Taille du pool DHCP",
+  "overTheBox_autoconfig_dhcp_lease_duration": "Durée des baux (secondes)",
+  "overTheBox_autoconfig_dhcp_priority": "Priorité",
+  "overTheBox_autoconfig_dhcp_config_create": "Créer une nouvelle configuration",
+  "overTheBox_autoconfig_dhcp_static_lease_create": "Créer un nouveau bail statique",
+  "overTheBox_autoconfig_dhcp_create_error": "Une erreur s'est produite lors de la création : {{errorMessage}}.",
+  "overTheBox_autoconfig_dhcp_interface_description": "Interface sur laquelle la configuration est appliquée (par défaut au LAN)",
+  "overTheBox_autoconfig_dhcp_offset_description": "Décalage de l'adresse IP du réseau",
+  "overTheBox_autoconfig_dhcp_static_leases": "Baux statiques",
+  "overTheBox_autoconfig_dhcp_name": "Nom de l'hôte",
+  "overTheBox_autoconfig_dhcp_mac_address": "Adresse Mac",
+  "overTheBox_autoconfig_dhcp_ip_address": "Adresse IP",
+  "overTheBox_autoconfig_dhcp_actions": "Actions",
+  "overTheBox_autoconfig_dhcp_update": "Modifier",
+  "overTheBox_autoconfig_dhcp_delete": "Supprimer",
+  "overTheBox_autoconfig_dns_title": "DNS",
+  "overTheBox_autoconfig_apply": "Appliquer",
+  "overTheBox_autoconfig_add": "Ajouter",
+  "overTheBox_autoconfig_submit": "Valider",
+  "overTheBox_autoconfig_cancel": "Annuler"
 }

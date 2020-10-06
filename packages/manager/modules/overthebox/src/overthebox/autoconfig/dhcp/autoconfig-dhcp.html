@@ -1,0 +1,42 @@
+<div>
+    <div class="oui-box oui-box_light">
+        <h4 class="oui-box__heading" data-translate="overTheBox_autoconfig_dhcp_config"></h4>
+        <oui-button variant="primary" data-on-click="$ctrl.addDhcpConfig()" class="ml-2 mb-2">
+            <span data-translate="overTheBox_autoconfig_add"></span>
+        </oui-button>
+        <oui-datagrid
+            page-size="5"
+            rows="$ctrl.config">
+            <oui-datagrid-column title="'overTheBox_autoconfig_dhcp_interface' | translate" property="data.interface"></oui-datagrid-column>
+            <oui-datagrid-column title="'overTheBox_autoconfig_dhcp_offset' | translate" property="data.offset"></oui-datagrid-column>
+            <oui-datagrid-column title="'overTheBox_autoconfig_dhcp_pool_size' | translate" property="data.poolSize"></oui-datagrid-column>
+            <oui-datagrid-column title="'overTheBox_autoconfig_dhcp_lease_duration' | translate" property="data.leaseDuration"></oui-datagrid-column>
+            <oui-datagrid-column title="'overTheBox_autoconfig_dhcp_priority' | translate" property="priority"></oui-datagrid-column>
+            <oui-action-menu text="{{::'overTheBox_autoconfig_dhcp_actions' | translate }}" compact>
+                <oui-action-menu-item
+                    on-click="$ctrl.onConfigDeleteClick($row)">
+                    <span data-translate="overTheBox_autoconfig_dhcp_delete">
+                </oui-action-menu-item>
+            </oui-action-menu>
+        </oui-datagrid>
+    </div>
+    <div class="oui-box oui-box_light mt-2">
+        <h4 class="oui-box__heading" data-translate="overTheBox_autoconfig_dhcp_static_leases"></h4>
+        <oui-button variant="primary" on-click="$ctrl.addDhcpStaticLease()" class="ml-2 mb-2">
+            <span data-translate="overTheBox_autoconfig_add"></span>
+        </oui-button>
+        <oui-datagrid
+            page-size="5"
+            rows="$ctrl.staticLeases">
+            <oui-datagrid-column title="'overTheBox_autoconfig_dhcp_name' | translate" property="hostName"></oui-datagrid-column>
+            <oui-datagrid-column title="'overTheBox_autoconfig_dhcp_mac_address' | translate" property="macAddress"></oui-datagrid-column>
+            <oui-datagrid-column title="'overTheBox_autoconfig_dhcp_ip_address' | translate" property="ipAddress"></oui-datagrid-column>
+            <oui-action-menu text="{{::'overTheBox_autoconfig_dhcp_actions' | translate}}" compact>
+                <oui-action-menu-item
+                    on-click="$ctrl.onStaticLeaseDeleteClick($row)">
+                    <span data-translate="overTheBox_autoconfig_dhcp_delete">
+                </oui-action-menu-item>
+            </oui-action-menu>
+        </oui-datagrid>
+    </div>
+</div>
