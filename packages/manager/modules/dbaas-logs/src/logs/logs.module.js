@@ -12,6 +12,7 @@ import 'angular-ui-bootstrap';
 import '@ovh-ux/ui-kit/dist/css/oui.css';
 import './logs.scss';
 
+import empty from './empty';
 import component from './logs.component';
 import constants from './logs-constants';
 import logsDetail from './detail/detail.module';
@@ -31,6 +32,7 @@ angular
     'pascalprecht.translate',
     'ui.bootstrap',
     'ui.router',
+    empty,
     logsDetail,
     logsList,
     logsWelcome,
