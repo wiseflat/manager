@@ -1,4 +1,4 @@
-import placeholder from './placeholder.png';
+import placeholder from '../../assets/placeholder.png';
 
 export default class {
   constructor() {

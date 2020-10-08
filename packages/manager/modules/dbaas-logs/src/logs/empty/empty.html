@@ -4,8 +4,7 @@
             <div data-ng-class="{ 'placeholder p-5' : !$ctrl.imageSource }">
                 <img
                     data-ng-src="{{:: $ctrl.imageSource || $ctrl.placeholder }}"
-                    data-ng-attr-alt="{{:: $ctrl.imageAlt }}"
-                    alt
+                    alt="{{::'alt_illustration' | translate}}"
                     class="w-100"
                 />
             </div>
