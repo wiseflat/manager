@@ -21,6 +21,8 @@ export default class OverTheBoxAutoconfigDns {
       priority: '',
     };
 
+    console.log('serviceName', this.serviceName);
+
     return this.$q.all([this.loadLocalDomain(), this.loadNameserver()]);
   }
 
