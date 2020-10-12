@@ -153,8 +153,12 @@ angular
         .setAttribute('lang', Environment.getUserLanguage());
     },
   )
-  .run((ssoAuthentication /* , User */) => {
-    ssoAuthentication.login(); // .then(() => User.getUser());
+  .run((ssoAuthentication) => {
+    if (Environment.getUser()) {
+      ssoAuthentication.setIsLoggedIn();
+    } else {
+      ssoAuthentication.login();
+    }
   })
   .constant('OVH_SSO_AUTH_LOGIN_URL', '/auth')
   .factory('serviceTypeInterceptor', () => ({

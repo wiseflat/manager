@@ -263,6 +263,7 @@ export default function() {
     // /!\ For testing purpose only
     this.setIsLoggedIn = function setIsLoggedIn() {
       isLogged = true;
+      this.userId = this.getUserIdCookie();
       deferredObj.login.resolve();
     };
 
