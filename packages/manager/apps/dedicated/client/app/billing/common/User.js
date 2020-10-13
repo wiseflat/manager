@@ -1,6 +1,9 @@
+import { Environment } from '@ovh-ux/manager-config';
+
 angular.module('Billing.services').service('BillingUser', [
+  '$q',
   'OvhHttp',
-  function BillingUserService(OvhHttp) {
+  function BillingUserService($q, OvhHttp) {
     /*
      * get user by SWS
      */
@@ -15,11 +18,13 @@ angular.module('Billing.services').service('BillingUser', [
         spareEmail: result.spareEmail,
       }));
 
-    this.getMe = () =>
-      OvhHttp.get('/me', {
-        rootPath: 'apiv6',
-        cache: 'UNIVERS_BILLING_ME',
-      });
+    this.getMe = () => {
+      if (Environment.getUser()) {
+        return $q.resolve(Environment.getUser());
+      }
+
+      return $q.reject({});
+    };
 
     this.isVATNeeded = () =>
       this.getUser().then(

@@ -1,6 +1,7 @@
 import flatten from 'lodash/flatten';
 
 import { User } from '@ovh-ux/manager-models';
+import { Environment } from '@ovh-ux/manager-config';
 
 angular.module('services').service('User', [
   '$http',
@@ -10,48 +11,22 @@ angular.module('services').service('User', [
   'OvhHttp',
   function userF($http, $q, constants, billingConstants, OvhHttp) {
     const self = this;
-    let user = null;
-    let userPromise;
-    let userPromiseRunning = false;
 
     this.getUser = function getUser() {
-      if (!userPromiseRunning && user === null) {
-        userPromiseRunning = true;
-
-        userPromise = $q.when('start').then(() =>
-          $q
-            .all({
-              me: OvhHttp.get('/me', {
-                rootPath: 'apiv6',
-              }),
-              certificates: this.getUserCertificates(),
-            })
-            .then((result) => {
-              userPromiseRunning = false;
-
-              if (result) {
-                user = new User(
-                  {
-                    ...result.me,
-                    firstName: result.me.firstname,
-                    lastName: result.me.name,
-                    billingCountry: result.me.country,
-                    customerCode: result.me.customerCode,
-                  },
-                  result.certificates,
-                );
-              }
-            }),
+      if (Environment.getUser()) {
+        return $q.resolve(
+          new User({
+            ...Environment.getUser(),
+            firstName: Environment.getUser().firstname,
+            lastName: Environment.getUser().name,
+            billingCountry: Environment.getUser().country,
+            customerCode: Environment.getUser().customerCode,
+          }),
         );
       }
 
-      return userPromise.then(
-        () => user,
-        (error) => $q.reject(error),
-      );
+      return $q.reject(new User());
     };
-
-    this.getUser();
 
     this.getUrlOf = function getUrlOf(link) {
       return this.getUser().then((data) => {

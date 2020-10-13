@@ -1,7 +1,10 @@
+import { Environment } from '@ovh-ux/manager-config';
+
 angular.module('UserAccount').service('UserAccount.services.emails', [
   'constants',
   'OvhHttp',
-  function UserAccountEmailsService(constants, OvhHttp) {
+  '$q',
+  function UserAccountEmailsService(constants, OvhHttp, $q) {
     const cache = {
       models: 'UNIVERS_MODULE_OTRS_MODELS',
       me: 'UNIVERS_MODULE_OTRS_ME',
@@ -16,7 +19,11 @@ angular.module('UserAccount').service('UserAccount.services.emails', [
     };
 
     this.getMe = function getMe() {
-      return OvhHttp.get('/me', { rootPath: 'apiv6', cache: cache.me });
+      if (Environment.getUser()) {
+        return $q.resolve(Environment.getUser());
+      }
+
+      return $q.reject({});
     };
 
     this.getEmails = function getEmails(opts) {
