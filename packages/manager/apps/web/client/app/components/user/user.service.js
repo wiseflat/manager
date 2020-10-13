@@ -2,48 +2,21 @@ import get from 'lodash/get';
 import has from 'lodash/has';
 import isEmpty from 'lodash/isEmpty';
 
+import { Environment } from '@ovh-ux/manager-config';
+
 angular.module('services').service('User', [
   '$http',
   '$q',
   'constants',
   'OvhHttp',
   function userService($http, $q, constants, OvhHttp) {
-    let user = null;
-    let userPromise;
-    let userPromiseRunning = false;
-
     this.getUser = () => {
-      if (!userPromiseRunning && user === null) {
-        userPromiseRunning = true;
-
-        userPromise = $q.when('start').then(() =>
-          OvhHttp.get('/me', {
-            rootPath: 'apiv6',
-          }).then((result) => {
-            userPromiseRunning = false;
-
-            if (result) {
-              user = {
-                nichandle: result.nichandle,
-                email: result.email,
-                firstName: result.firstname,
-                lastName: result.name,
-                billingCountry: result.country,
-                ovhSubsidiary: result.ovhSubsidiary,
-                spareEmail: result.spareEmail,
-              };
-            }
-          }),
-        );
+      if (Environment.getUser()) {
+        return $q.resolve(Environment.getUser());
       }
 
-      return userPromise.then(
-        () => user,
-        (error) => $q.reject(error),
-      );
+      return $q.reject({});
     };
-
-    this.getUser();
 
     this.getUrlOf = (link) =>
       this.getUser().then((data) => {

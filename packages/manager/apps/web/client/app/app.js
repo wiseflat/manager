@@ -429,7 +429,11 @@ angular
           (url) => !url.test(window.location.href),
         ),
         () => {
-          authentication.login();
+          if (Environment.getUser()) {
+            authentication.setIsLoggedIn();
+          } else {
+            authentication.login();
+          }
         },
       );
     },
