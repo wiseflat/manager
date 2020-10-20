@@ -25,7 +25,7 @@ import tipsController from './tips/telecom-sms-sms-compose-tips.controller';
 import tipsComposeTemplate from './tips/telecom-sms-sms-compose-tips-compose.html';
 import tipsSizeTemplate from './tips/telecom-sms-sms-compose-tips-size.html';
 
-import { SMS_COMPOSE } from './telecom-sms-sms-compose.constant';
+import { COMPOSE_HIT, SMS_COMPOSE } from './telecom-sms-sms-compose.constant';
 
 export default class {
   /* @ngInject */
@@ -558,6 +558,7 @@ export default class {
       }
     }
 
+    this.trackClick(COMPOSE_HIT);
     return this.$q
       .all(promises)
       .then((results) => {
