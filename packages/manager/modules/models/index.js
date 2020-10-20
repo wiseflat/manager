@@ -2,6 +2,7 @@ import Bill from './billing/Bill.class';
 import BillingService from './BillingService/BillingService.class';
 import CatalogPricing from './catalog/CatalogPricing.class';
 import Certificate from './certificate/Certificate.class';
+import Commitment from './service/Commitment.class';
 import DebtAccount from './billing/DebtAccount.class';
 import Engagement from './service/Engagement.class';
 import PartnerLevel from './support/level/PartnerLevel.class';
@@ -17,6 +18,7 @@ export {
   BillingService,
   CatalogPricing,
   Certificate,
+  Commitment,
   DebtAccount,
   Engagement,
   PartnerLevel,
@@ -33,6 +35,7 @@ export default {
   BillingService,
   CatalogPricing,
   Certificate,
+  Commitment,
   DebtAccount,
   Engagement,
   PartnerLevel,
