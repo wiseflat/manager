@@ -15134,8 +15134,8 @@ ovh-api-services@^11.0.0:
     lodash "^4.17.20"
 
 "ovh-api-services@git+https://github.com/ovh-ux/ovh-api-services.git#feat/overthebox-configuration":
-  version "10.1.0"
-  resolved "git+https://github.com/ovh-ux/ovh-api-services.git#80e3ead7bab616671575f0ab60ad05d57aa861cf"
+  version "10.2.0"
+  resolved "git+https://github.com/ovh-ux/ovh-api-services.git#c3e01659c24c2ec98702d68ac2b2f22aeb8d7b85"
   dependencies:
     lodash "^4.17.20"
 

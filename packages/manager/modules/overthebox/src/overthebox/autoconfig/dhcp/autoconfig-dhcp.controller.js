@@ -8,6 +8,8 @@ export default class OverTheBoxAutoconfigDhcp {
   }
 
   $onInit() {
+    this.displayAddConfigButton = true;
+    this.displayAddStaticLeaseButton = true;
     this.showAddConfig = false;
     this.showAddStaticLease = false;
 
@@ -30,6 +32,7 @@ export default class OverTheBoxAutoconfigDhcp {
   }
 
   loadConfig() {
+    this.configList = [];
     return this.OvhApiOverTheBoxConfiguration.Dhcp()
       .Config()
       .v6()
@@ -37,33 +40,19 @@ export default class OverTheBoxAutoconfigDhcp {
         serviceName: this.serviceName,
       })
       .$promise.then((data) => {
-        this.configList = data.result;
+        if (data.result) {
+          this.configList = data.result;
+        }
         return data;
       })
       .catch((error) => {
-        console.log('error', error);
-        this.configList = [
+        // Display error message
+        this.errorMessage = this.$translate.instant(
+          'overTheBox_autoconfig_loading_failed',
           {
-            id: 'f0151a8d-04ef-43d3-b367-628e8b5e7182',
-            data: {
-              interface: 'test',
-              offset: 2,
-              poolSize: 59,
-              leaseDuration: 123,
-            },
-            priority: 1,
+            errorMessage: error.data.message,
           },
-          {
-            id: '7cfbd450-c40b-48b9-bcaa-a7d9deac9bf4',
-            data: {
-              interface: 'lan',
-              offset: 22,
-              poolSize: 22,
-              leaseDuration: 3600,
-            },
-            priority: 5,
-          },
-        ];
+        );
       });
   }
 
@@ -74,6 +63,7 @@ export default class OverTheBoxAutoconfigDhcp {
     this.config.poolSize = '';
     this.config.priority = '';
     this.showAddConfig = true;
+    this.displayAddConfigButton = false;
   }
 
   createConfig() {
@@ -106,9 +96,7 @@ export default class OverTheBoxAutoconfigDhcp {
         {
           serviceName: this.serviceName,
         },
-        {
-          params,
-        },
+        params,
       )
       .$promise.then((data) => {
         // Display success message
@@ -119,12 +107,13 @@ export default class OverTheBoxAutoconfigDhcp {
         // Reload config table
         this.loadConfig();
         this.showAddConfig = false;
+        this.displayAddConfigButton = true;
         return data;
       })
       .catch((error) => {
         // Display error message
         this.errorMessage = this.$translate.instant(
-          'overTheBox_autoconfig_dhcp_create_failed',
+          'overTheBox_autoconfig_create_failed',
           {
             errorMessage: error.data.message,
           },
@@ -134,6 +123,7 @@ export default class OverTheBoxAutoconfigDhcp {
 
   cancelCreateConfig() {
     this.showAddConfig = false;
+    this.displayAddConfigButton = true;
   }
 
   removeConfig(row) {
@@ -159,7 +149,7 @@ export default class OverTheBoxAutoconfigDhcp {
       .catch((error) => {
         // Display error message
         this.errorMessage = this.$translate.instant(
-          'overTheBox_autoconfig_dhcp_remove_failed',
+          'overTheBox_autoconfig_remove_failed',
           {
             errorMessage: error.data.message,
           },
@@ -168,6 +158,7 @@ export default class OverTheBoxAutoconfigDhcp {
   }
 
   loadStaticLeases() {
+    this.staticLeases = [];
     return this.OvhApiOverTheBoxConfiguration.Dhcp()
       .StaticLease()
       .v6()
@@ -175,14 +166,19 @@ export default class OverTheBoxAutoconfigDhcp {
         serviceName: this.serviceName,
       })
       .$promise.then((data) => {
-        console.log('result', data);
-        this.staticLeases = data.result;
+        if (data.result) {
+          this.staticLeases = data.result;
+        }
         return data;
       })
       .catch((error) => {
         // Display error message
-        console.log('error', error);
-        this.staticLeases = [];
+        this.errorMessage = this.$translate.instant(
+          'overTheBox_autoconfig_loading_failed',
+          {
+            errorMessage: error.data.message,
+          },
+        );
       });
   }
 
@@ -192,6 +188,7 @@ export default class OverTheBoxAutoconfigDhcp {
     this.staticLease.mac = '';
     this.staticLease.priority = '';
     this.showAddStaticLease = true;
+    this.displayAddStaticLeaseButton = false;
   }
 
   createStaticLease() {
@@ -220,9 +217,7 @@ export default class OverTheBoxAutoconfigDhcp {
         {
           serviceName: this.serviceName,
         },
-        {
-          params,
-        },
+        params,
       )
       .$promise.then((data) => {
         // Display success message
@@ -233,11 +228,12 @@ export default class OverTheBoxAutoconfigDhcp {
         // Reload static lease table
         this.loadStaticLeases();
         this.showAddStaticLease = false;
+        this.displayAddStaticLeaseButton = true;
         return data;
       })
       .catch((error) => {
         this.errorMessage = this.$translate.instant(
-          'overTheBox_autoconfig_dhcp_create_failed',
+          'overTheBox_autoconfig_create_failed',
           {
             errorMessage: error.data.message,
           },
@@ -247,6 +243,7 @@ export default class OverTheBoxAutoconfigDhcp {
 
   cancelCreateStaticLease() {
     this.showAddStaticLease = false;
+    this.displayAddStaticLeaseButton = true;
   }
 
   removeStaticLease(row) {
@@ -272,7 +269,7 @@ export default class OverTheBoxAutoconfigDhcp {
       .catch((error) => {
         // Display error message
         this.errorMessage = this.$translate.instant(
-          'overTheBox_autoconfig_dhcp_remove_failed',
+          'overTheBox_autoconfig_remove_failed',
           {
             errorMessage: error.data.message,
           },
