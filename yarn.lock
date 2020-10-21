@@ -2702,14 +2702,14 @@
   dependencies:
     lodash "^4.17.20"
 
-"@ovh-ux/rollup-plugin-less-inject@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@ovh-ux/rollup-plugin-less-inject/-/rollup-plugin-less-inject-1.0.5.tgz#02285367219f72056faf06deeacaeb357f16633c"
-  integrity sha512-YJLkfmi0pljQ5OG1z4oDIV0f0AVFFRJqcPbK29xc33yER5OSZ4KkanJpIFKoXslfBRxOqXR251SlXGVkLMjJ8w==
+"@ovh-ux/rollup-plugin-less-inject@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@ovh-ux/rollup-plugin-less-inject/-/rollup-plugin-less-inject-1.0.6.tgz#8db90747f02d2bb95e3a5563d1c5a77a25edd0ad"
+  integrity sha512-GNpbqdzc3/sk+02SYntSEtKn0+jbbxQ6UXauIgX3kjc7nnatnWP29GvPC1H4eMBvpOVCioyMGpHxnxkzi0qVyg==
   dependencies:
     estree-walker "^2.0.1"
     less "^3.9.0"
-    lodash "^4.17.15"
+    lodash "^4.17.20"
     rollup-pluginutils "^2.8.2"
 
 "@ovh-ux/rollup-plugin-less-tilde-importer@^1.0.3":
@@ -10000,7 +10000,7 @@ flat@^4.1.0:
   dependencies:
     is-buffer "~2.0.3"
 
-flatpickr@4.6.3, flatpickr@^4.6.3:
+flatpickr@^4.6.3:
   version "4.6.3"
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.3.tgz#15a8b76b6e34e3a072861250503a5995b9d3bc60"
   integrity sha512-007VucCkqNOMMb9ggRLNuJowwaJcyOh4sKAFcdGfahfGc7JQbf94zSzjdBq/wVyHWUEs5o3+idhFZ0wbZMRmVQ==
