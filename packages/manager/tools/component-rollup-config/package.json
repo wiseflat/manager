@@ -45,7 +45,7 @@
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/pluginutils": "^4.0.0",
     "babel-plugin-angularjs-annotate": "^0.10.0",
-    "camelcase": "^5.0.0",
+    "camelcase": "^6.1.0",
     "core-js": "^3.6.5",
     "estree-walker": "^0.6.0",
     "less": "~3.9.0",
