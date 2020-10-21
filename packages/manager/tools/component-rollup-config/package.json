@@ -43,7 +43,7 @@
     "@rollup/plugin-image": "^2.0.5",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/pluginutils": "^3.0.8",
+    "@rollup/pluginutils": "^4.0.0",
     "babel-plugin-angularjs-annotate": "^0.10.0",
     "camelcase": "^5.0.0",
     "core-js": "^3.6.5",
