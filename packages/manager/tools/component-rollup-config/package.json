@@ -47,7 +47,7 @@
     "babel-plugin-angularjs-annotate": "^0.10.0",
     "camelcase": "^6.1.0",
     "core-js": "^3.6.5",
-    "estree-walker": "^0.6.0",
+    "estree-walker": "^2.0.1",
     "less": "~3.9.0",
     "less-plugin-remcalc": "^0.1.0",
     "lodash": "^4.17.15",
