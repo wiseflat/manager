@@ -35,8 +35,8 @@
                 </div>
             </form>
         </div>
-        <oui-button variant="primary" on-click="$ctrl.addNameserver()" class="ml-2 mb-2 justify-center" data-ng-if="$ctrl.displayAddServerButton">
-            <span data-translate="overTheBox_autoconfig_add"></span>
+        <oui-button variant="primary" on-click="$ctrl.addNameserver()" class="mb-2 d-flex justify-content-center" data-ng-if="$ctrl.displayAddServerButton">
+            <span data-translate="overTheBox_autoconfig_dns_server_add"></span>
         </oui-button>
         <oui-datagrid page-size="5" rows="$ctrl.nameServers" data-ng-if="$ctrl.nameServers.length > 0">
             <oui-datagrid-column title="'overTheBox_autoconfig_dns_server' | translate" property="data.server">
@@ -78,8 +78,8 @@
                 </div>
             </form>
         </div>
-        <oui-button variant="primary" data-on-click="$ctrl.addLocalDomain()" class="ml-2 mb-2 justify-center" data-ng-if="$ctrl.displayAddLocalDomainButton">
-            <span data-translate="overTheBox_autoconfig_add"></span>
+        <oui-button variant="primary" data-on-click="$ctrl.addLocalDomain()" class="mb-2 d-flex justify-content-center" data-ng-if="$ctrl.displayAddLocalDomainButton">
+            <span data-translate="overTheBox_autoconfig_dns_local_domain_add"></span>
         </oui-button>
         <oui-datagrid page-size="5" rows="$ctrl.localDomains" data-ng-if="$ctrl.localDomains.length > 0">
             <oui-datagrid-column title="'overTheBox_autoconfig_hostname' | translate" property="data.hostname">
