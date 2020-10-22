@@ -3,7 +3,9 @@ import template from './index.html';
 
 export default {
   name: 'dedicatedServerInstallTemplate',
-  bindings: {},
+  bindings: {
+    server: '<',
+  },
   controller,
   template,
 };

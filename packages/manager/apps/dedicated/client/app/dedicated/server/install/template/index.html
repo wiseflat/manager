@@ -1,3 +1,7 @@
 <div class="dedicated-server-install-template">
-    TODO: INSTALL FROM TEMPLATE
+    <oui-header
+        heading="{{ :: 'dedicated_server_install_template' | translate }}"
+        description="{{ :: 'dedicated_server_install_template_intro' | translate:{ serverName: $ctrl.server.displayName } }}"
+    >
+    </oui-header>
 </div>

@@ -1,1 +1,4 @@
-{}
+{
+  "dedicated_server_install_template": "Installer un système (OS) à partir d'un de vos gabarits",
+  "dedicated_server_install_template_intro": "Renseignez les paramètres de l'OS que vous souhaitez utiliser sur le serveur {{ serverName }}."
+}
