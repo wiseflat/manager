@@ -33,6 +33,7 @@ export default class OverTheBoxAutoconfigDns {
       .showAllLocalDomain({ serviceName: this.serviceName })
       .$promise.then((data) => {
         this.localDomains = data;
+        return data;
       })
       .catch((error) => {
         // Display error message
@@ -52,6 +53,7 @@ export default class OverTheBoxAutoconfigDns {
       .showAllNameserver({ serviceName: this.serviceName })
       .$promise.then((data) => {
         this.nameServers = data;
+        return data;
       })
       .catch((error) => {
         // Display error message

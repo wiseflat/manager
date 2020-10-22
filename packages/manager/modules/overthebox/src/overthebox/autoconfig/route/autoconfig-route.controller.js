@@ -33,6 +33,7 @@ export default class OverTheBoxAutoconfigRoute {
       .showAllRoute4({ serviceName: this.serviceName })
       .$promise.then((data) => {
         this.routes4 = data;
+        return data;
       })
       .catch((error) => {
         // Display error message
@@ -150,5 +151,4 @@ export default class OverTheBoxAutoconfigRoute {
         );
       });
   }
-
 }
