@@ -3,6 +3,7 @@ import routing from './overTheBox-autoconfig.routing';
 
 import dhcp from './dhcp';
 import dns from './dns';
+import firewall from './firewall';
 import multipath from './multipath';
 import route from './route';
 
@@ -14,6 +15,7 @@ angular
     'ovh-api-services',
     dhcp,
     dns,
+    firewall,
     multipath,
     route,
   ])
