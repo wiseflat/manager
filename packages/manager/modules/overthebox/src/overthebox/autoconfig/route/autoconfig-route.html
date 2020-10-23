@@ -84,35 +84,42 @@
                 </oui-button>
             </oui-datagrid-column>
             <oui-datagrid-row-detail>
-                <div class="oui-input-group oui-input-group_inline d-flex">
-                    <oui-field label="{{:: 'overTheBox_autoconfig_route_gateway' | translate}}">
-                        <span data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.gateway"></span>
-                        <span data-ng-bind="$row.data.gateway" data-ng-if="$row.data.gateway"></span>
-                    </oui-field>
-                    <oui-field class="ml-2" label="{{:: 'overTheBox_autoconfig_route_interface' | translate}}">
-                        <span data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.interface"></span>
-                        <span data-ng-bind="$row.data.interface" data-ng-if="$row.data.gateway"></span>
-                    </oui-field>
-                    <oui-field class="ml-2" label="{{:: 'overTheBox_autoconfig_route_metric' | translate}}">
-                        <span data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.metric"></span>
-                        <span data-ng-bind="$row.data.metric" data-ng-if="$row.data.metric"></span>
-                    </oui-field>
-                    <oui-field class="ml-2" label="{{:: 'overTheBox_autoconfig_route_mtu' | translate}}">
-                        <span data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.mtu"></span>
-                        <span data-ng-bind="$row.data.mtu" data-ng-if="$row.data.mtu"></span>
-                    </oui-field>
-                    <oui-field class="ml-2" label="{{:: 'overTheBox_autoconfig_route_netmask' | translate}}">
-                        <span data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.netmask"></span>
-                        <span data-ng-bind="$row.data.netmask" data-ng-if="$row.data.netmask"></span>
-                    </oui-field>
-                    <oui-field class="ml-2" label="{{:: 'overTheBox_autoconfig_route_table' | translate}}">
-                        <span data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.table"></span>
-                        <span data-ng-bind="$row.data.table" data-ng-if="$row.data.table"></span>
-                    </oui-field>
-                    <oui-field class="ml-2" label="{{:: 'overTheBox_autoconfig_route_type' | translate}}">
-                        <span data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.type"></span>
-                        <span data-ng-bind="$row.data.type" data-ng-if="$row.data.type"></span>
-                    </oui-field>
+                <div class="d-flex justify-content-around">
+                    <dl class="oui-description">
+                        <dt data-translate="overTheBox_autoconfig_gateway"></dt>
+                        <dd data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.gateway"></dd>
+                        <dd data-ng-bind="$row.data.gateway" data-ng-if="$row.data.gateway"></dd>
+                    </dl>
+                    <dl class="oui-description">
+                        <dt data-translate="overTheBox_autoconfig_route_interface"></dt>
+                        <dd data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.interface"></dd>
+                        <dd data-ng-bind="$row.data.interface" data-ng-if="$row.data.interface"></dd>
+                    </dl>
+                    <dl class="oui-description">
+                        <dt data-translate="overTheBox_autoconfig_route_metric"></dt>
+                        <dd data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.metric"></dd>
+                        <dd data-ng-bind="$row.data.metric" data-ng-if="$row.data.metric"></dd>
+                    </dl>
+                    <dl class="oui-description">
+                        <dt data-translate="overTheBox_autoconfig_mtu"></dt>
+                        <dd data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.mtu"></dd>
+                        <dd data-ng-bind="$row.data.mtu" data-ng-if="$row.data.mtu"></dd>
+                    </dl>
+                    <dl class="oui-description">
+                        <dt data-translate="overTheBox_autoconfig_netmask"></dt>
+                        <dd data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.netmask"></dd>
+                        <dd data-ng-bind="$row.data.netmask" data-ng-if="$row.data.netmask"></dd>
+                    </dl>
+                    <dl class="oui-description">
+                        <dt data-translate="overTheBox_autoconfig_route_table"></dt>
+                        <dd data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.table"></dd>
+                        <dd data-ng-bind="$row.data.table" data-ng-if="$row.data.table"></dd>
+                    </dl>
+                    <dl class="oui-description">
+                        <dt data-translate="overTheBox_autoconfig_route_type"></dt>
+                        <dd data-translate="overTheBox_autoconfig_value_not_defined" data-ng-if="!$row.data.type"></dd>
+                        <dd data-ng-bind="$row.data.type" data-ng-if="$row.data.type"></dd>
+                    </dl>
                 </div>
             </oui-datagrid-row-detail>
         </oui-datagrid>

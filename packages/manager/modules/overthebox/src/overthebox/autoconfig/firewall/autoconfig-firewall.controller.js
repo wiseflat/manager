@@ -49,7 +49,6 @@ export default class OverTheBoxAutoconfigFirewall {
       .v6()
       .showAllRule({ serviceName: this.serviceName })
       .$promise.then((data) => {
-        console.log('data', data);
         this.rules = data;
         return data;
       })
