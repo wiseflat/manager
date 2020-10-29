@@ -45,5 +45,14 @@ angular.module('App').config(
       abstract: true,
       template: '<ui-view />',
     });
+
+    $stateProvider.state('app.hpc', {
+      url: '/hpc',
+      template: '<ui-view />',
+      redirectTo: () => {
+        sessionStorage.setItem('HPC_UNIVERSE_ENABLED', true);
+        return 'app.configuration';
+      },
+    });
   },
 );

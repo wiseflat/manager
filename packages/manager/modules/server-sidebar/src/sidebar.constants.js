@@ -35,31 +35,6 @@ export const DEDICATED_SERVER_CONFIG = {
   regions: ['EU', 'CA', 'US'],
 };
 
-export const DEDICATED_CLOUD_CONFIG = {
-  id: 'dedicatedClouds',
-  types: [
-    {
-      path: '/dedicatedCloud',
-      types: [
-        {
-          path: '/dedicatedCloud/:productId/datacenter',
-          state: 'app.dedicatedClouds.datacenter',
-          stateParams: ['productId', 'datacenterId'],
-          app: [DEDICATED],
-        },
-      ],
-      state: 'app.dedicatedClouds',
-      stateParams: ['productId'],
-      icon: 'ovh-font ovh-font-dedicatedCloud',
-      app: [DEDICATED],
-    },
-  ],
-  loadOnState: 'app.dedicatedClouds',
-  icon: 'ovh-font ovh-font-dedicatedCloud',
-  app: [DEDICATED],
-  regions: ['EU', 'CA', 'US'],
-};
-
 export const NETWORKS_CONFIG = {
   id: 'networks',
   types: [
@@ -341,7 +316,6 @@ export const CLOUD_DESKTOP_CONFIG = {
 
 export const SIDEBAR_CONFIG = [
   DEDICATED_SERVER_CONFIG,
-  DEDICATED_CLOUD_CONFIG,
   NETWORKS_CONFIG,
   ENTERPRISE_CLOUD_DATABASE,
 

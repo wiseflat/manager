@@ -38,7 +38,7 @@
                     toggle: {
                         event: 'sidebar:loaded'
                     },
-                    universe: 'server'
+                    universe: 'hpc'
                 }"
                 data-universe-click="$ctrl.openSidebar()"
             >
@@ -61,7 +61,7 @@
             >
                 <div class="row">
                     <ovh-manager-server-sidebar
-                        universe="'DEDICATED'"
+                        universe="$ctrl.universe"
                         data-is-open="$ctrl.sidebarIsOpen"
                         data-on-click="$ctrl.closeSidebar()"
                         data-ng-if="!$ctrl.displayAccountSidebar"

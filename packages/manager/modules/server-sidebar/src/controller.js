@@ -17,6 +17,7 @@ import sumBy from 'lodash/sumBy';
 import zipObject from 'lodash/zipObject';
 
 import { SIDEBAR_CONFIG } from './sidebar.constants';
+import { HPC_SIDEBAR_CONFIG } from './hpc.constants';
 import { ORDER_URLS, SIDEBAR_ORDER_CONFIG } from './order.constants';
 import { WEB_SIDEBAR_CONFIG, WEB_ORDER_SIDEBAR_CONFIG } from './web.constants';
 
@@ -88,6 +89,10 @@ export default class OvhManagerServerSidebarController {
     if (this.universe === 'WEB') {
       this.SIDEBAR_CONFIG = WEB_SIDEBAR_CONFIG;
       this.SIDEBAR_ORDER_CONFIG = WEB_ORDER_SIDEBAR_CONFIG;
+    }
+
+    if (this.universe === 'HPC') {
+      this.SIDEBAR_CONFIG = HPC_SIDEBAR_CONFIG;
     }
 
     // set initialization promise

@@ -12,6 +12,7 @@ angular.module('App').controller(
       this.$transitions = $transitions;
       this.$translate = $translate;
       this.User = User;
+      this.universe = 'DEDICATED';
     }
 
     $onInit() {
@@ -22,6 +23,9 @@ angular.module('App').controller(
       });
 
       set(this.$document, 'title', this.$translate.instant('global_app_title'));
+      if (sessionStorage.getItem('HPC_UNIVERSE_ENABLED') === 'true') {
+        this.universe = 'HPC';
+      }
 
       this.hooksToUnsubscribe = [
         this.$transitions.onStart({}, () => {
