@@ -1,5 +1,5 @@
 {
-  "cloud_connect_service_keys_status_doing": "En progreso",
+  "cloud_connect_service_keys_status_doing": "Pendiente",
   "cloud_connect_service_keys_status_active": "Activo",
   "cloud_connect_service_keys_status_cancelled": "Cancelado",
   "cloud_connect_service_keys_status_terminated": "Finalizado",

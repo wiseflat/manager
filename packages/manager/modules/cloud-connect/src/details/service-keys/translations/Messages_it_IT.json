@@ -2,7 +2,7 @@
   "cloud_connect_service_keys_status_doing": "Da fare",
   "cloud_connect_service_keys_status_active": "Attivo",
   "cloud_connect_service_keys_status_cancelled": "Annullato",
-  "cloud_connect_service_keys_status_terminated": "Terminato",
+  "cloud_connect_service_keys_status_terminated": "Completato",
   "cloud_connect_service_keys_status_toCheck": "Verifica",
   "cloud_connect_service_keys_status": "Stato",
   "cloud_connect_service_keys_id": "ID",
