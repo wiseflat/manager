@@ -251,7 +251,12 @@ angular
           $location.search('');
         }
 
-        const HPC_STATES = ['app.dedicatedClouds', 'app.hpc'];
+        const HPC_STATES = [
+          'app.dedicatedClouds',
+          'app.hpc',
+          'veeam-cloud-connect',
+          'veeam-enterprise',
+        ];
         const IGNORE_STATES = ['app.configuration'];
 
         const stateIncludes = Object.keys(transition.$to().includes);

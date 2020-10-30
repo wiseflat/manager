@@ -222,6 +222,24 @@ angular
       });
     },
   )
+  .run(
+    /* @ngInject */ ($rootScope, $transitions) => {
+      $transitions.onBefore({}, (transition) => {
+        const HPC_STATES = ['deskaas', 'paas.cda'];
+        const IGNORE_STATES = ['app.configuration'];
+
+        const stateIncludes = Object.keys(transition.$to().includes);
+
+        if (HPC_STATES.some((state) => stateIncludes.includes(state))) {
+          $rootScope.$broadcast('switchUniverse', 'hpc');
+        } else if (
+          !IGNORE_STATES.some((state) => stateIncludes.includes(state))
+        ) {
+          $rootScope.$broadcast('switchUniverse', 'server');
+        }
+      });
+    },
+  )
   .run(/* @ngTranslationsInject:json ./common/translations */);
 
 export default moduleName;

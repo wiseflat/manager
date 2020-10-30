@@ -1,5 +1,6 @@
 class CloudMainController {
   constructor(
+    $scope,
     $document,
     $interval,
     $rootScope,
@@ -8,6 +9,7 @@ class CloudMainController {
     CucProductsService,
     SessionService,
   ) {
+    this.$scope = $scope;
     this.$document = $document;
     this.$interval = $interval;
     this.$rootScope = $rootScope;
@@ -18,9 +20,21 @@ class CloudMainController {
   }
 
   $onInit() {
+    this.$scope.$on('switchUniverse', (event, universe) => {
+      this.sidebarNamespace = universe === 'server' ? undefined : 'hpc';
+      this.navbarOptions.universe = universe;
+    });
+
     this.expiringProject = null;
 
     [this.currentLanguage] = this.$translate.use().split('_');
+
+    this.navbarOptions = {
+      toggle: {
+        event: 'sidebar:loaded',
+      },
+      universe: 'server',
+    };
 
     this.SessionService.getUser().then((user) => {
       this.user = user;

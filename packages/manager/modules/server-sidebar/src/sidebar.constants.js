@@ -218,6 +218,7 @@ export const PAAS_CONFIG = {
   icon: 'ovh-font ovh-font-cloud-package',
   app: [CLOUD],
   regions: ['EU', 'CA'],
+  // namespace: HPC_NAMESPACE,
 };
 
 export const METRICS_CONFIG = {
@@ -322,23 +323,23 @@ export const DEDICATED_NETWORK_CONFIG = {
   ],
 };
 
-export const CLOUD_DESKTOP_CONFIG = {
-  id: 'cloud_desktop',
-  loadOnState: 'deskaas',
-  types: [
-    {
-      path: '/deskaas',
-      state: 'deskaas.details',
-      stateParams: ['serviceName'],
-      icon: 'ovh-font ovh-font-cloud-desktop',
-      app: [CLOUD],
-      searchKeys: ['Cloud Desktop', 'deskaas', 'vdi'],
-    },
-  ],
-  icon: 'ovh-font ovh-font-cloud-desktop',
-  app: [CLOUD],
-  regions: ['EU'],
-};
+// export const CLOUD_DESKTOP_CONFIG = {
+//   id: 'cloud_desktop',
+//   loadOnState: 'deskaas',
+//   types: [
+//     {
+//       path: '/deskaas',
+//       state: 'deskaas.details',
+//       stateParams: ['serviceName'],
+//       icon: 'ovh-font ovh-font-cloud-desktop',
+//       app: [CLOUD],
+//       searchKeys: ['Cloud Desktop', 'deskaas', 'vdi'],
+//     },
+//   ],
+//   icon: 'ovh-font ovh-font-cloud-desktop',
+//   app: [CLOUD],
+//   regions: ['EU'],
+// };
 
 export const SIDEBAR_CONFIG = [
   DEDICATED_SERVER_CONFIG,
@@ -353,7 +354,6 @@ export const SIDEBAR_CONFIG = [
   LOGS_CONFIG,
   IPLB_CONFIG,
   DEDICATED_NETWORK_CONFIG,
-  CLOUD_DESKTOP_CONFIG,
 
   // DEDICATED END
   MICROSOFT_CONFIG,
