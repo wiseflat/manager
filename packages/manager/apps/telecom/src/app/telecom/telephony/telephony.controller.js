@@ -2,15 +2,23 @@ import { ListLayoutHelper } from '@ovh-ux/manager-ng-layout-helpers';
 
 export default class TelecomTelephonyController extends ListLayoutHelper.ListLayoutCtrl {
   /* @ngInject */
-  constructor($q, $translate, ouiDatagridService) {
+  constructor($http, $q, $translate, $window, ouiDatagridService) {
     super($q, ouiDatagridService);
+    this.$http = $http;
     this.$translate = $translate;
+    this.$window = $window;
   }
 
   $onInit() {
     this.datagridId = 'dg-telephony-billingAccounts';
     this.defaultFilterColumn = 'billingAccount';
+    this.isActive = false;
 
+    this.stencilModel = {
+      firstName: '',
+    };
+
+    this.testItems = [1, 2, 3];
     super.$onInit();
 
     this.filtersOptions = {
@@ -42,5 +50,24 @@ export default class TelecomTelephonyController extends ListLayoutHelper.ListLay
       },
       { name: 'status', sortable: this.getSorting('status') },
     ];
+  }
+
+  callExposedMethod() {
+    return this.stencilModel.exposedMethod();
+  }
+
+  fooFunction() {
+    return this.$http.get('/me').then((user) => {
+      console.log(user);
+    });
+  }
+
+  dispatchEvent() {
+    this.stencilModel.isBusy = false;
+    this.$window.dispatchEvent(
+      new CustomEvent('onWindowEvent', {
+        detail: false,
+      }),
+    );
   }
 }

@@ -43,6 +43,7 @@ import ngOvhFeatureFlipping from '@ovh-ux/ng-ovh-feature-flipping';
 import ovhNotificationsSidebar from '@ovh-ux/manager-notifications-sidebar';
 
 import uiRouter, { RejectType } from '@uirouter/angularjs';
+import { applyPolyfills, defineCustomElements } from 'demo/loader';
 import TelecomAppCtrl from './app.controller';
 import pack from './telecom/pack';
 import telephony from './telecom/telephony';
@@ -294,5 +295,9 @@ angular
       });
     },
   );
+
+applyPolyfills().then(() => {
+  defineCustomElements();
+});
 
 export default moduleName;

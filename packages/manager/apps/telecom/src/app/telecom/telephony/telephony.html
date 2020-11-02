@@ -1,5 +1,30 @@
 <oui-header data-heading="{{ :: 'telephony_title' | translate }}"></oui-header>
 
+<component-wrapper
+    items="$ctrl.testItems"
+    name="Stencil component wrapped by AngularJS"
+    selection="2"
+    selection-count="5"
+    click-callback="$ctrl.fooFunction()"
+    model="$ctrl.stencilModel.itemCount"
+    exposed-method="$ctrl.stencilModel.exposedMethod"
+    is-active="$ctrl.isActive"
+></component-wrapper>
+
+<checkbox-wrapper model="$ctrl.stencilModel.isBusy"></checkbox-wrapper>
+
+<br />
+{{ $ctrl.stencilModel }}
+<br />
+
+<oui-checkbox model="$ctrl.isActive">
+    Is the component active
+</oui-checkbox>
+
+<oui-button on-click="$ctrl.callExposedMethod()"
+    >Component exposed method</oui-button
+>
+
 <div class="container-fluid my-5">
     <oui-datagrid
         id="dg-telephony-billingAccounts"

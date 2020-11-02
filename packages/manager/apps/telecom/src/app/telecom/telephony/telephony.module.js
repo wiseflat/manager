@@ -6,6 +6,8 @@ import 'angular-translate';
 
 import component from './telephony.component';
 import routing from './telephony.routing';
+import wrapper from './componentWrapper/wrapper.component';
+import checkboxWrapper from './checkboxWrapper/wrapper.component';
 
 const moduleName = 'ovhManagerTelecomTelephony';
 
@@ -19,6 +21,8 @@ angular
   ])
   .config(routing)
   .component('telecomTelephony', component)
+  .component('componentWrapper', wrapper)
+  .component('checkboxWrapper', checkboxWrapper)
   .run(/* @ngTranslationsInject:json ./translations */);
 
 export default moduleName;
