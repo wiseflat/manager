@@ -52,11 +52,12 @@ import ovhManagerCloudConnect from '@ovh-ux/manager-cloud-connect';
 import { detach as detachPreloader } from '@ovh-ux/manager-preloader';
 import ovhNotificationsSidebar from '@ovh-ux/manager-notifications-sidebar';
 import ovhManagerAccountMigration from '@ovh-ux/manager-account-migration';
+import { billingManagement } from '@ovh-ux/manager-billing';
+import dedicatedUniverseComponents from '@ovh-ux/ng-ovh-dedicated-universe-components';
 import account from './account';
 import config from './config/config';
 import contactsService from './account/contacts/service/contacts-service.module';
 import dedicatedCloud from './dedicatedCloud';
-import dedicatedUniverseComponents from './dedicatedUniverseComponents';
 import errorPage from './error';
 
 import dedicatedServer from './dedicated/server';
@@ -76,7 +77,7 @@ angular
       account,
       ovhManagerAccountSidebar,
       ovhManagerCore,
-      'Billing',
+      billingManagement,
       chartjs,
       'controllers',
       contactsService,
