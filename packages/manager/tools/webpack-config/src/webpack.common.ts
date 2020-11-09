@@ -21,7 +21,7 @@ const cacheLoader = {
 
 // The common webpack configuration
 
-export = opts => {
+export = (opts) => {
   const lessLoaderOptions = {
     sourceMap: true,
     plugins: [
@@ -76,17 +76,31 @@ export = opts => {
         // optional value to set the maximum number of retries to load the chunk. Default is 1
         maxRetries: 5,
       }),
+
+      new webpack.ContextReplacementPlugin(
+        /.*translations.*/,
+        new RegExp([
+          'cs_CZ',
+          'de_DE',
+          'en_GB',
+          'es_ES',
+          'es_US',
+          'fi_FI',
+          'fr_CA',
+          'fr_FR',
+          'it_IT',
+          'lt_LT',
+          'pl_PL',
+          'pt_PT',
+        ].join('|'))
+      ),
     ],
 
     resolve: {
-      modules: [
-        './node_modules',
-        path.resolve('./node_modules'),
-      ],
+      modules: ['./node_modules', path.resolve('./node_modules')],
     },
 
     resolveLoader: {
-
       // webpack module resolution paths
       modules: [
         './node_modules', // #1 check in module's relative node_module directory
@@ -96,7 +110,6 @@ export = opts => {
 
     module: {
       rules: [
-
         // load HTML files as string (raw-loader)
         {
           test: /\.html$/,
@@ -219,7 +232,10 @@ export = opts => {
           use: [
             cacheLoader,
             {
-              loader: path.resolve(__dirname, './loaders/translation-ui-router.js'),
+              loader: path.resolve(
+                __dirname,
+                './loaders/translation-ui-router.js',
+              ),
               options: {
                 subdirectory: 'translations',
                 filtering: false,
@@ -236,7 +252,10 @@ export = opts => {
           use: [
             cacheLoader,
             {
-              loader: path.resolve(__dirname, './loaders/translation-inject.js'),
+              loader: path.resolve(
+                __dirname,
+                './loaders/translation-inject.js',
+              ),
               options: {
                 filtering: false,
               },
@@ -251,7 +270,6 @@ export = opts => {
       runtimeChunk: 'single',
       // bundle spliting configuration
       splitChunks: {
-
         // vendors bundle containing node_modules source code
         cacheGroups: {
           bower: {
@@ -276,7 +294,6 @@ export = opts => {
           },
         },
       },
-
     }, // \optimization
   };
 };

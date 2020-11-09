@@ -9,7 +9,7 @@
     "directory": "packages/manager/apps/order-tracking"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --env.production",
     "dev": "webpack-dev-server",
     "dev:watch": "yarn run dev",
     "start": "lerna exec --stream --scope='@ovh-ux/order-tracking-app' --include-dependencies -- npm run build --if-present",

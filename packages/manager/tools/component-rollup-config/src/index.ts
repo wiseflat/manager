@@ -12,6 +12,7 @@ import path from 'path';
 import peerdeps from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
 import sass from 'rollup-plugin-sass';
+import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 
 import translationInject from './plugins/translation-inject';
 import translationUiRouter from './plugins/translation-ui-router';
@@ -65,6 +66,7 @@ const generateConfig = (opts, pluginsOpts) => mergeConfig({
       languages: getLanguages(pluginsOpts),
     }),
     translationXML(),
+    dynamicImportVars(),
     babel({
       babelHelpers: 'bundled',
       babelrc: false,
