@@ -13,8 +13,6 @@ export default {
   FAILURE: 'FAILURE',
   SUCCESS: 'SUCCESS',
   suffixPattern: '^[a-z0-9_-]+$',
-  ORDER_URL:
-    "/order/express/#/new/express/resume?products=~(~(planCode~'logs-account~productId~'logs~region~'gra))",
   LOGS_DOCS_NAME: 'logs-data-platform',
   LOGS_PRODUCT_URL: '/data-platforms/logs/',
   ELASTICSEARCH_API_URL: 'ELASTICSEARCH_API',
