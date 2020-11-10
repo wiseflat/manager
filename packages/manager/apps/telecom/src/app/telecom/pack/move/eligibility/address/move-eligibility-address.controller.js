@@ -137,35 +137,13 @@ export default class {
    * Copper eligibility by address
    */
   copperEligibilityByAddress() {
-    return this.OvhApiConnectivityEligibilitySearch.v6()
-      .searchLines(this.$scope, {
+    return this.OvhApiConnectivityEligibility.v6()
+      .testAddress(this.$scope, {
         streetCode: this.address.street.streetCode,
         streetNumber: this.address.streetNumber,
-        ownerName: this.address.owner,
-      })
-      .then((data) => {
-        if (data.result.length > 0) {
-          const lines = {
-            isAvailableLines: true,
-            result: data.result,
-          };
-          return lines;
-        }
-        return this.OvhApiConnectivityEligibility.v6().testAddress(
-          this.$scope,
-          {
-            streetCode: this.address.street.streetCode,
-            streetNumber: this.address.streetNumber,
-          },
-        );
       })
       .then((res) => {
-        if (res.isAvailableLines) {
-          return res;
-        }
-
         const elig = {
-          isAvailableLines: false,
           result: res.result,
         };
         return elig;
@@ -205,27 +183,16 @@ export default class {
     return this.testFiberEligibility(building.reference).then(() => {
       this.displayListOfBuildings = false;
 
-      // Copper result
-      if (this.copper.isAvailableLines) {
-        // Display inactive lines found for this address
-        this.availableLines = this.copper.result;
-        this.isAvailableLine = true;
-        this.displayResult = true;
-        this.displaySearchResult = true;
-        this.displaySearch = false;
-        this.loading = false;
-      } else {
-        this.sendLineOffers(
-          this.copper,
-          this.fiber,
-          'address',
-          ELIGIBILITY_LINE_STATUS.create,
-        );
-        this.displayResult = true;
-        this.displaySearchResult = true;
-        this.displaySearch = false;
-        this.loading = false;
-      }
+      this.sendLineOffers(
+        this.copper,
+        this.fiber,
+        'address',
+        ELIGIBILITY_LINE_STATUS.create,
+      );
+      this.displayResult = true;
+      this.displaySearchResult = true;
+      this.displaySearch = false;
+      this.loading = false;
     });
   }
 
@@ -292,44 +259,42 @@ export default class {
           if (buildings.length === 1) {
             // Eligibility fiber
             const [building] = buildings;
-            this.testFiberEligibility(building.reference);
+            this.testFiberEligibility(building.reference).then(() => {
+              // send line offers
+              this.sendLineOffers(
+                copper,
+                this.fiber,
+                'address',
+                ELIGIBILITY_LINE_STATUS.create,
+              );
+              this.displayResult = true;
+              this.displaySearchResult = true;
+              this.displaySearch = false;
+              this.loading = false;
+            });
           } else {
             // Display buildings list
             this.buildings = buildings;
-          }
-        }
 
-        if (this.buildings && this.buildings.length > 0) {
-          this.copper = copper;
-          this.displayListOfBuildings = true;
-          this.loading = false;
-          this.displaySearch = false;
+            this.copper = copper;
+            this.displayListOfBuildings = true;
+            this.loading = false;
+            this.displaySearch = false;
+            this.displayResult = true;
+            this.displaySearchResult = true;
+          }
+        } else {
+          // send line offers
+          this.sendLineOffers(
+            copper,
+            this.fiber,
+            'address',
+            ELIGIBILITY_LINE_STATUS.create,
+          );
           this.displayResult = true;
           this.displaySearchResult = true;
-        } else {
-          this.displayListOfBuildings = false;
-
-          // Copper result
-          if (copper.isAvailableLines) {
-            // Display inactive lines found for this address
-            this.availableLines = copper.result;
-            this.isAvailableLine = true;
-            this.displayResult = true;
-            this.displaySearchResult = true;
-            this.displaySearch = false;
-            this.loading = false;
-          } else {
-            this.sendLineOffers(
-              copper,
-              this.fiber,
-              'address',
-              ELIGIBILITY_LINE_STATUS.create,
-            );
-            this.displayResult = true;
-            this.displaySearchResult = true;
-            this.displaySearch = false;
-            this.loading = false;
-          }
+          this.displaySearch = false;
+          this.loading = false;
         }
       });
     });
@@ -388,52 +353,5 @@ export default class {
     this.offersChange({
       OFFERS: [offer],
     });
-  }
-
-  createLine() {
-    this.loading = true;
-    return this.OvhApiConnectivityEligibility.v6()
-      .testAddress(this.$scope, {
-        streetCode: this.address.street.streetCode,
-        streetNumber: this.address.streetNumber,
-      })
-      .then((res) => {
-        this.sendLineOffers(
-          res,
-          this.fiber,
-          'address',
-          ELIGIBILITY_LINE_STATUS.create,
-        );
-        this.displayResult = false;
-        return res;
-      })
-      .catch((error) => {
-        this.TucToast.error(error);
-      })
-      .finally(() => {
-        this.loading = false;
-      });
-  }
-
-  testLineEligibility(row) {
-    this.loading = true;
-    const lineNumber = row.lineNumber.replace(/[^0-9]/g, '');
-    const { status } = row.copperInfo;
-
-    return this.OvhApiConnectivityEligibility.v6()
-      .testLine(this.$scope, {
-        lineNumber,
-        status,
-      })
-      .then((copper) => {
-        this.sendLineOffers(copper, this.fiber, 'number', status);
-        this.displayResult = false;
-      })
-      .catch((error) => {
-        this.TucToast.error(error);
-      })
-      .finally(() => {
-        this.loading = false;
-      });
   }
 }
