@@ -320,7 +320,7 @@
                             <div class="btn-group w-100">
                                 <button
                                     type="button"
-                                    class="btn"
+                                    class="oui-button"
                                     data-ng-repeat="day in conditionsGroup.dayModel track by $index"
                                     data-ng-model="day.selected"
                                     data-ng-click="$ctrl.onDayBtnClick(day, conditionsGroup)"
@@ -441,6 +441,7 @@
                                         data-ng-disabled="!$ctrl.isConditionGroupValid(conditionsGroup)"
                                         data-ng-click="$ctrl.onConditionAddBtnClick(conditionsGroup)"
                                     >
+                                        <!-- Button for checking if time slots entered is correct  -->
                                         <span
                                             class="oui-icon oui-icon-success group-number__dialplan--check-btn"
                                         ></span>

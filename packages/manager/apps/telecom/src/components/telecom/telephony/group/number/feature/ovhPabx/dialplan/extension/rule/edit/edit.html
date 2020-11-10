@@ -526,7 +526,7 @@
                 <!-- Search result -->
                 <div
                     class="section-group"
-                    data-ng-repeat="group in $ctrl.groupsFiltered"
+                    data-ng-repeat="group in $ctrl.groupsFiltered track by $index"
                 >
                     <div class="group-title">
                         <span data-ng-bind="group.getDisplayedName()"></span>
