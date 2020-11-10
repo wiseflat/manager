@@ -98,7 +98,6 @@ angular
       'directives',
       errorPage,
       'filters',
-      'internationalPhoneNumber',
       'Module.download',
       Environment.getRegion() === 'CA' ? moduleExchange : undefined,
       'Module.ip',
