@@ -77,7 +77,7 @@ export default class {
         find(
           options,
           ({ planCode, family }) =>
-            planCode.startsWith(targetPlanCode) && family === targetFamily,
+            planCode === targetPlanCode && family === targetFamily,
         ),
       )
       .then(({ planCode }) => planCode);
