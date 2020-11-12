@@ -93,7 +93,12 @@ export default class PackMoveCtrl {
         copperInfo: selected.line.endpoint.copperInfo,
         moveOutDate: selected.moveOutDate,
         contactOwner: this.contactOwner,
+        searchAddress: selected.line.searchAddress,
       };
+      if (selected.line.endpoint.neighbourAddress) {
+        this.offer.selected.neighbourAddress =
+          selected.line.endpoint.neighbourAddress;
+      }
       if (this.selectedLine.status === ELIGIBILITY_LINE_STATUS.create) {
         this.offer.selected.futureLineNumber = null;
         this.isNewLine = true;

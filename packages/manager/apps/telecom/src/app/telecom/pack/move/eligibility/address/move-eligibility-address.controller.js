@@ -322,6 +322,7 @@ export default class {
         reference: copper.result.endpoint.reference,
         referenceType: copper.result.endpoint.referenceType,
       },
+      searchAddress: this.address,
     };
     if (fiber) {
       if (copper.result.endpoint.address !== fiber.addressFiber) {
