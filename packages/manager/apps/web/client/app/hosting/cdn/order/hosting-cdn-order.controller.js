@@ -85,7 +85,7 @@ export default class {
   }
 
   getButtonSubmitText() {
-    if (this.isOptionFree) {
+    if (!this.hasCDN && this.isOptionFree) {
       return this.$translate.instant('hosting_cdn_order_submit_activate');
     }
     if (this.isIncludedCDN) {
@@ -94,5 +94,19 @@ export default class {
       );
     }
     return this.$translate.instant('hosting_cdn_order_submit_pay');
+  }
+
+  getHeaderText() {
+    if (!this.hasCDN && this.isOptionFree) {
+      return this.$translate.instant(
+        'hosting_cdn_order_step_header_activation',
+      );
+    }
+    if (this.isIncludedCDN) {
+      return this.$translate.instant(
+        'hosting_cdn_order_customer_cdn_included_step2_header',
+      );
+    }
+    return this.$translate.instant('hosting_cdn_order_step_header_payment');
   }
 }

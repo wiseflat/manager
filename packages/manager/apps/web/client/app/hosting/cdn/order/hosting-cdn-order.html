@@ -56,7 +56,7 @@
         </oui-step-form>
         <oui-step-form
             name="checkout"
-            data-header="{{:: ($ctrl.isOptionFree ? 'hosting_cdn_order_step_header_activation' : 'hosting_cdn_order_step_header_payment') | translate }}"
+            data-header="{{:: $ctrl.getHeaderText() }}"
             data-submit-text="{{:: $ctrl.getButtonSubmitText() }}"
             data-cancel-text="{{:: 'hosting_cdn_order_cancel' | translate }}"
             data-editable="::false"
