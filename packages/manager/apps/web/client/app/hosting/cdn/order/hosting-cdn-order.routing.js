@@ -16,6 +16,13 @@ export default /* @ngInject */ ($stateProvider) => {
     autoPayWithPreferredPaymentMethod: (ovhPaymentMethod) =>
       ovhPaymentMethod.hasDefaultPaymentMethod(),
 
+    isAutoPayable: /* @ngInject */ (
+      autoPayWithPreferredPaymentMethod,
+      isOptionFree,
+    ) => (defaultPaymentChoose) =>
+      defaultPaymentChoose ||
+      (autoPayWithPreferredPaymentMethod && isOptionFree),
+
     catalogAddons: /* @ngInject */ (user, WucOrderCartService) =>
       WucOrderCartService.getProductPublicCatalog(
         user.ovhSubsidiary,
@@ -134,10 +141,11 @@ export default /* @ngInject */ ($stateProvider) => {
       $translate,
       $window,
       HostingCdnOrderService,
+      isAutoPayable,
     ) => async (autoPayWithPreferredPaymentMethod, cartId) => {
       try {
         const order = await HostingCdnOrderService.checkoutOrderCart(
-          autoPayWithPreferredPaymentMethod,
+          isAutoPayable(autoPayWithPreferredPaymentMethod),
           cartId,
         );
 
@@ -209,12 +217,13 @@ export default /* @ngInject */ ($stateProvider) => {
       $translate,
       $window,
       HostingCdnOrderService,
+      isAutoPayable,
     ) => async (autoPayWithPreferredPaymentMethod, addonPlan, serviceId) => {
       try {
         const {
           data,
         } = await HostingCdnOrderService.checkoutOrderCartForUpgrade(
-          autoPayWithPreferredPaymentMethod,
+          isAutoPayable(autoPayWithPreferredPaymentMethod),
           addonPlan,
           serviceId,
         );

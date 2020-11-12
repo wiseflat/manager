@@ -17,6 +17,7 @@
   "hosting_cdn_order_customer_cdn_without_step1_price": "Prix au prorata selon votre hébergement",
 
   "hosting_cdn_order_customer_cdn_included_step2_header": "Confirmation",
+  "hosting_cdn_order_customer_cdn_included_step2_no_default_payment_method": "Vous n'avez pas entré de moyen de paiement par défaut. Vous allez être redirigé vers un bon de commande pour effectuer votre paiement.",
   "hosting_cdn_order_customer_cdn_included_step2_btn_ok": "Valider",
   "hosting_cdn_order_customer_cdn_included_step2_btn_ko": "Annuler",
 

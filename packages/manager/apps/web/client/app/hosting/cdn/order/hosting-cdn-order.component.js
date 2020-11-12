@@ -6,6 +6,7 @@ export default {
   template,
   bindings: {
     autoPayWithPreferredPaymentMethod: '<',
+    isAutoPayable: '<',
     catalogAddons: '<',
     catalogAddon: '<',
     prepareCart: '<',
