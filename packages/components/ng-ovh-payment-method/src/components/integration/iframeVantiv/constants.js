@@ -2,7 +2,7 @@ export const THREAT_METRIX = {
   PAGE_ID: 1,
   SCRIPT: {
     id: 'threat_metric_script',
-    src: 'https://h.online-metrix.net/fp/tags.js',
+    src: 'https://us.ovhcloud.com/af/tags.js',
   },
   IFRAME: {
     id: 'threat_metric_iframe',

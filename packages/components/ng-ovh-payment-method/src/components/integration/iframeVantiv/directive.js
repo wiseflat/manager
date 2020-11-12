@@ -33,7 +33,7 @@ export default {
      */
     iframeVantivCtrl.insertThreatMetrix = ({ formSessionId, organizationId }) =>
       new Promise((resolve) => {
-        const threatMetricParams = `?org_id=${organizationId}&session_id=${formSessionId}&pageid=${THREAT_METRIX.PAGE_ID}`;
+        const threatMetricParams = `?session_id=${formSessionId}&pageid=${THREAT_METRIX.PAGE_ID}&org_id=${organizationId}`;
 
         // insert ThreatMetrix script
         integrationCtrl.insertElement(
