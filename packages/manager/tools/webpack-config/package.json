@@ -27,7 +27,7 @@
     "dev:watch": "tsc -w",
     "lint": "eslint --quiet --fix src",
     "prepare": "yarn run build",
-    "test": "eslint --quiet src"
+    "test": "eslint --quiet ./src/**/*.ts"
   },
   "dependencies": {
     "@babel/generator": "^7.10.3",
