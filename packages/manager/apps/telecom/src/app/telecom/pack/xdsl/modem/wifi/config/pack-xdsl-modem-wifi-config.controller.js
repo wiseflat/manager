@@ -184,20 +184,15 @@ angular
     };
 
     function getModem() {
-      return OvhApiXdsl.Modem()
-        .v6()
-        .get({
-          xdslId: $stateParams.serviceName,
-        }).$promise;
+      return OvhApiXdsl.Modem().v6().get({
+        xdslId: $stateParams.serviceName,
+      }).$promise;
     }
 
     function getWifi() {
-      return OvhApiXdsl.Modem()
-        .Wifi()
-        .Aapi()
-        .getWifiDetails({
-          xdslId: $stateParams.serviceName,
-        }).$promise;
+      return OvhApiXdsl.Modem().Wifi().Aapi().getWifiDetails({
+        xdslId: $stateParams.serviceName,
+      }).$promise;
     }
 
     self.$onInit = function $onInit() {

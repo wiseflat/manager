@@ -35,10 +35,7 @@ describe('plugins', () => {
     );
 
     it('should convert XML to JSON', () => {
-      const code = _.chain(bundleModules)
-        .head()
-        .get('code')
-        .value();
+      const code = _.chain(bundleModules).head().get('code').value();
       assert(
         code ===
           'export default {"foo":"Foo","bar":"Bar","hello":"Hello {{t0}}"};',

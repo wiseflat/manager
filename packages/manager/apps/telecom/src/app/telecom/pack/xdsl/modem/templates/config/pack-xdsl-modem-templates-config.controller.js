@@ -46,9 +46,7 @@ angular.module('managerApp').controller(
 
     fetchTemplates() {
       this.loaders.template = true;
-      this.OvhApiXdsl.TemplateModem()
-        .v6()
-        .resetAllCache();
+      this.OvhApiXdsl.TemplateModem().v6().resetAllCache();
       return this.OvhApiXdsl.TemplateModem()
         .v6()
         .query()
@@ -58,11 +56,9 @@ angular.module('managerApp').controller(
               map(
                 chunk(names, 50),
                 (chunkNames) =>
-                  this.OvhApiXdsl.TemplateModem()
-                    .v6()
-                    .getBatch({
-                      name: chunkNames,
-                    }).$promise,
+                  this.OvhApiXdsl.TemplateModem().v6().getBatch({
+                    name: chunkNames,
+                  }).$promise,
               ),
             )
             .then((chunkResult) => {
