@@ -56,17 +56,12 @@ export = (opts: any = {}) => {
               )[0];
 
             if (translations) {
-              let format;
               let value;
 
               if (has(translations, 'value.elements')) {
                 value = map(get(translations, 'value.elements'), 'value');
               } else {
                 const myObj = get(translations, 'value.properties');
-                format = get(
-                  myObj.filter(({ key }) => key.name === 'format')[0],
-                  'value.value',
-                );
                 value = get(
                   myObj.filter(({ key }) => key.name === 'value')[0],
                   'value.elements',
@@ -88,7 +83,6 @@ export = (opts: any = {}) => {
                 value,
                 id,
                 subdirectory,
-                format,
               );
 
               inject = `translations: /* @ngInject */ ($q, $translate, asyncLoader) => { ${inject} }`;
