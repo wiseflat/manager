@@ -7,6 +7,7 @@ export default {
   bindings: {
     autoPayWithPreferredPaymentMethod: '<',
     isAutoPayable: '<',
+    autoPayFreeOffer: '<',
     catalogAddons: '<',
     catalogAddon: '<',
     prepareCart: '<',

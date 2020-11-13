@@ -141,11 +141,10 @@ export default /* @ngInject */ ($stateProvider) => {
       $translate,
       $window,
       HostingCdnOrderService,
-      isAutoPayable,
     ) => async (autoPayWithPreferredPaymentMethod, cartId) => {
       try {
         const order = await HostingCdnOrderService.checkoutOrderCart(
-          isAutoPayable(autoPayWithPreferredPaymentMethod),
+          autoPayWithPreferredPaymentMethod,
           cartId,
         );
 
@@ -158,7 +157,7 @@ export default /* @ngInject */ ($stateProvider) => {
         }
 
         return goBack(
-          $translate.instant('hosting_dashboard_cdn_order_success', {
+          $translate.instant('hosting_dashboard_cdn_v2_order_success', {
             t0: order.url,
           }),
         );
@@ -210,14 +209,22 @@ export default /* @ngInject */ ($stateProvider) => {
       }
     },
 
+    autoPayFreeOffer: /* @ngInject */ (OvhApiMe) => ({ orderId }) =>
+      OvhApiMe.Order()
+        .v6()
+        .payRegisteredPaymentMean(
+          { orderId },
+          { paymentMean: 'fidelityAccount' },
+        ).$promise,
+
     checkoutCart: /* @ngInject */ (
       goBack,
       goBackWithError,
       isOptionFree,
       $translate,
-      $window,
       HostingCdnOrderService,
       isAutoPayable,
+      autoPayFreeOffer,
     ) => async (autoPayWithPreferredPaymentMethod, addonPlan, serviceId) => {
       try {
         const {
@@ -228,6 +235,10 @@ export default /* @ngInject */ ($stateProvider) => {
           serviceId,
         );
 
+        if (isOptionFree) {
+          await autoPayFreeOffer(data.order);
+        }
+
         if (isOptionFree || autoPayWithPreferredPaymentMethod) {
           return goBack(
             $translate.instant(
@@ -237,7 +248,7 @@ export default /* @ngInject */ ($stateProvider) => {
         }
 
         return goBack(
-          $translate.instant('hosting_dashboard_cdn_order_success', {
+          $translate.instant('hosting_dashboard_cdn_v2_order_success', {
             t0: data.order.url,
           }),
         );

@@ -224,6 +224,7 @@
   "hosting_dashboard_cdn_order_choose_duration": "Choisissez une durée :",
   "hosting_dashboard_cdn_order_validation": "Cliquez sur \"Valider\" pour créer votre bon de commande.",
   "hosting_dashboard_cdn_order_success": "Votre <a href=\"{{t0}}\" target=\"_blank\">bon de commande</a> a été généré avec succès. Votre produit sera activé lorsque vous l'aurez validé.",
+  "hosting_dashboard_cdn_v2_order_success": "Votre <a href=\"{{t0}}\" target=\"_blank\">bon de commande</a> a été généré. Le CDN sera activé une fois le paiement effectué.",
   "hosting_dashboard_cdn_order_success_activation": "Nous vous remercions d’avoir souscrit l’option Shared CDN. Celle-ci va être déployée sur votre hébergement web. Vous recevrez une notification lorsqu’elle sera opérationnelle.",
   "hosting_dashboard_cdn_upgrade_included_success": "Nous vous remercions d’avoir migré votre CDN vers l’option Shared CDN. Celle-ci va être déployée sur votre hébergement web. Vous recevrez une notification lorsque votre nouveau CDN sera opérationnel.",
   "hosting_dashboard_cdn_upgrade_payable_success": "Nous vous remercions d’avoir migré votre CDN vers l’option Shared CDN. Celle-ci va être déployée sur votre hébergement web. Vous recevrez une notification lorsque votre nouveau CDN sera opérationnel.",
