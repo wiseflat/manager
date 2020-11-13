@@ -74,7 +74,7 @@
   "cpcivm_add_step3_quantity_help": "Votre quota actuel vous permet de créer simultanéement jusqu'à {{max}} instance(s) de type {{type}} pour la region de {{region}}.",
   "cpcivm_add_step3_quota_link_text": "Consultez votre quota",
   "cpcivm_add_step3_name_label": "Nom de votre instance",
-  "cpcivm_add_step3_name_help": "Doit uniquement contenir des nombres, lettres, underscores, tirets, ou points.",
+  "cpcivm_add_step3_name_help": "Doit uniquement contenir des nombres, des lettres non accentuées, underscores et tiret.",
   "cpcivm_add_step3_name_additional": "Le nom des instances supplémentaires sera préfixé et incrémenté à partir du terme saisi.",
   "cpcivm_add_step3_postscript_label": "Script de post-installation",
   "cpcivm_add_step3_postscript_info": "Saisissez votre script post-installation",

@@ -62,13 +62,13 @@
             data-prevent-next
         >
             <p
-                data-ng-if="!$ctrl.autoPayWithPreferredPaymentMethod"
+                data-ng-if="(!$ctrl.autoPayWithPreferredPaymentMethod && !$ctrl.isOptionFree)"
                 data-translate="hosting_cdn_order_customer_cdn_included_step2_no_default_payment_method"
             ></p>
 
             <!-- Payment Means -->
             <ovh-payment-method-choice
-                data-ng-if="::!$ctrl.isOptionFree"
+                data-ng-if="::($ctrl.autoPayWithPreferredPaymentMethod && !$ctrl.isOptionFree)"
                 data-model="$ctrl.defaultPaymentMethod"
                 data-error-callback="$ctrl.goBackWithError()"
             >
