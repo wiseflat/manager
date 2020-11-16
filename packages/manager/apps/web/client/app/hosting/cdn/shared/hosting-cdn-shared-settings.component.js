@@ -17,5 +17,4 @@ export default {
     displayConfirmSettingsModal: '<',
     displayLeaveSettingsModal: '<',
   },
-  controllerAs: '$ctrl',
 };

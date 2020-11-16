@@ -74,7 +74,7 @@ export default /* @ngInject */ ($stateProvider) => {
     ) => {
       return HostingCdnSharedService.getCDNProperties(serviceName)
         .then(({ data: cdn }) => {
-          if (cdn.version === HOSTING_CDN_ORDER_CDN_VERSION_V2) return goBack();
+          if (cdn.version === HOSTING_CDN_ORDER_CDN_VERSION_V2) goBack();
           return cdn;
         })
         .catch(() => null);
@@ -202,7 +202,7 @@ export default /* @ngInject */ ($stateProvider) => {
           serviceId,
         );
 
-        return { cart: data.order, cartId: null, addonPlan, serviceId };
+        return { cart: data.order, addonPlan, serviceId };
       } catch (error) {
         goBackWithError(get(error, 'data.message', error));
         return {};

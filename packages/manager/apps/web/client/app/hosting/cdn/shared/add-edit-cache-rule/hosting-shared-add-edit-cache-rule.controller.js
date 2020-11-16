@@ -11,8 +11,7 @@ import {
 
 export default class {
   /* @ngInject */
-  constructor($state, $translate, HostingCdnSharedService) {
-    this.$state = $state;
+  constructor($translate, HostingCdnSharedService) {
     this.$translate = $translate;
     this.HostingCdnSharedService = HostingCdnSharedService;
 

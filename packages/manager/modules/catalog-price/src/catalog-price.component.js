@@ -9,7 +9,6 @@ const component = {
     price: '<',
     tax: '<',
     user: '<',
-    cdnCase: '<',
     fromToPrice: '<',
     performRounding: '<?',
     minimumFractionDigits: '<?',

@@ -149,12 +149,20 @@
                             data-ng-init="status = {inProgress: false}"
                         >
                             <td class="oui-table__cell">
-                                {{rule.config.priority}}
+                                <span
+                                    data-ng-bind="rule.config.priority"
+                                ></span>
                             </td>
-                            <td class="oui-table__cell">{{::rule.name}}</td>
-                            <td class="oui-table__cell">{{::rule.pattern}}</td>
                             <td class="oui-table__cell">
-                                {{$ctrl.convertToUnitTime(rule.config.ttl)}}
+                                <span data-ng-bind="::rule.name"></span>
+                            </td>
+                            <td class="oui-table__cell">
+                                <span data-ng-bind="::rule.pattern"></span>
+                            </td>
+                            <td class="oui-table__cell">
+                                <span
+                                    data-ng-bind="$ctrl.convertToUnitTime(rule.config.ttl)"
+                                ></span>
                             </td>
                             <td class="oui-table__cell">
                                 <oui-switch
@@ -206,7 +214,9 @@
             disabled="status.inProgress"
             data-on-click="$ctrl.displayLeaveSettingsModal($ctrl.model, $ctrl.model.rules)"
         >
-            {{:: 'hosting_cdn_shared_option_cache_rule_btn_cancel' | translate}}
+            <span
+                data-translate="hosting_cdn_shared_option_cache_rule_btn_cancel"
+            ></span>
         </oui-button>
 
         <!--Validate settings-->
@@ -216,8 +226,9 @@
             data-on-click="$ctrl.openConfirmModal()"
             disabled="!$ctrl.settingsToSave"
         >
-            {{:: 'hosting_cdn_shared_option_cache_rule_btn_validate' |
-            translate}}
+            <span
+                data-translate="hosting_cdn_shared_option_cache_rule_btn_validate"
+            ></span>
         </oui-button>
     </div>
 </div>

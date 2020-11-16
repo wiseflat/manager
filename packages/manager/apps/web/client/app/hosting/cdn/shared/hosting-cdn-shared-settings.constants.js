@@ -12,7 +12,6 @@ export const SHARED_CDN_GET_MORE_INFO = {
   FR: 'https://www.ovh.com/fr/hebergement-web/cdn.xml',
   DE: 'https://www.ovh.de/hosting/cdn.xml',
   ES: 'https://www.ovh.es/hosting/cdn.xml',
-  IR: 'https://www.ovh.ie/web-hosting/cdn.xml',
   IT: 'https://www.ovh.it/hosting-web/cdn.xml',
   NL: 'https://www.ovh.nl/shared-hosting/cdn.xml',
   PL: 'https://www.ovh.pl/hosting/cdn.xml',

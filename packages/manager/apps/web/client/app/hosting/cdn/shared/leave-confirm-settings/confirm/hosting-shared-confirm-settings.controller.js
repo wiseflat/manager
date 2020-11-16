@@ -9,8 +9,4 @@ export default class {
     this.success();
     return this.goBack();
   }
-
-  secondaryAction() {
-    return this.goBack();
-  }
 }

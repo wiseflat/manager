@@ -19,17 +19,8 @@ import {
 
 export default class CdnSharedSettingsController {
   /* @ngInject */
-  constructor(
-    $q,
-    $state,
-    $translate,
-    $uibModal,
-    $timeout,
-    Alerter,
-    HostingCdnSharedService,
-  ) {
+  constructor($q, $translate, $timeout, Alerter, HostingCdnSharedService) {
     this.$q = $q;
-    this.$state = $state;
     this.$translate = $translate;
     this.$timeout = $timeout;
     this.Alerter = Alerter;

@@ -121,6 +121,8 @@ export default class {
       value: false,
     };
 
+    this.$scope.ovhSubsidiary = this.user.ovhSubsidiary;
+
     this.$scope.alerts = {
       page: 'app.alerts.page',
       tabs: 'app.alerts.tabs',
@@ -822,7 +824,6 @@ export default class {
       })
       .then(() => this.handlePrivateDatabases())
       .then(() => this.handleCDNProperties())
-      .then(() => this.handleUserSubsidiary())
       .then(() => this.simulateUpgradeAvailability())
       .finally(() => {
         this.$scope.loadingHostingInformations = false;
@@ -916,12 +917,6 @@ export default class {
       this.selectedTab = this.defaultTab;
     }
     this.$location.search('tab', this.selectedTab);
-  }
-
-  handleUserSubsidiary() {
-    return this.User.getUser().then(({ ovhSubsidiary }) => {
-      this.$scope.ovhSubsidiary = ovhSubsidiary;
-    });
   }
 
   static toKebabCase(str) {
