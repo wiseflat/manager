@@ -212,83 +212,21 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <oui-action-menu
-                                        data-compact
-                                        data-placement="end"
+                                    <button
+                                        class="oui-action-button"
+                                        type="button"
+                                        data-linkedpopover="hosting/popover/multisite.html"
+                                        data-linkedpopover-placement="left"
+                                        data-linkedpopover-single="true"
+                                        data-linkedpopover-remote="true"
+                                        data-linkedpopover-title="{{ 'common_actions' | translate }}"
+                                        data-domain-index="{{$index}}"
                                     >
-                                        <oui-action-menu-item
-                                            data-on-click="modifyDomain(domain)"
-                                            data-disabled="domain.status !== HOSTING_STATUS.CREATED"
-                                            data-ng-if="excludeAttachedDomains.indexOf(domain.displayName) === -1"
-                                        >
-                                            <span
-                                                data-translate="hosting_tab_DOMAINS_table_popover_modify"
-                                            ></span>
-                                        </oui-action-menu-item>
-                                        <div
-                                            data-ng-controller="HostingTabDomainsMultisiteLogs"
-                                            data-ng-if="!!domain.ownLog"
-                                        >
-                                            <span
-                                                data-ng-if="domain.logsLoading || !domain.logUrl"
-                                            >
-                                                <span
-                                                    class="text-muted"
-                                                    data-translate="hosting_tab_DOMAINS_multisite_logs_link"
-                                                ></span>
-                                                <oui-spinner
-                                                    data-size="s"
-                                                    data-ng-if="domain.logsLoading"
-                                                >
-                                                </oui-spinner>
-                                            </span>
-                                            <a
-                                                class="btn btn-link"
-                                                target="_blank"
-                                                title="{{:: 'hosting_common_target_new_window' | translate }}"
-                                                data-translate="hosting_tab_DOMAINS_multisite_logs_link"
-                                                data-ng-href="{{domain.logUrl}}"
-                                                data-ng-if="!domain.logsLoading && !!domain.logUrl"
-                                            >
-                                            </a>
-                                        </div>
-                                        <oui-action-menu-item
-                                            data-on-click="detachDomain(domain)"
-                                            data-disabled="domain.status !== HOSTING_STATUS.CREATED"
-                                            data-ng-if="excludeAttachedDomains.indexOf(domain.displayName) === -1"
-                                        >
-                                            <span
-                                                data-translate="hosting_tab_DOMAINS_table_popover_delete"
-                                            ></span>
-                                        </oui-action-menu-item>
-                                        <oui-action-menu-item
-                                            data-on-click="activateDomain(domain)"
-                                            data-disabled="domain.status !== HOSTING_STATUS.CREATED"
-                                            data-ng-if="domain.cdn === 'ACTIVE' && cdnProperties.version === 'cdn-hosting'"
-                                        >
-                                            <span
-                                                data-translate="hosting_tab_DOMAINS_table_popover_modify_cdn"
-                                            ></span>
-                                        </oui-action-menu-item>
-                                        <oui-action-menu-item
-                                            data-ng-if="hosting.isCloudWeb && cdnProperties.version === '2013v1'"
-                                            data-disabled="domain.status !== HOSTING_STATUS.CREATED"
-                                            data-on-click="restartDomain(domain)"
-                                        >
-                                            <span
-                                                data-translate="hosting_tab_DOMAINS_table_popover_restart"
-                                            ></span>
-                                        </oui-action-menu-item>
-                                        <oui-action-menu-item
-                                            data-ng-if="domain.cdn === 'ACTIVE' && cdnProperties.version === 'cdn-hosting'"
-                                            data-disabled="domain.status !== HOSTING_STATUS.CREATED"
-                                            data-on-click="setAction('cdn/flush/hosting-cdn-flush', {domain})"
-                                        >
-                                            <span
-                                                data-translate="hosting_tab_DOMAINS_table_popover_purge"
-                                            ></span>
-                                        </oui-action-menu-item>
-                                    </oui-action-menu>
+                                        <span
+                                            class="oui-icon oui-icon-ellipsis"
+                                            aria-hidden="true"
+                                        ></span>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
