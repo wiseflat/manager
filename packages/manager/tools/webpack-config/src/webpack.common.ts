@@ -21,7 +21,7 @@ const cacheLoader = {
 
 // The common webpack configuration
 
-export = opts => {
+export = (opts) => {
   const lessLoaderOptions = {
     sourceMap: true,
     plugins: [
@@ -79,14 +79,10 @@ export = opts => {
     ],
 
     resolve: {
-      modules: [
-        './node_modules',
-        path.resolve('./node_modules'),
-      ],
+      modules: ['./node_modules', path.resolve('./node_modules')],
     },
 
     resolveLoader: {
-
       // webpack module resolution paths
       modules: [
         './node_modules', // #1 check in module's relative node_module directory
@@ -96,7 +92,6 @@ export = opts => {
 
     module: {
       rules: [
-
         // load HTML files as string (raw-loader)
         {
           test: /\.html$/,
@@ -116,8 +111,9 @@ export = opts => {
         {
           test: /\.css$/,
           use: [
-            MiniCssExtractPlugin.loader,
             cacheLoader,
+            'thread-loader',
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader', // translates CSS into CommonJS
             },
@@ -134,8 +130,9 @@ export = opts => {
         {
           test: /\.less$/,
           use: [
-            MiniCssExtractPlugin.loader,
             cacheLoader,
+            'thread-loader',
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader', // translates CSS into CommonJS
             },
@@ -156,8 +153,9 @@ export = opts => {
         {
           test: /\.scss$/,
           use: [
-            MiniCssExtractPlugin.loader,
             cacheLoader,
+            'thread-loader',
+            MiniCssExtractPlugin.loader,
             'css-loader', // translates CSS into CommonJS
             'sass-loader', // compiles Sass to CSS
           ],
@@ -168,6 +166,7 @@ export = opts => {
           test: /Messages_\w+_\w+\.xml$/,
           use: [
             cacheLoader,
+            'thread-loader',
             {
               loader: path.resolve(__dirname, './loaders/translation-xml.js'),
             },
@@ -219,7 +218,10 @@ export = opts => {
           use: [
             cacheLoader,
             {
-              loader: path.resolve(__dirname, './loaders/translation-ui-router.js'),
+              loader: path.resolve(
+                __dirname,
+                './loaders/translation-ui-router.js',
+              ),
               options: {
                 subdirectory: 'translations',
                 filtering: false,
@@ -236,7 +238,10 @@ export = opts => {
           use: [
             cacheLoader,
             {
-              loader: path.resolve(__dirname, './loaders/translation-inject.js'),
+              loader: path.resolve(
+                __dirname,
+                './loaders/translation-inject.js',
+              ),
               options: {
                 filtering: false,
               },
@@ -251,7 +256,6 @@ export = opts => {
       runtimeChunk: 'single',
       // bundle spliting configuration
       splitChunks: {
-
         // vendors bundle containing node_modules source code
         cacheGroups: {
           bower: {
@@ -276,7 +280,6 @@ export = opts => {
           },
         },
       },
-
     }, // \optimization
   };
 };
